@@ -1,0 +1,74 @@
+---
+name: CI🚦
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  setup-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Source checkout
+        uses: actions/checkout@v4
+
+      - id: set-matrix
+        run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
+
+  build_test_container:
+    name: 'Build test container'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    needs: setup-matrix
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          tags: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+          push: false
+          build-args: |
+            BASE_IMAGE=${{ matrix.base_image }}
+            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
+            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli_test }}
+            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
+            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
+            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
+            RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
+            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+          matrix: ${{ toJson(matrix) }}
+
+  tests:
+    needs:
+      - build_test_container
+    runs-on: ubuntu-latest
+    name: Test suite
+    steps:
+      - run: echo Test suite completed

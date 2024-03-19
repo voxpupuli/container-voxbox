@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+source ENV['GEM_SOURCE'] || 'https://rubygems.org'
+
+gem 'facter',               ENV['RUBYGEM_FACTER']
+gem 'modulesync',           ENV['RUBYGEM_MODULESYNC']
+gem 'puppet',               ENV['RUBYGEM_PUPPET']
+gem 'puppet_metadata',      ENV['RUBYGEM_PUPPET_METADATA']
+gem 'voxpupuli-acceptance', ENV['RUBYGEM_VOXPUPULI_ACCEPTANCE']
+gem 'voxpupuli-release',    ENV['RUBYGEM_VOXPUPULI_RELEASE']
+gem 'voxpupuli-test',       ENV['RUBYGEM_VOXPUPULI_TEST']
+
+# vim: syntax=ruby
