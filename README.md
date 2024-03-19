@@ -14,7 +14,7 @@ This container should be used to test voxpupuli puppet modules. It has the voxpu
 cd puppet-k8s
 docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox # rake -T
 docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox spec # rake spec
-docker run -it --rm -v $(pwd):/repo --entrypoint bash vtc-local # get shell
+docker run -it --rm -v $(pwd):/repo --entrypoint bash voxpupuli/voxbox # get shell
 ```
 
 ## Version Schema
