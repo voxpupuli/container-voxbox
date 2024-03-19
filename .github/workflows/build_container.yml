@@ -62,4 +62,3 @@ jobs:
           username: voxpupulibot
           password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
           repository: voxpupuli/voxbox
-          enable-url-completion: true
