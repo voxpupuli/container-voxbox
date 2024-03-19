@@ -35,8 +35,12 @@ ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-3.2.0}
 COPY voxbox/Gemfile /
 COPY Dockerfile /
 
-RUN bundle config set path.system true && \
-    bundle install --gemfile=/Gemfile
+RUN apt update && apt upgrade -y \
+    && apt autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && bundle config set path.system true \
+    && bundle install --gemfile=/Gemfile
 
 WORKDIR /repo
 
