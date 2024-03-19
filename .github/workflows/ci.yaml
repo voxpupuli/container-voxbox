@@ -36,7 +36,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: Build image
         uses: docker/build-push-action@v5
         with:
           tags: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'

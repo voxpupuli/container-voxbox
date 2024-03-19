@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
     steps:
-      - name: Build Puppet Development Container ${{ matrix.puppet_release }}
+      - name: Build Vox Pupuli Test Box r${{ matrix.puppet_release }}
         uses: voxpupuli/gha-build-and-publish-a-container@v2
         with:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
@@ -61,3 +61,5 @@ jobs:
         with:
           username: voxpupulibot
           password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
+          repository: voxpupuli/voxbox
+          enable-url-completion: true
