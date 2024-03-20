@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ruby:2.7.8
+ARG BASE_IMAGE=ghcr.io/betadots/ruby:2.7.8
 
 FROM $BASE_IMAGE
 
@@ -37,8 +37,9 @@ COPY Dockerfile /
 
 RUN apt-get update && apt-get upgrade -y \
     && bundle config set path.system true \
+    && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
-    && apt-get purge -y curl "libcurl*" "libaom*" python3.9 \
+    && apt-get purge -y "libaom*" \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
