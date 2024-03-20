@@ -2,7 +2,7 @@
   "include": [
     {
       "puppet_release": 7,
-      "base_image": "ruby:2.7.8",
+      "base_image": "ghcr.io/betadots/ruby:2.7.8",
       "rubygem_puppet": "7.29.1",
       "rubygem_facter": "4.6.1",
       "rubygem_voxpupuli_test": "7.1.0",
@@ -14,7 +14,7 @@
     },
     {
       "puppet_release": 8,
-      "base_image": "ruby:3.2.2",
+      "base_image": "ghcr.io/betadots/ruby:3.2.3",
       "rubygem_puppet": "8.5.1",
       "rubygem_facter": "4.6.1",
       "rubygem_voxpupuli_test": "7.1.0",
