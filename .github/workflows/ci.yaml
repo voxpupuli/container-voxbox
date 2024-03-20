@@ -66,21 +66,21 @@ jobs:
           sarif_file: 'trivy-results.sarif'
           matrix: ${{ toJson(matrix) }}
 
-      - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'image'
-          format: 'github'
-          output: 'dependency-results.sbom.json'
-          image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
-          github-pat: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #     scan-type: 'image'
+      #     format: 'github'
+      #     output: 'dependency-results.sbom.json'
+      #     image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+      #     github-pat: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload trivy report as a Github artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: trivy-sbom-report
-          path: '${{ github.workspace }}/dependency-results.sbom.json'
-          retention-days: 20 # 90 is the default
+      # - name: Upload trivy report as a Github artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: trivy-sbom-report
+      #     path: '${{ github.workspace }}/dependency-results.sbom.json'
+      #     retention-days: 20 # 90 is the default
 
   tests:
     needs:
