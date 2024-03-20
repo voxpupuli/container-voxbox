@@ -35,12 +35,13 @@ ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-3.2.0}
 COPY voxbox/Gemfile /
 COPY Dockerfile /
 
-RUN apt update && apt upgrade -y \
-    && apt autoremove -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get upgrade -y \
     && bundle config set path.system true \
-    && bundle install --gemfile=/Gemfile
+    && bundle install --gemfile=/Gemfile \
+    && apt-get purge -y curl "libcurl*" libaom0 python3.9 \
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /repo
 
