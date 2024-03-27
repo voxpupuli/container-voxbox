@@ -32,19 +32,28 @@ ENV RUBYGEM_PUPPET_METADATA=${RUBYGEM_PUPPET_METADATA:-3.6.0}
 ARG RUBYGEM_MODULESYNC
 ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-3.2.0}
 
+ARG RUBYGEM_R10K
+ENV RUBYGEM_R10K=${RUBYGEM_R10K:-4.0.2}
+
+ARG RUBYGEM_RA10KE
+ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-3.0.0}
+
 COPY voxbox/Gemfile /
+COPY voxbox/Rakefile /
 COPY Dockerfile /
 
 RUN apt-get update && apt-get upgrade -y \
-    && bundle config set path.system true \
-    && bundle config set jobs $(nproc) \
-    && bundle install --gemfile=/Gemfile \
     && apt-get purge -y "libaom*" \
     && apt-get autoremove -y \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && bundle config set path.system true \
+    && bundle config set jobs $(nproc) \
+    && bundle install --gemfile=/Gemfile \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
+    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/cgi-0.1.0.2.gemspec
 
 WORKDIR /repo
 
 ENTRYPOINT [ "rake" ]
-CMD [ "-T" ]
+CMD [ "-f", "/Rakefile", "-T" ]
