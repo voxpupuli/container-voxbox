@@ -10,7 +10,7 @@ else
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file."
     config.exclude_labels = %w[duplicate question invalid wontfix wont-fix skip-changelog]
     config.user = 'voxpupuli'
-    config.project = 'voxbox'
+    config.project = 'container-voxbox'
     # get branch name from git and strip off any prefixes (e.g. 'release-')
     config.future_release = `git rev-parse --abbrev-ref HEAD`.strip.split('-', 2).last
   end
