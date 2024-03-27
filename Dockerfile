@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ghcr.io/betadots/ruby:2.7.8
+ARG BASE_IMAGE=ghcr.io/betadots/ruby:2.7.8-focal
 
 FROM $BASE_IMAGE
 
