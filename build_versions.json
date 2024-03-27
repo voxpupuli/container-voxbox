@@ -10,7 +10,9 @@
       "rubygem_voxpupuli_release": "3.0.1",
       "rubygem_puppet_metadata": "3.6.0",
       "rubygem_overcommit": "0.63.0",
-      "rubygem_modulesync": "3.2.0"
+      "rubygem_modulesync": "3.2.0",
+      "rubygem_r10k": "4.0.2",
+      "rubygem_ra10ke": "3.0.0"
     },
     {
       "puppet_release": 8,
@@ -22,7 +24,9 @@
       "rubygem_voxpupuli_release": "3.0.1",
       "rubygem_puppet_metadata": "3.6.0",
       "rubygem_overcommit": "0.63.0",
-      "rubygem_modulesync": "3.2.0"
+      "rubygem_modulesync": "3.2.0",
+      "rubygem_r10k": "4.0.2",
+      "rubygem_ra10ke": "3.0.0"
     }
   ]
 }
