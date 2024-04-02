@@ -43,6 +43,7 @@ jobs:
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
+            RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop_performance }}
           build_arch: linux/amd64,linux/arm64
           docker_username: voxpupulibot
           docker_password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}

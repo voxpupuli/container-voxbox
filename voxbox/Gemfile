@@ -11,5 +11,6 @@ gem 'ra10ke',               ENV['RUBYGEM_RA10KE']
 gem 'voxpupuli-acceptance', ENV['RUBYGEM_VOXPUPULI_ACCEPTANCE']
 gem 'voxpupuli-release',    ENV['RUBYGEM_VOXPUPULI_RELEASE']
 gem 'voxpupuli-test',       ENV['RUBYGEM_VOXPUPULI_TEST']
+gem 'rubocop-performance',  ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
 
 # vim: syntax=ruby
