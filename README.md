@@ -8,6 +8,12 @@
 
 This container should be used to test voxpupuli puppet modules. It has the voxpupuli-test, -acceptance, -release gems and all dependencies installed.
 
+### Versions
+
+Too see which gems and versions are included in the container, see:
+
+[build_versions.json](build_versions.json)
+
 ## Example usage
 
 ```shell
@@ -16,6 +22,10 @@ docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox # rake -T
 docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox spec # rake spec
 docker run -it --rm -v $(pwd):/repo --entrypoint bash voxpupuli/voxbox # get shell
 ```
+
+## Example Gitlab CI configuration
+
+see [.gitlab-ci.yml](.gitlab-ci.yml)
 
 ## Version Schema
 
