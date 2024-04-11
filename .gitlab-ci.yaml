@@ -1,0 +1,96 @@
+---
+# Example of a CI/CD pipeline for a Puppet module
+stages:
+  - QA🚦
+  - Test🚥
+
+variables:
+  RAKE: rake -f /Rakefile
+
+default:
+  image:
+    name: ghcr.io/voxpupuli/vobox:7.29.1-main
+    entrypoint: [""]
+
+### QA🚦
+.qa:
+  stage: QA🚦
+
+qa-check:
+  extends: .qa
+  script:
+    - $RAKE check
+
+qa-lint:
+  extends: .qa
+  script:
+    - $RAKE lint
+
+qa-metadata_lint:
+  extends: .qa
+  script:
+    - $RAKE metadata_lint
+
+qa-puppet-strings:
+  extends: .qa
+  script:
+    - $RAKE strings:validate:reference
+
+qa-rubocop:
+  extends: .qa
+  script:
+    - $RAKE rubocop
+
+qa-syntax:
+  extends: .qa
+  script:
+    - $RAKE syntax
+
+qa-gateway:
+  stage: QA🚦
+  image: alpine:latest
+  script:
+    - echo "QA Gateway"
+  variables:
+    GIT_STRATEGY: none
+  needs:
+    - qa-check
+    - qa-lint
+    - qa-metadata_lint
+    - qa-puppet-strings
+    - qa-rubocop
+    - qa-syntax
+
+### Test🚥
+.test:
+  stage: Test🚥
+  needs:
+    - qa-gateway
+
+test-unit:
+  extends: .test
+  script:
+   - $RAKE spec
+  artifacts:
+    expire_in: "30 days"
+    when: always
+    paths:
+      - "rspec.xml"
+    reports:
+      junit: "rspec.xml"
+
+test-acceptance:
+  extends: .test
+  script:
+    - $RAKE beaker
+
+test-gateway:
+  stage: Test🚥
+  image: alpine:latest
+  script:
+    - echo "Test Gateway"
+  variables:
+    GIT_STRATEGY: none
+  needs:
+    - test-unit
+    - test-acceptance
