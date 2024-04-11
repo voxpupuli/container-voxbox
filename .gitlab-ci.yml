@@ -71,13 +71,6 @@ test-unit:
   extends: .test
   script:
    - $RAKE spec
-  artifacts:
-    expire_in: "30 days"
-    when: always
-    paths:
-      - "rspec.xml"
-    reports:
-      junit: "rspec.xml"
 
 test-acceptance:
   extends: .test
