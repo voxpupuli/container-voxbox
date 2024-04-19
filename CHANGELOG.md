@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.0](https://github.com/voxpupuli/container-voxbox/tree/v1.1.0) (2024-04-19)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.0.0...v1.1.0)
+
+**Implemented enhancements:**
+
+- update puppet to 7.30.0 and 8.6.0, facter to 4.7.0 and r10k to 4.1.0 [\#8](https://github.com/voxpupuli/container-voxbox/pull/8) ([rwaffen](https://github.com/rwaffen))
+
+**Merged pull requests:**
+
+- Update GitHub actions: Labeler, Add Release workflow, try to fix trivy [\#9](https://github.com/voxpupuli/container-voxbox/pull/9) ([rwaffen](https://github.com/rwaffen))
+- remove artifacts from gitlab example [\#7](https://github.com/voxpupuli/container-voxbox/pull/7) ([rwaffen](https://github.com/rwaffen))
+- fix wrong file name of gitlab-ci.yml [\#6](https://github.com/voxpupuli/container-voxbox/pull/6) ([rwaffen](https://github.com/rwaffen))
+- update README.md to highlight build\_versions.json and add .gitlab-ci.yaml example [\#5](https://github.com/voxpupuli/container-voxbox/pull/5) ([rwaffen](https://github.com/rwaffen))
+- Use more precise container image names and add rubocop-performance [\#4](https://github.com/voxpupuli/container-voxbox/pull/4) ([rwaffen](https://github.com/rwaffen))
+
 ## [v1.0.0](https://github.com/voxpupuli/container-voxbox/tree/v1.0.0) (2024-03-27)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/ac1461e6cb5c9f365632f39b551bfd510aeea1ba...v1.0.0)
