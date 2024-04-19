@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ghcr.io/betadots/ruby:2.7.8-focal
+ARG BASE_IMAGE=ghcr.io/betadots/ruby:3.2.3-jammy
 
 FROM $BASE_IMAGE
 
@@ -12,10 +12,10 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <info@voxpupuli.org>" \
       org.label-schema.dockerfile="/Dockerfile"
 
 ARG RUBYGEM_PUPPET
-ENV RUBYGEM_PUPPET=${RUBYGEM_PUPPET:-7.29.1}
+ENV RUBYGEM_PUPPET=${RUBYGEM_PUPPET:-8.6.0}
 
 ARG RUBYGEM_FACTER
-ENV RUBYGEM_FACTER=${RUBYGEM_FACTER:-4.6.1}
+ENV RUBYGEM_FACTER=${RUBYGEM_FACTER:-4.7.0}
 
 ARG RUBYGEM_VOXPUPULI_TEST
 ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-7.1.0}
@@ -33,7 +33,7 @@ ARG RUBYGEM_MODULESYNC
 ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-3.2.0}
 
 ARG RUBYGEM_R10K
-ENV RUBYGEM_R10K=${RUBYGEM_R10K:-4.0.2}
+ENV RUBYGEM_R10K=${RUBYGEM_R10K:-4.1.0}
 
 ARG RUBYGEM_RA10KE
 ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-3.0.0}
@@ -46,15 +46,18 @@ COPY voxbox/Rakefile /
 COPY Dockerfile /
 
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get purge -y "libaom*" \
     && apt-get autoremove -y \
     && apt-get clean \
     && bundle config set path.system true \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
+    && apt-get purge -y "libaom*" linux-libc-dev "libmagick*" "imagemagick-*" \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/cgi-0.1.0.2.gemspec
+    && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/cgi-0.1.0.2 \
+    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/cgi-0.1.0.2.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/3.2.0/gems/rdoc-6.5.0 \
+    && rm -rf /usr/local/lib/ruby/gems/3.2.0/specifications/default/rdoc-6.5.0.gemspec
 
 WORKDIR /repo
 
