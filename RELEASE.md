@@ -33,6 +33,6 @@ git push origin release-v$RELEASE_VERSION
 ```shell
 git switch main
 git pull -r
-git tag v$RELEASE_VERSION
+git tag v$RELEASE_VERSION -m "v$RELEASE_VERSION"
 git push --tags
 ```
