@@ -57,14 +57,13 @@ jobs:
         with:
           image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
           format: 'sarif'
-          output: 'trivy-results.sarif'
+          output: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results.sarif'
-          matrix: ${{ toJson(matrix) }}
+          sarif_file: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
 
       # - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
       #   uses: aquasecurity/trivy-action@master
