@@ -45,7 +45,9 @@ COPY voxbox/Gemfile /
 COPY voxbox/Rakefile /
 COPY Dockerfile /
 
-RUN apt-get update && apt-get upgrade -y \
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y yamllint \
     && apt-get autoremove -y \
     && apt-get clean \
     && bundle config set path.system true \
