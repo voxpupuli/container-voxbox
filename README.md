@@ -14,13 +14,97 @@ Too see which gems and versions are included in the container, see:
 
 [build_versions.json](build_versions.json)
 
-## Example usage
+## Usage
+
+Default entrypoint is rake. Without any arguments it will run `rake -T`. You can specify a rake task as argument. See [Supported rake tasks](#supported-rake-tasks) for more information.
 
 ```shell
 cd puppet-k8s
 docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox # rake -T
 docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox spec # rake spec
+```
+
+if you need a shell, you have to override the entrypoint:
+
+```shell
 docker run -it --rm -v $(pwd):/repo --entrypoint bash voxpupuli/voxbox # get shell
+```
+
+### Supported rake tasks
+
+```shell
+rake beaker                                                                     # Run RSpec code examples
+rake build                                                                      # Build puppet module package
+rake build:pdk                                                                  # Build Puppet module with PDK
+rake check                                                                      # Run static pre release checks
+rake check:dot_underscore                                                       # Fails if any ._ files are present in directory
+rake check:git_ignore                                                           # Fails if directories contain the files specified in .gitignore
+rake check:symlinks                                                             # Fails if symlinks are present in directory
+rake check:test_file                                                            # Fails if .pp files present in tests folder
+rake check:trailing_whitespace                                                  # Check for trailing whitespace
+rake check_changelog                                                            # Check Changelog
+rake clean                                                                      # Clean a built module package
+rake compute_dev_version                                                        # Print development version of module
+rake help                                                                       # Display the list of available rake tasks
+rake lint                                                                       # Run puppet-lint
+rake lint_fix                                                                   # Run puppet-lint
+rake metadata_lint                                                              # Run metadata-json-lint
+rake module:build                                                               # Build the module using puppet-modulebuilder
+rake module:bump                                                                # Bump module version to the next patch
+rake module:bump:full                                                           # Bump module version to the next FULL version
+rake module:bump:major                                                          # Bump module version to the next MAJOR version
+rake module:bump:minor                                                          # Bump module version to the next MINOR version
+rake module:bump:patch                                                          # Bump module version to the next PATCH version
+rake module:bump_commit                                                         # Bump version and git commit
+rake module:bump_commit:full                                                    # Bump module version to the next FULL version and git commit
+rake module:bump_commit:major                                                   # Bump module version to the next MAJOR version and git commit
+rake module:bump_commit:minor                                                   # Bump module version to the next MINOR version and git commit
+rake module:bump_commit:patch                                                   # Bump module version to the next PATCH version and git commit
+rake module:bump_to_version[new_version]                                        # Bump module to specific version number
+rake module:clean                                                               # Runs clean again
+rake module:dependency[module_name,version]                                     # Set specific module dependency version
+rake module:push                                                                # Push module to the Puppet Forge
+rake module:release                                                             # Release the Puppet module, doing a clean, build, bump_commit, tag, push and git push
+rake module:tag                                                                 # Git tag with the current module version
+rake module:version                                                             # Get current module version
+rake module:version:next                                                        # Get next module version
+rake module:version:next:major                                                  # Get the next MAJOR version
+rake module:version:next:minor                                                  # Get the next MINOR version
+rake module:version:next:patch                                                  # Get the next PATCH version
+rake parallel_spec                                                              # Run spec tests in parallel and clean the fixtures directory if successful
+rake parallel_spec_standalone                                                   # Parallel spec tests
+rake r10k:dependencies                                                          # Print outdated forge modules
+rake r10k:deprecation                                                           # Validate that no forge modules are deprecated
+rake r10k:duplicates                                                            # Check Puppetfile for duplicates
+rake r10k:install                                                               # Install modules specified in Puppetfile
+rake r10k:print_git_conversion                                                  # Convert and print forge modules to git format
+rake r10k:solve_dependencies[allow_major_bump]                                  # Find missing or outdated module dependencies
+rake r10k:syntax                                                                # Syntax check Puppetfile
+rake r10k:validate                                                              # Validate the git urls and branches, refs, or tags
+rake release                                                                    # Release via GitHub Actions
+rake release:prepare                                                            # Prepare a release
+rake release_checks                                                             # Runs all necessary checks on a module in preparation for a release
+rake rubocop                                                                    # Run RuboCop
+rake rubocop:autocorrect                                                        # Autocorrect RuboCop offenses (only when it's safe)
+rake rubocop:autocorrect_all                                                    # Autocorrect RuboCop offenses (safe and unsafe)
+rake spec                                                                       # Run spec tests and clean the fixtures directory if successful
+rake spec:simplecov                                                             # Run spec tests with ruby simplecov code coverage
+rake spec_clean                                                                 # Clean up the fixtures directory
+rake spec_clean_symlinks                                                        # Clean up any fixture symlinks
+rake spec_list_json                                                             # List spec tests in a JSON document
+rake spec_prep                                                                  # Create the fixtures directory
+rake spec_standalone                                                            # Run RSpec code examples
+rake strings:generate[patterns,debug,backtrace,markup,json,markdown,yard_args]  # Generate Puppet documentation with YARD
+rake strings:generate:reference[patterns,debug,backtrace]                       # Generate Puppet Reference documentation
+rake strings:gh_pages:update                                                    # Update docs on the gh-pages branch and push to GitHub
+rake strings:validate:reference[patterns,debug,backtrace]                       # Validate the reference is up to date
+rake syntax                                                                     # Syntax check for Puppet manifests, templates and Hiera
+rake syntax:hiera                                                               # Syntax check Hiera config files
+rake syntax:manifests                                                           # Syntax check Puppet manifests
+rake syntax:templates                                                           # Syntax check Puppet templates
+rake test                                                                       # Run tests
+rake travis_release                                                             # Deprecated: use the "release" task instead
+rake validate                                                                   # Check syntax of Ruby files and call :syntax and :metadata_lint
 ```
 
 ## Example Gitlab CI configuration
