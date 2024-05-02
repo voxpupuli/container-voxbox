@@ -16,21 +16,24 @@ Too see which gems and versions are included in the container, see:
 
 ## Usage
 
-Default entrypoint is rake. Without any arguments it will run `rake -T`. You can specify a rake task as argument. See [Supported rake tasks](#supported-rake-tasks) for more information.
+Change into the root of a puppet module and run the container.
+Make sure to mount the current directory into the container under `/repo`.
+The default entrypoint is rake. Without any arguments it will run `rake -T`.
+You can specify a rake task as argument. See [Available rake tasks](#available-rake-tasks) for more information.
 
 ```shell
 cd puppet-k8s
-docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox # rake -T
-docker run -it --rm -v $(pwd):/repo voxpupuli/voxbox spec # rake spec
+docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8      # rake -T
+docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8 spec # rake spec
 ```
 
 if you need a shell, you have to override the entrypoint:
 
 ```shell
-docker run -it --rm -v $(pwd):/repo --entrypoint bash voxpupuli/voxbox # get shell
+docker run -it --rm -v $(pwd):/repo --entrypoint bash ghcr.io/voxpupuli/voxbox:8
 ```
 
-### Supported rake tasks
+### Available rake tasks
 
 ```shell
 rake beaker                                                                     # Run RSpec code examples
@@ -133,9 +136,9 @@ docker pull ghcr.io/voxpupuli/voxbox:latest
 
 | Name | Description |
 | --- | --- |
-| puppet.major | Describes the contained major Puppet version (7 or 8) |
-| puppet.minor | Describes the contained minor Puppet version |
-| puppet.patch | Describes the contained patchlevel Puppet version |
+| puppet.major    | Describes the contained major Puppet version (7 or 8) |
+| puppet.minor    | Describes the contained minor Puppet version |
+| puppet.patch    | Describes the contained patchlevel Puppet version |
 | container.major | Describes breaking changes without backward compatibility |
 | container.minor | Describes new features or refactoring with backward compatibility |
 | container.patch | Describes if minor changes or bugfixes have been implemented |
