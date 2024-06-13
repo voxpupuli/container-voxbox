@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.2.0](https://github.com/voxpupuli/container-voxbox/tree/v1.2.0) (2024-06-13)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.1.0...v1.2.0)
+
+**Implemented enhancements:**
+
+- Update puppet to 7.31.0 & 8.7.0 and also update gem versions [\#16](https://github.com/voxpupuli/container-voxbox/pull/16) ([rwaffen](https://github.com/rwaffen))
+- add yamllint [\#13](https://github.com/voxpupuli/container-voxbox/pull/13) ([rwaffen](https://github.com/rwaffen))
+
+**Closed issues:**
+
+- add yamllint [\#12](https://github.com/voxpupuli/container-voxbox/issues/12)
+
+**Merged pull requests:**
+
+- Describe in more detail the entrypoint and switch from "supported" to "available" rake tasks [\#15](https://github.com/voxpupuli/container-voxbox/pull/15) ([rwaffen](https://github.com/rwaffen))
+- describe in more detail how to use the voxbox [\#14](https://github.com/voxpupuli/container-voxbox/pull/14) ([rwaffen](https://github.com/rwaffen))
+- Remove libs not needed with CVEs, move defaults to puppet 8 [\#11](https://github.com/voxpupuli/container-voxbox/pull/11) ([rwaffen](https://github.com/rwaffen))
+
 ## [v1.1.0](https://github.com/voxpupuli/container-voxbox/tree/v1.1.0) (2024-04-19)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.0.0...v1.1.0)
