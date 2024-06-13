@@ -50,7 +50,6 @@ RUN apt-get update \
     && apt-get install -y yamllint \
     && apt-get autoremove -y \
     && apt-get clean \
-    && gem update --system \
     && bundle config set path.system true \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
