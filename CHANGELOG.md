@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.3.0](https://github.com/voxpupuli/container-voxbox/tree/v1.3.0) (2024-07-08)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.2.0...v1.3.0)
+
+**Implemented enhancements:**
+
+- chore: Update rubygem versions in build\_versions.json [\#23](https://github.com/voxpupuli/container-voxbox/pull/23) ([rwaffen](https://github.com/rwaffen))
+- Remove stringio 0.1.0 from ruby 2.7 and replace with 3.1 [\#22](https://github.com/voxpupuli/container-voxbox/pull/22) ([rwaffen](https://github.com/rwaffen))
+
 ## [v1.2.0](https://github.com/voxpupuli/container-voxbox/tree/v1.2.0) (2024-06-13)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.1.0...v1.2.0)

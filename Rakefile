@@ -8,7 +8,7 @@ rescue LoadError
 else
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file."
-    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix skip-changelog]
+    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix skip-changelog github_actions modulesync]
     config.user = 'voxpupuli'
     config.project = 'container-voxbox'
     # get branch name from git and strip off any prefixes (e.g. 'release-')
