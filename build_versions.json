@@ -17,7 +17,7 @@
     },
     {
       "puppet_release": 8,
-      "base_image": "ghcr.io/betadots/ruby:3.2.3-jammy",
+      "base_image": "docker.io/ruby:3.2.5-bookworm",
       "rubygem_puppet": "8.7.0",
       "rubygem_facter": "4.7.1",
       "rubygem_voxpupuli_test": "8.1.0",

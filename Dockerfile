@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ghcr.io/betadots/ruby:3.2.3-jammy
+ARG BASE_IMAGE=docker.io/ruby:3.2.5-bookworm
 
 FROM $BASE_IMAGE
 
@@ -59,9 +59,7 @@ RUN apt-get update \
     && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/cgi-0.1.0.2 \
     && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/cgi-0.1.0.2.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/stringio-0.1.0 \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/stringio-0.1.0.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/3.2.0/gems/rdoc-6.5.0 \
-    && rm -rf /usr/local/lib/ruby/gems/3.2.0/specifications/default/rdoc-6.5.0.gemspec
+    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/stringio-0.1.0.gemspec
 
 WORKDIR /repo
 
