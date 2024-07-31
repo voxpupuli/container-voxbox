@@ -2,7 +2,7 @@
   "include": [
     {
       "puppet_release": 7,
-      "base_image": "ghcr.io/betadots/ruby:2.7.8-focal",
+      "base_image": "docker.io/ruby:2.7.8-alpine3.16",
       "rubygem_puppet": "7.32.1",
       "rubygem_facter": "4.8.0",
       "rubygem_voxpupuli_test": "9.0.0",
@@ -17,7 +17,7 @@
     },
     {
       "puppet_release": 8,
-      "base_image": "docker.io/ruby:3.2.5-bookworm",
+      "base_image": "docker.io/ruby:3.2.5-alpine3.20",
       "rubygem_puppet": "8.8.1",
       "rubygem_facter": "4.8.0",
       "rubygem_voxpupuli_test": "9.0.0",

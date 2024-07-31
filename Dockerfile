@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=docker.io/ruby:3.2.5-bookworm
+ARG BASE_IMAGE=docker.io/ruby:3.2.5-alpine3.20
 
 FROM $BASE_IMAGE
 
@@ -45,16 +45,13 @@ COPY voxbox/Gemfile /
 COPY voxbox/Rakefile /
 COPY Dockerfile /
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y yamllint \
-    && apt-get autoremove -y \
-    && apt-get clean \
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache --update alpine-sdk \
+    && apk add --no-cache --update yamllint \
     && bundle config set path.system true \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
-    && apt-get purge -y "libaom*" linux-libc-dev "libmagick*" "imagemagick-*" \
-    && rm -rf /var/lib/apt/lists/* \
     && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
     && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/cgi-0.1.0.2 \
     && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/cgi-0.1.0.2.gemspec \
