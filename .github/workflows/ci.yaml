@@ -65,11 +65,13 @@ jobs:
         with:
           sarif_file: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
 
+      - name: Clone voxpupuli/puppet-example repository
+        uses: actions/checkout@v4
+        with:
+          repository: voxpupuli/puppet-example
+
       - name: Test container
         run: |
-          mkdir -p /tmp/voxbox
-          cd /tmp/voxbox
-          git clone https://github.com/voxpupuli/puppet-example.git
           cd puppet-example
           docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -T
           docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} check
