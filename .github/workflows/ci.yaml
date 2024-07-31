@@ -52,6 +52,12 @@ jobs:
             RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: voxpupulibot
+          password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
+
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
         uses: docker/scout-action@v1
