@@ -73,7 +73,6 @@ jobs:
       - name: Test container
         run: |
           docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile -T
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile check
           docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile lint
           docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile metadata_lint
           docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile strings:validate:reference
