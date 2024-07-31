@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.0](https://github.com/voxpupuli/container-voxbox/tree/v1.3.0) (2024-07-08)
+## [v2.0.0](https://github.com/voxpupuli/container-voxbox/tree/v2.0.0) (2024-07-31)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.3.0...v2.0.0)
+
+**Breaking changes:**
+
+- switch to alpine [\#28](https://github.com/voxpupuli/container-voxbox/pull/28) ([rwaffen](https://github.com/rwaffen))
+- update puppet, facter and voxpupuli-test to latest versions, update build defaults [\#26](https://github.com/voxpupuli/container-voxbox/pull/26) ([rwaffen](https://github.com/rwaffen))
+
+## [v1.3.0](https://github.com/voxpupuli/container-voxbox/tree/v1.3.0) (2024-07-09)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.2.0...v1.3.0)
 
