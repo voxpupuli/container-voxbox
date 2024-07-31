@@ -29,6 +29,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
+      pull-requests: write
     needs: setup-matrix
     strategy:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
@@ -52,18 +53,26 @@ jobs:
             RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
-          format: 'sarif'
-          output: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
-          severity: 'CRITICAL,HIGH'
+          username: voxpupulibot
+          password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Analyze for critical and high CVEs
+        id: docker-scout-cves
+        uses: docker/scout-action@v1
         with:
-          sarif_file: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
+          command: cves
+          image: 'local://ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+          sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
+          summary: true
+
+      - name: Upload SARIF result
+        id: upload-sarif
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
