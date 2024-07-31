@@ -65,21 +65,22 @@ jobs:
         with:
           sarif_file: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
 
-      # - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     scan-type: 'image'
-      #     format: 'github'
-      #     output: 'dependency-results.sbom.json'
-      #     image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
-      #     github-pat: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Upload trivy report as a Github artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: trivy-sbom-report
-      #     path: '${{ github.workspace }}/dependency-results.sbom.json'
-      #     retention-days: 20 # 90 is the default
+      - name: Test container
+        run: |
+          mkdir -p /tmp/voxbox
+          cd /tmp/voxbox
+          git clone https://github.com/voxpupuli/puppet-example.git
+          cd puppet-example
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -T
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} check
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} lint
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} metadata_lint
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} strings:validate:reference
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} rubocop
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} syntax
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} spec
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} r10k:syntax
+          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} r10k:dependencies
 
   tests:
     needs:
