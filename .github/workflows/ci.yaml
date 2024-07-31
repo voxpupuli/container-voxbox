@@ -72,17 +72,16 @@ jobs:
 
       - name: Test container
         run: |
-          cd puppet-example
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -T
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} check
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} lint
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} metadata_lint
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} strings:validate:reference
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} rubocop
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} syntax
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} spec
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} r10k:syntax
-          docker run --rm -it ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} r10k:dependencies
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile -T
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile check
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile lint
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile metadata_lint
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile strings:validate:reference
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile rubocop
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile syntax
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile spec
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile r10k:syntax
+          docker run --rm -it -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile r10k:dependencies
 
   tests:
     needs:
