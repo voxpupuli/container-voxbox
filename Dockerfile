@@ -60,5 +60,8 @@ RUN apk update \
 
 WORKDIR /repo
 
+RUN addgroup -S voxbox && adduser -S voxbox -G voxbox
+USER voxbox
+
 ENTRYPOINT [ "rake" ]
 CMD [ "-f", "/Rakefile", "-T" ]
