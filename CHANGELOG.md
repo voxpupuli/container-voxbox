@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1.0](https://github.com/voxpupuli/container-voxbox/tree/v2.1.0) (2024-08-21)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.0.0...v2.1.0)
+
+**Implemented enhancements:**
+
+- Add jq for json handling in CIs [\#34](https://github.com/voxpupuli/container-voxbox/pull/34) ([rwaffen](https://github.com/rwaffen))
+
 ## [v2.0.0](https://github.com/voxpupuli/container-voxbox/tree/v2.0.0) (2024-07-31)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.3.0...v2.0.0)
