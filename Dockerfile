@@ -49,6 +49,7 @@ RUN apk update \
     && apk upgrade \
     && apk add --no-cache --update alpine-sdk \
     && apk add --no-cache --update yamllint \
+    && apk add --no-cache --update jq \
     && bundle config set path.system true \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
