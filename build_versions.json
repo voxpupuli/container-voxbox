@@ -1,24 +1,15 @@
 {
+  "base_image": ["docker.io/ruby:2.7.8-alpine3.16", "docker.io/ruby:3.0.2-alpine3.13"],
+  "puppet_release": [7, 8],
   "rubygem_facter": "4.8.0",
   "rubygem_modulesync": "3.2.0",
   "rubygem_overcommit": "0.63.0",
   "rubygem_puppet_metadata": "4.2.0",
+  "rubygem_puppet": ["7.32.1", "8.8.1"],
   "rubygem_r10k": "4.1.0",
   "rubygem_ra10ke": "3.1.0",
   "rubygem_rubocop_performance": "1.21.1",
   "rubygem_voxpupuli_acceptance": "3.2.0",
   "rubygem_voxpupuli_release": "3.1.0",
-  "rubygem_voxpupuli_test": "9.0.0",
-  "include": [
-    {
-      "base_image": "docker.io/ruby:2.7.8-alpine3.16",
-      "puppet_release": 7,
-      "rubygem_puppet": "7.32.1"
-    },
-    {
-      "base_image": "docker.io/ruby:3.2.5-alpine3.20",
-      "puppet_release": 8,
-      "rubygem_puppet": "8.8.1"
-    }
-  ]
+  "rubygem_voxpupuli_test": "9.0.0"
 }
