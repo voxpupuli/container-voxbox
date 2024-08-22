@@ -64,7 +64,7 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: cves,compare
-          to: 'ghcr.io/voxpupuli/voxbox-${{ matrix.rubygem_puppet }}-main'
+          to: 'ghcr.io/voxpupuli/voxbox-${{ matrix.puppet_release }}-main'
           ignore-unchanged: true
           image: 'local://ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
           sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
