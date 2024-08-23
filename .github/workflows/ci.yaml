@@ -60,11 +60,12 @@ jobs:
         id: analyze-image
         uses: docker/scout-action@v1
         with:
-          command: cves,compare
+          command: cves,compare,recommendations
           to: 'ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-main'
           image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
           sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
           summary: true
+          keep-previous-comments: true
 
       - name: Upload SARIF result
         id: upload-sarif
