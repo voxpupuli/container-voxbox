@@ -56,11 +56,20 @@ jobs:
           username: voxpupulibot
           password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
 
-      - name: Analyze Container Image
-        id: analyze-image
+      - name: Analyze container image for CVEs
+        id: analyze-image-cves
         uses: docker/scout-action@v1
         with:
-          command: cves,compare,recommendations
+          command: cves
+          image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
+          sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
+          write-comment: false
+
+      - name: Compare container image to latest from Registry
+        id: compare-image
+        uses: docker/scout-action@v1
+        with:
+          command: compare
           to: 'ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-main'
           image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
           sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
