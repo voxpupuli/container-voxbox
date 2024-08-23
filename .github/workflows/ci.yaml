@@ -5,9 +5,6 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -40,7 +37,7 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v6
         with:
-          tags: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+          tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
           push: false
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
@@ -59,14 +56,24 @@ jobs:
           username: voxpupulibot
           password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
 
-      - name: Analyze for critical and high CVEs
-        id: docker-scout-cves
+      - name: Analyze container image for CVEs
+        id: analyze-image-cves
         uses: docker/scout-action@v1
         with:
           command: cves
-          image: 'local://ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+          image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
           sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
+          write-comment: false
+
+      - name: Compare container image to latest from Registry
+        id: compare-image
+        uses: docker/scout-action@v1
+        with:
+          command: compare
+          image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
+          to: 'ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-main'
           summary: true
+          keep-previous-comments: true
 
       - name: Upload SARIF result
         id: upload-sarif
@@ -81,15 +88,15 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile -T
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile lint
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile metadata_lint
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile strings:validate:reference
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile rubocop
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile syntax
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile spec
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile r10k:syntax
-          docker run --rm  -v $(pwd):/repo ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }} -f /Rakefile r10k:dependencies
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   tests:
     needs:
