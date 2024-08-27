@@ -54,10 +54,12 @@ RUN apk update \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
     && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/cgi-0.1.0.2 \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/cgi-0.1.0.2.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/stringio-0.1.0 \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/stringio-0.1.0.gemspec
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/cgi-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/cgi-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/stringio-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/stringio-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/rexml-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/rexml-*.gemspec
 
 WORKDIR /repo
 
