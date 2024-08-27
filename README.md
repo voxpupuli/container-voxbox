@@ -110,6 +110,11 @@ rake travis_release                                                             
 rake validate                                                                   # Check syntax of Ruby files and call :syntax and :metadata_lint
 ```
 
+## Additionally included Tools
+
+- jq
+- yamllint
+
 ## Example Gitlab CI configuration
 
 see [.gitlab-ci.yml](.gitlab-ci.yml)
