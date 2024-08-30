@@ -41,6 +41,9 @@ ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-3.1.0}
 ARG RUBYGEM_RUBOCOP_PERFORMANCE
 ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.21.1}
 
+ARG RUBYGEM_BUNDLER
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-2.5.18}
+
 COPY voxbox/Gemfile /
 COPY voxbox/Rakefile /
 COPY Dockerfile /
@@ -50,6 +53,9 @@ RUN apk update \
     && apk add --no-cache --update alpine-sdk \
     && apk add --no-cache --update yamllint \
     && apk add --no-cache --update jq \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/bundler-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec \
+    && gem install bundler -v ${RUBYGEM_BUNDLER} \
     && bundle config set path.system true \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
