@@ -22,7 +22,7 @@ jobs:
         run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
 
   build-ARM-container:
-    runs-on: ubuntu-latest
+    runs-on: hetzner-arm
     permissions:
       contents: read
       packages: write
