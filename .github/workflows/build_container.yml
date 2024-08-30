@@ -37,7 +37,7 @@ jobs:
           build_args: |
             BASE_IMAGE=${{ matrix.base_image }}
             RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
-            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_FACTER=${{ matrix.rubygem_facter }}
             RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli_test }}
             RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
