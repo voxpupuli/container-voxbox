@@ -19,7 +19,7 @@ jobs:
       - id: set-matrix
         run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
 
-  build_test_container:
+  build-x86-container:
     name: 'Build test container'
     runs-on: ubuntu-latest
     permissions:
@@ -72,9 +72,57 @@ jobs:
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
+  build-ARM-container:
+    name: 'Build ARM CI container'
+    runs-on: hetzner-arm
+    permissions:
+      actions: read
+      contents: read
+    needs: setup-matrix
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}-arm'
+          push: false
+          platforms: linux/arm64
+          build-args: |
+            BASE_IMAGE=${{ matrix.base_image }}
+            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
+            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli_test }}
+            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
+            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
+            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
+            RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
+            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
+
+      - name: Clone voxpupuli/puppet-example repository
+        uses: actions/checkout@v4
+        with:
+          repository: voxpupuli/puppet-example
+
+      - name: Test container
+        run: |
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+
   tests:
     needs:
-      - build_test_container
+      - build-x86-container
+      - build-ARM-container
     runs-on: ubuntu-latest
     name: Test suite
     steps:
