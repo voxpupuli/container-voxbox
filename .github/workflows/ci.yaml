@@ -5,9 +5,6 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -29,6 +26,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
+      pull-requests: write
     needs: setup-matrix
     strategy:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
@@ -39,7 +37,7 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v6
         with:
-          tags: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
+          tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
           push: false
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
@@ -52,34 +50,53 @@ jobs:
             RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
-          format: 'sarif'
-          output: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
-          severity: 'CRITICAL,HIGH'
+          username: voxpupulibot
+          password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
 
-      - name: Upload Trivy scan results to GitHub Security tab
+      - name: Analyze container image for CVEs
+        id: analyze-image-cves
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
+          sarif-file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
+          write-comment: false
+
+      - name: Compare container image to latest from Registry
+        id: compare-image
+        uses: docker/scout-action@v1
+        with:
+          command: compare
+          image: 'local://ci/voxbox:${{ matrix.rubygem_puppet }}'
+          to: 'ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-main'
+          summary: true
+          keep-previous-comments: true
+
+      - name: Upload SARIF result
+        id: upload-sarif
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results-${{ matrix.rubygem_puppet }}.sarif'
+          sarif_file: sarif.output.${{ matrix.rubygem_puppet }}.${{ github.sha }}.json
 
-      # - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     scan-type: 'image'
-      #     format: 'github'
-      #     output: 'dependency-results.sbom.json'
-      #     image-ref: 'ci/voxbox-${{ matrix.rubygem_puppet }}:${{ github.sha }}'
-      #     github-pat: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clone voxpupuli/puppet-example repository
+        uses: actions/checkout@v4
+        with:
+          repository: voxpupuli/puppet-example
 
-      # - name: Upload trivy report as a Github artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: trivy-sbom-report
-      #     path: '${{ github.workspace }}/dependency-results.sbom.json'
-      #     retention-days: 20 # 90 is the default
+      - name: Test container
+        run: |
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   tests:
     needs:

@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1.0](https://github.com/voxpupuli/container-voxbox/tree/v2.1.0) (2024-08-21)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.0.0...v2.1.0)
+
+**Implemented enhancements:**
+
+- Add jq for json handling in CIs [\#34](https://github.com/voxpupuli/container-voxbox/pull/34) ([rwaffen](https://github.com/rwaffen))
+
+## [v2.0.0](https://github.com/voxpupuli/container-voxbox/tree/v2.0.0) (2024-07-31)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.3.0...v2.0.0)
+
+**Breaking changes:**
+
+- switch to alpine [\#28](https://github.com/voxpupuli/container-voxbox/pull/28) ([rwaffen](https://github.com/rwaffen))
+- update puppet, facter and voxpupuli-test to latest versions, update build defaults [\#26](https://github.com/voxpupuli/container-voxbox/pull/26) ([rwaffen](https://github.com/rwaffen))
+
+## [v1.3.0](https://github.com/voxpupuli/container-voxbox/tree/v1.3.0) (2024-07-09)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.2.0...v1.3.0)
+
+**Implemented enhancements:**
+
+- chore: Update rubygem versions in build\_versions.json [\#23](https://github.com/voxpupuli/container-voxbox/pull/23) ([rwaffen](https://github.com/rwaffen))
+- Remove stringio 0.1.0 from ruby 2.7 and replace with 3.1 [\#22](https://github.com/voxpupuli/container-voxbox/pull/22) ([rwaffen](https://github.com/rwaffen))
+
 ## [v1.2.0](https://github.com/voxpupuli/container-voxbox/tree/v1.2.0) (2024-06-13)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v1.1.0...v1.2.0)
