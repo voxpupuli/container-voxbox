@@ -67,14 +67,14 @@ rake module:bump_to_version[new_version]                                        
 rake module:clean                                                               # Runs clean again
 rake module:dependency[module_name,version]                                     # Set specific module dependency version
 rake module:push                                                                # Push module to the Puppet Forge
-rake module:release                                                             # Release the Puppet module, doing a clean, build, bump_commit, tag, push and git push
+rake module:release                                                             # Release the Puppet module, doing a clean, build, bump_commit...
 rake module:tag                                                                 # Git tag with the current module version
 rake module:version                                                             # Get current module version
 rake module:version:next                                                        # Get next module version
 rake module:version:next:major                                                  # Get the next MAJOR version
 rake module:version:next:minor                                                  # Get the next MINOR version
 rake module:version:next:patch                                                  # Get the next PATCH version
-rake parallel_spec                                                              # Run spec tests in parallel and clean the fixtures directory if successful
+rake parallel_spec                                                              # Run spec tests in parallel and clean the fixtures directory ...
 rake parallel_spec_standalone                                                   # Parallel spec tests
 rake r10k:dependencies                                                          # Print outdated forge modules
 rake r10k:deprecation                                                           # Validate that no forge modules are deprecated
@@ -86,7 +86,7 @@ rake r10k:syntax                                                                
 rake r10k:validate                                                              # Validate the git urls and branches, refs, or tags
 rake release                                                                    # Release via GitHub Actions
 rake release:prepare                                                            # Prepare a release
-rake release_checks                                                             # Runs all necessary checks on a module in preparation for a release
+rake release_checks                                                             # Runs all necessary checks on a module in preparation for a r...
 rake rubocop                                                                    # Run RuboCop
 rake rubocop:autocorrect                                                        # Autocorrect RuboCop offenses (only when it's safe)
 rake rubocop:autocorrect_all                                                    # Autocorrect RuboCop offenses (safe and unsafe)
@@ -108,6 +108,7 @@ rake syntax:templates                                                           
 rake test                                                                       # Run tests
 rake travis_release                                                             # Deprecated: use the "release" task instead
 rake validate                                                                   # Check syntax of Ruby files and call :syntax and :metadata_lint
+rake voxpupuli:custom:lint_all                                                  # Lint with all puppet-lint checks
 ```
 
 ## Additionally included Tools
