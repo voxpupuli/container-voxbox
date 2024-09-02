@@ -20,7 +20,7 @@ jobs:
         run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
 
   build-x86-container:
-    name: 'Build test container'
+    name: 'Build x86 CI container'
     runs-on: ubuntu-latest
     permissions:
       actions: read
