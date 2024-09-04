@@ -71,6 +71,7 @@ jobs:
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+          docker run --rm  -v $(pwd):/repo alpine rm -fr /repo/.yardoc
 
   build-ARM-container:
     name: 'Build ARM CI container'
@@ -118,6 +119,7 @@ jobs:
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
           docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+          docker run --rm  -v $(pwd):/repo alpine rm -fr /repo/.yardoc
 
   tests:
     needs:
