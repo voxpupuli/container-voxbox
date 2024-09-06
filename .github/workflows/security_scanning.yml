@@ -1,0 +1,68 @@
+---
+name: Security Scanning 🕵️
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Source checkout
+        uses: actions/checkout@v4
+
+      - id: set-matrix
+        run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
+
+  scan_ci_container:
+    name: 'Scan CI container'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    needs: setup-matrix
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build CI container
+        uses: docker/build-push-action@v6
+        with:
+          tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
+          push: false
+          build-args: |
+            BASE_IMAGE=${{ matrix.base_image }}
+            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
+            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli_test }}
+            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
+            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
+            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
+            RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
+            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
+            RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+
+      - name: Scan image with Anchore Grype
+        uses: anchore/scan-action@v4
+        id: scan
+        with:
+          image: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
+          fail-build: false
+
+      - name: Inspect action SARIF report
+        run: jq . ${{ steps.scan.outputs.sarif }}
+
+      - name: Upload Anchore scan SARIF report
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
