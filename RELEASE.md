@@ -1,16 +1,11 @@
-# How to make a release
+# Release
 
 ## On a fork
 
-Initiate a Release Pull Request (PR). Ensure that the release branch includes the version in its name, as this will be utilized as the `future_version` for the GitHub changelog generator.
-
-See Rakefile
-
-```ruby
-    config.future_release = `git rev-parse --abbrev-ref HEAD`.strip.split('-', 2).last
-```
-
-Do the following:
+Please follow these instructions carefully.
+Ensure that you name the branch precisely as `release-vX.Y.Z`
+since this nomenclature is crucial for obtaining the `future_version` in the changelog.
+Your attention to this specific branch naming convention is essential for accurate version tracking in the changelog.
 
 ```shell
 export RELEASE_VERSION="X.Y.Z"
@@ -23,10 +18,11 @@ bundle config set --local with 'release'
 bundle install
 
 CHANGELOG_GITHUB_TOKEN="token_MC_tokenface" bundle exec rake changelog
-
 git commit -am "Release v${RELEASE_VERSION}"
 git push origin release-v$RELEASE_VERSION
 ```
+
+Then open a PR, discuss and merge.
 
 ## After the merge, as a maintainer on upstream
 
