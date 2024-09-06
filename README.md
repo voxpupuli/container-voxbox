@@ -108,6 +108,7 @@ rake syntax:templates                                                           
 rake test                                                                       # Run tests
 rake travis_release                                                             # Deprecated: use the "release" task instead
 rake validate                                                                   # Check syntax of Ruby files and call :syntax and :metadata_lint
+rake voxpupuli:custom:lint_all                                                  # Lint with all puppet-lint checks
 ```
 
 ## Additionally included Tools
