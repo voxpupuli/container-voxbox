@@ -62,15 +62,18 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+          # get ids from runner user
+          UID=$(id -u)
+          GID=$(id -g)
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   build-ARM-container:
     name: 'Build ARM CI container'
@@ -110,15 +113,18 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+          # get ids from runner user
+          UID=$(id -u)
+          GID=$(id -g)
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --user ${UID}:${GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   tests:
     needs:
