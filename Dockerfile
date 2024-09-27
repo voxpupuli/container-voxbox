@@ -80,8 +80,10 @@ RUN apk update \
     && apk add jq=${APK_JQ} \
     && apk add yamllint=${APK_YAMLLINT} \
     && apk add git=${APK_GIT} \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /usr/local/lib/ruby/gems
 
+COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY Dockerfile /
 COPY voxbox/Rakefile /
