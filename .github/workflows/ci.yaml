@@ -21,8 +21,7 @@ jobs:
 
   build-x86-container:
     name: 'Build x86 CI container'
-    # runs-on: macarne
-    runs-on: ubuntu-latest
+    runs-on: macarne
     permissions:
       actions: read
       contents: read
@@ -63,21 +62,19 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
-          docker run --rm  -v $(pwd):/repo alpine rm -fr /repo/.yardoc
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   build-ARM-container:
     name: 'Build ARM CI container'
-    # runs-on: hetzner-arm
-    runs-on: ubuntu-latest
+    runs-on: hetzner-arm
     permissions:
       actions: read
       contents: read
@@ -112,16 +109,15 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
-          docker run --rm  -v $(pwd):/repo alpine rm -fr /repo/.yardoc
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   tests:
     needs:
