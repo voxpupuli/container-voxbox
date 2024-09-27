@@ -62,15 +62,15 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   build-ARM-container:
     name: 'Build ARM CI container'
@@ -109,15 +109,15 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --user runner:runner --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
+          docker run --user 999:998 --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
   tests:
     needs:
