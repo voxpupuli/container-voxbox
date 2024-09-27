@@ -50,6 +50,9 @@ jobs:
             RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+            APK_JQ=${{ matrix.apk_jq }}
+            APK_YAMLLINT=${{ matrix.apk_yamllint }}
+            APK_GIT=${{ matrix.apk_git }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
