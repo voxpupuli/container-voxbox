@@ -22,7 +22,8 @@ jobs:
         run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
 
   build-ARM-container:
-    runs-on: hetzner-arm
+    # runs-on: hetzner-arm
+    runs-on: macarne
     permissions:
       contents: read
       packages: write
@@ -59,7 +60,7 @@ jobs:
             docker.io/voxpupuli/voxbox:latest
 
   build-X86-container:
-    runs-on: ubuntu-latest
+    runs-on: macarne
     permissions:
       contents: read
       packages: write
