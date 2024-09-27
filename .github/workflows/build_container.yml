@@ -23,7 +23,7 @@ jobs:
 
   build-ARM-container:
     # runs-on: hetzner-arm
-    runs-on: macarne
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -60,7 +60,8 @@ jobs:
             docker.io/voxpupuli/voxbox:latest
 
   build-X86-container:
-    runs-on: macarne
+    # runs-on: macarne
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
