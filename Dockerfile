@@ -73,7 +73,7 @@ RUN apk update \
 
 WORKDIR /repo
 
-RUN addgroup -S voxbox && adduser -S voxbox -G voxbox
+RUN addgroup -g 1001 -S voxbox && adduser -u 1001 -S -G voxbox voxbox
 USER voxbox
 
 ENTRYPOINT [ "rake" ]
