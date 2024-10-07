@@ -2,6 +2,7 @@ ARG BASE_IMAGE=docker.io/ruby:3.2.5-alpine3.20
 
 FROM $BASE_IMAGE AS builder
 
+# Gems have to be ARG and ENV because they are used as reference in the Gemfile
 ARG RUBYGEM_PUPPET
 ENV RUBYGEM_PUPPET ${RUBYGEM_PUPPET:-8.8.1}
 
@@ -71,15 +72,18 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.dockerfile="/Dockerfile"
 
+# APKs are not used in any other file, so ARG is sufficient.
 ARG APK_JQ=1.7.1-r0
 ARG APK_YAMLLINT=1.35.1-r1
 ARG APK_GIT=2.45.2-r0
+ARG APK_CURL=8.10.1-r0
 
 RUN apk update \
     && apk upgrade \
     && apk add jq=${APK_JQ} \
     && apk add yamllint=${APK_YAMLLINT} \
     && apk add git=${APK_GIT} \
+    && apk add curl=${APK_CURL} \
     && rm -rf /var/cache/apk/* \
     && rm -rf /usr/local/lib/ruby/gems
 
