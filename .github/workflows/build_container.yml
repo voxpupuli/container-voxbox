@@ -21,8 +21,8 @@ jobs:
       - id: set-matrix
         run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
 
-  build-and-push-container:
-    runs-on: ubuntu-latest
+  build-X86-container:
+    runs-on: macarne
     permissions:
       contents: read
       packages: write
@@ -49,7 +49,7 @@ jobs:
             APK_YAMLLINT=${{ matrix.apk_yamllint }}
             APK_GIT=${{ matrix.apk_git }}
             APK_CURL=${{ matrix.apk_curl }}
-          build_arch: linux/amd64,linux/arm64
+          build_arch: linux/amd64
           docker_username: voxpupulibot
           docker_password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
           tags: |
@@ -62,6 +62,53 @@ jobs:
             docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}
             docker.io/voxpupuli/voxbox:latest
 
+  build-ARM-container:
+    runs-on: hetzner-arm
+    permissions:
+      contents: read
+      packages: write
+    needs: setup-matrix
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    steps:
+      - name: Build Vox Pupuli Test Box r${{ matrix.puppet_release }}
+        uses: voxpupuli/gha-build-and-publish-a-container@v2
+        with:
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          build_args: |
+            BASE_IMAGE=${{ matrix.base_image }}
+            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
+            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli_test }}
+            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
+            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
+            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
+            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
+            RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop_performance }}
+            RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+            APK_JQ=${{ matrix.apk_jq }}
+            APK_YAMLLINT=${{ matrix.apk_yamllint }}
+            APK_GIT=${{ matrix.apk_git }}
+            APK_CURL=${{ matrix.apk_curl }}
+          build_arch: linux/arm64
+          docker_username: voxpupulibot
+          docker_password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
+          tags: |
+            ghcr.io/voxpupuli/voxbox:${{ matrix.rubygem_puppet }}-${{ github.ref_name }}
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.ref_name }}
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}
+            ghcr.io/voxpupuli/voxbox:latest
+            docker.io/voxpupuli/voxbox:${{ matrix.rubygem_puppet }}-${{ github.ref_name }}
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.ref_name }}
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}
+            docker.io/voxpupuli/voxbox:latest
+
+  update-dockerhub-description:
+    runs-on: ubuntu-latest
+    needs:
+      - build-X86-container
+      - build-ARM-container
+    steps:
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
