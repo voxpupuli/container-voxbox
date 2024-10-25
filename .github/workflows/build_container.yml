@@ -86,6 +86,10 @@ jobs:
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop_performance }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+            APK_JQ=${{ matrix.apk_jq }}
+            APK_YAMLLINT=${{ matrix.apk_yamllint }}
+            APK_GIT=${{ matrix.apk_git }}
+            APK_CURL=${{ matrix.apk_curl }}
           build_arch: linux/arm64
           docker_username: voxpupulibot
           docker_password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
