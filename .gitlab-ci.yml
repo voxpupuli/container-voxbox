@@ -1,89 +1,155 @@
 ---
 # Example of a CI/CD pipeline for a Puppet module
+# Pipeline runs on main and merge_requests, but not on tags.
+#
 stages:
-  - QA🚦
-  - Test🚥
+  - 🚦 QA
+  -🚥 Test
 
 variables:
+# Use internal default Rakefile, to make sure we have a working version
   RAKE: rake -f /Rakefile
 
 default:
   image:
-    name: ghcr.io/voxpupuli/vobox:7.29.1-main
+    name: ghcr.io/voxpupuli/voxbox:7.34.0-main
     entrypoint: [""]
 
-### QA🚦
+### Templates
+.default_rules:
+  rules:
+    - &puppetfile
+      if: '$CI_COMMIT_TAG == null'
+      exists:
+        - 'Puppetfile'
+      changes:
+        - 'Puppetfile'
+
+### 🚦 QA
 .qa:
-  stage: QA🚦
+  stage: 🚦 QA
 
 qa-check:
   extends: .qa
   script:
     - $RAKE check
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
 
 qa-lint:
   extends: .qa
   script:
-    - $RAKE lint
+    - $RAKE voxpupuli:custom:lint_all
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - '**/*.pp'
+
+qa-yamllint:
+  extends: .qa
+  script:
+    - yamllint data/
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - 'data/**/*.yaml'
 
 qa-metadata_lint:
   extends: .qa
   script:
     - $RAKE metadata_lint
-
-qa-puppet-strings:
-  extends: .qa
-  script:
-    - $RAKE strings:validate:reference
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - metadata.json
 
 qa-rubocop:
   extends: .qa
   script:
     - $RAKE rubocop
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - '**/*.rb'
+
+qa-strings:
+  extends: .qa
+  script:
+    - $RAKE strings:validate:reference
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      exists:
+        - REFERENCE.md
 
 qa-syntax:
   extends: .qa
   script:
     - $RAKE syntax
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - 'data/**/*.yaml'
+        - 'manifests/**/*.pp'
+        - 'plans/**/*.pp'
+        - 'templates/**/*.epp'
+        - 'templates/**/*.erb'
 
-qa-gateway:
-  stage: QA🚦
-  image: alpine:latest
+qa-r10k-syntax:
+  extends: .qa
   script:
-    - echo "QA Gateway"
-  variables:
-    GIT_STRATEGY: none
-  needs:
-    - qa-check
-    - qa-lint
-    - qa-metadata_lint
-    - qa-puppet-strings
-    - qa-rubocop
-    - qa-syntax
+    - $RAKE r10k:syntax
+  rules:
+    - *puppetfile
 
-### Test🚥
+qa-r10k-duplicates:
+  extends: .qa
+  script:
+    - $RAKE r10k:duplicates
+  rules:
+    - *puppetfile
+
+qa-r10k-validate:
+  extends: .qa
+  script:
+    - $RAKE r10k:validate
+  rules:
+    - *puppetfile
+
+### 🚥 Test
 .test:
-  stage: Test🚥
-  needs:
-    - qa-gateway
+  stage: 🚥 Test
 
 test-unit:
   extends: .test
   script:
-   - $RAKE spec
+    - $RAKE spec
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - 'data/**/*.yaml'
+        - 'manifests/**/*.pp'
+        - 'plans/**/*.pp'
+        - 'spec/**/*_spec.rb'
+        - 'templates/**/*.epp'
+        - 'templates/**/*.erb'
+
+test-r10k-install:
+  extends: .test
+  script:
+    - $RAKE r10k:install
+  rules:
+    - *puppetfile
 
 test-acceptance:
   extends: .test
   script:
     - $RAKE beaker
-
-test-gateway:
-  stage: Test🚥
-  image: alpine:latest
-  script:
-    - echo "Test Gateway"
-  variables:
-    GIT_STRATEGY: none
-  needs:
-    - test-unit
-    - test-acceptance
+  rules:
+    - if: '$CI_COMMIT_TAG == null'
+      changes:
+        - 'data/**/*.yaml'
+        - 'manifests/**/*.pp'
+        - 'plans/**/*.pp'
+        - 'spec/**/*_spec.rb'
+        - 'templates/**/*.epp'
+        - 'templates/**/*.erb'
