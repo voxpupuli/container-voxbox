@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.2.0](https://github.com/voxpupuli/container-voxbox/tree/v2.2.0) (2024-09-16)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.1.0...v2.2.0)
+
+**Implemented enhancements:**
+
+- feat: re-enable by puppetlabs disabled puppet-lint checks [\#48](https://github.com/voxpupuli/container-voxbox/pull/48) ([rwaffen](https://github.com/rwaffen))
+- fix: update bundler, fix cve in voxbox7 [\#45](https://github.com/voxpupuli/container-voxbox/pull/45) ([rwaffen](https://github.com/rwaffen))
+- fix: in ruby 2.7 rexml is a default gem [\#42](https://github.com/voxpupuli/container-voxbox/pull/42) ([rwaffen](https://github.com/rwaffen))
+- Fix: update CVE infested gems [\#41](https://github.com/voxpupuli/container-voxbox/pull/41) ([rwaffen](https://github.com/rwaffen))
+
+**Fixed bugs:**
+
+- fix: update broken facter reference in build [\#46](https://github.com/voxpupuli/container-voxbox/pull/46) ([rwaffen](https://github.com/rwaffen))
+
+**Merged pull requests:**
+
+- doc: add info about additionally included tools [\#39](https://github.com/voxpupuli/container-voxbox/pull/39) ([rwaffen](https://github.com/rwaffen))
+
 ## [v2.1.0](https://github.com/voxpupuli/container-voxbox/tree/v2.1.0) (2024-08-21)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.0.0...v2.1.0)
