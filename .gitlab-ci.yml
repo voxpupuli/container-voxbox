@@ -4,10 +4,10 @@
 #
 stages:
   - 🚦 QA
-  -🚥 Test
+  - 🚥 Test
 
 variables:
-# Use internal default Rakefile, to make sure we have a working version
+  # Use internal default Rakefile, to make sure we have a working version
   RAKE: rake -f /Rakefile
 
 default:
@@ -15,7 +15,7 @@ default:
     name: ghcr.io/voxpupuli/voxbox:7.34.0-main
     entrypoint: [""]
 
-### Templates
+### Templates #################################################################
 .default_rules:
   rules:
     - &puppetfile
@@ -25,7 +25,7 @@ default:
       changes:
         - 'Puppetfile'
 
-### 🚦 QA
+### 🚦 QA ######################################################################
 .qa:
   stage: 🚦 QA
 
@@ -115,7 +115,7 @@ qa-r10k-validate:
   rules:
     - *puppetfile
 
-### 🚥 Test
+### 🚥 Test ####################################################################
 .test:
   stage: 🚥 Test
 
