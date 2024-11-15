@@ -76,7 +76,7 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 ARG APK_JQ=1.7.1-r0
 ARG APK_YAMLLINT=1.35.1-r1
 ARG APK_GIT=2.45.2-r0
-ARG APK_CURL=8.11.0-r1
+ARG APK_CURL=8.11.0-r2
 
 RUN apk update \
     && apk upgrade \
