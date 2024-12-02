@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.3.0](https://github.com/voxpupuli/container-voxbox/tree/v2.3.0) (2024-11-28)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.2.0...v2.3.0)
+
+**Implemented enhancements:**
+
+- feat: Update gitlab-ci example [\#66](https://github.com/voxpupuli/container-voxbox/pull/66) ([rwaffen](https://github.com/rwaffen))
+- fix: LegacyKeyValueFormat and update curl patch level [\#65](https://github.com/voxpupuli/container-voxbox/pull/65) ([rwaffen](https://github.com/rwaffen))
+- fix: update curl version [\#64](https://github.com/voxpupuli/container-voxbox/pull/64) ([rwaffen](https://github.com/rwaffen))
+- feat: update puppet, facter, voxpupuli-test, puppet-metadata, rubocop-performance, bundler [\#59](https://github.com/voxpupuli/container-voxbox/pull/59) ([rwaffen](https://github.com/rwaffen))
+- feat: do multi stage build [\#54](https://github.com/voxpupuli/container-voxbox/pull/54) ([rwaffen](https://github.com/rwaffen))
+- feat: update gems to latest versions [\#52](https://github.com/voxpupuli/container-voxbox/pull/52) ([rwaffen](https://github.com/rwaffen))
+
+**Fixed bugs:**
+
+- fix: add back curl [\#57](https://github.com/voxpupuli/container-voxbox/pull/57) ([rwaffen](https://github.com/rwaffen))
+- fix: add back cve fixes for system gems [\#55](https://github.com/voxpupuli/container-voxbox/pull/55) ([rwaffen](https://github.com/rwaffen))
+
 ## [v2.2.0](https://github.com/voxpupuli/container-voxbox/tree/v2.2.0) (2024-09-16)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.1.0...v2.2.0)
