@@ -113,6 +113,8 @@ rake voxpupuli:custom:lint_all                                                  
 
 ## Additionally included Tools
 
+- curl
+- git
 - jq
 - yamllint
 
