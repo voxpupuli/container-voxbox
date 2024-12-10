@@ -47,13 +47,8 @@ jobs:
             RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
-            RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
-            APK_JQ=${{ matrix.apk_jq }}
-            APK_YAMLLINT=${{ matrix.apk_yamllint }}
-            APK_GIT=${{ matrix.apk_git }}
-            APK_CURL=${{ matrix.apk_curl }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
@@ -102,13 +97,8 @@ jobs:
             RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
-            RUBYGEM_OVERCOMMIT=${{ matrix.rubygem_overcommit }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
-            APK_JQ=${{ matrix.apk_jq }}
-            APK_YAMLLINT=${{ matrix.apk_yamllint }}
-            APK_GIT=${{ matrix.apk_git }}
-            APK_CURL=${{ matrix.apk_curl }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4

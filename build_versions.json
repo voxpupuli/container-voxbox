@@ -9,16 +9,11 @@
       "rubygem_voxpupuli_acceptance": "3.2.0",
       "rubygem_voxpupuli_release": "3.1.0",
       "rubygem_puppet_metadata": "4.5.0",
-      "rubygem_overcommit": "0.64.0",
       "rubygem_modulesync": "3.2.0",
       "rubygem_r10k": "4.1.0",
       "rubygem_ra10ke": "3.1.0",
       "rubygem_rubocop_performance": "1.22.1",
-      "rubygem_bundler": "2.4.22",
-      "apk_jq": "1.6-r1",
-      "apk_yamllint": "1.26.3-r1",
-      "apk_git": "2.36.6-r0",
-      "apk_curl": "8.5.0-r0"
+      "rubygem_bundler": "2.4.22"
     },
     {
       "puppet_release": 8,
@@ -29,16 +24,11 @@
       "rubygem_voxpupuli_acceptance": "3.2.0",
       "rubygem_voxpupuli_release": "3.1.0",
       "rubygem_puppet_metadata": "4.5.0",
-      "rubygem_overcommit": "0.64.0",
       "rubygem_modulesync": "3.2.0",
       "rubygem_r10k": "4.1.0",
       "rubygem_ra10ke": "3.1.0",
       "rubygem_rubocop_performance": "1.22.1",
-      "rubygem_bundler": "2.5.22",
-      "apk_jq": "1.7.1-r0",
-      "apk_yamllint": "1.35.1-r1",
-      "apk_git": "2.45.2-r0",
-      "apk_curl": "8.11.0-r2"
+      "rubygem_bundler": "2.5.22"
     }
   ]
 }
