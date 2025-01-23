@@ -27,10 +27,16 @@ docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8      # rake -T
 docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8 spec # rake spec
 ```
 
+If you want to run onceover, you have to override the entrypoint:
+
+```shell
+docker run -it --rm -v $(pwd):/repo --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 help
+```
+
 if you need a shell, you have to override the entrypoint:
 
 ```shell
-docker run -it --rm -v $(pwd):/repo --entrypoint bash ghcr.io/voxpupuli/voxbox:8
+docker run -it --rm -v $(pwd):/repo --entrypoint sh ghcr.io/voxpupuli/voxbox:8
 ```
 
 ### Available rake tasks
