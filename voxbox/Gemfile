@@ -13,6 +13,7 @@ gem 'voxpupuli-release',    ENV['RUBYGEM_VOXPUPULI_RELEASE']
 gem 'voxpupuli-test',       ENV['RUBYGEM_VOXPUPULI_TEST']
 gem 'rubocop-performance',  ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
 gem 'ffi', '~> 1.16.3' # ffi 1.17.0 has change dependencies - see https://github.com/ffi/ffi/issues/1105
+gem 'onceover',             ENV['RUBYGEM_ONCEOVER']
 
 # CVE fixes
 gem 'cgi', '~> 0.4.1'             # cgi 0.1.0 has CVEs - remove default and install upstream replacement
