@@ -49,6 +49,7 @@ jobs:
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+            RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
@@ -99,6 +100,7 @@ jobs:
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+            RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
