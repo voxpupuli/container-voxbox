@@ -21,7 +21,7 @@ jobs:
 
   build-x86-container:
     name: 'Build x86 CI container'
-    runs-on: macarne
+    runs-on: ubuntu-24.04
     permissions:
       actions: read
       contents: read
@@ -73,7 +73,7 @@ jobs:
 
   build-ARM-container:
     name: 'Build ARM CI container'
-    runs-on: hetzner-arm
+    runs-on: ubuntu-24.04-arm
     permissions:
       actions: read
       contents: read
