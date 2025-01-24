@@ -16,6 +16,8 @@ Too see which gems and versions are included in the container, see:
 
 ## Usage
 
+### Rake
+
 Change into the root of a puppet module and run the container.
 Make sure to mount the current directory into the container under `/repo`.
 The default entrypoint is rake. Without any arguments it will run `rake -T`.
@@ -27,11 +29,32 @@ docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8      # rake -T
 docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8 spec # rake spec
 ```
 
+### Onceover
+
 If you want to run onceover, you have to override the entrypoint:
 
 ```shell
 docker run -it --rm -v $(pwd):/repo --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 help
 ```
+
+Onceover allows you to run tests against your control-repository.
+
+Running spec tests:
+
+```shell
+docker run -it --rm -v $(pwd):/repo --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 run spec
+```
+
+Other commands are:
+
+| Command | What it does |
+|---|---|
+| `show puppetfile` | Analyze the Puppetfile and show open updates |
+| `update puppetfile` | Update modules |
+
+Further commands, required configuration and usage is described in the [onceover repository](https://github.com/voxpupuli/onceover).
+
+### Other
 
 if you need a shell, you have to override the entrypoint:
 
@@ -54,6 +77,8 @@ rake check:trailing_whitespace                                                  
 rake check_changelog                                                            # Check Changelog
 rake clean                                                                      # Clean a built module package
 rake compute_dev_version                                                        # Print development version of module
+rake generate_fixtures                                                          # Generate -fixtures.yml based on Puppetfile
+rake generate_vendor_cache                                                      # Fetches the core modules which are usually bundled in AIO agent
 rake help                                                                       # Display the list of available rake tasks
 rake lint                                                                       # Run puppet-lint
 rake lint_fix                                                                   # Run puppet-lint

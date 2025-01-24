@@ -2,6 +2,7 @@ require 'voxpupuli/test/rake'
 require 'voxpupuli/acceptance/rake'
 require 'voxpupuli/release/rake_tasks'
 require 'ra10ke'
+require 'onceover/rake_tasks'
 
 Ra10ke::RakeTask.new
 
