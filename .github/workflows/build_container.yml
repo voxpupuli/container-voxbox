@@ -115,43 +115,43 @@ jobs:
         run: |
           docker buildx imagetools create -t ghcr.io/voxpupuli/voxbox:${{ matrix.rubygem_puppet }}-${{ github.ref_name }} \
             ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t ghcr.io/voxpupuli/voxbox:${{ matrix.rubygem_puppet }}-latest \
             ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.ref_name }} \
             ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }} \
             ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t ghcr.io/voxpupuli/voxbox:latest \
             ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t docker.io/voxpupuli/voxbox:${{ matrix.rubygem_puppet }}-${{ github.ref_name }} \
             docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t docker.io/voxpupuli/voxbox:${{ matrix.rubygem_puppet }}-latest \
             docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.ref_name }} \
             docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }} \
             docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
           docker buildx imagetools create -t docker.io/voxpupuli/voxbox:latest \
             docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64 \
-            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86
+            docker.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-x86_64
 
   update-dockerhub-description:
     runs-on: ubuntu-latest
