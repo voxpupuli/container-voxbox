@@ -84,6 +84,20 @@ jobs:
           docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
           docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
 
+  info-output:
+    runs-on: ubuntu-24.04
+    needs:
+      - setup-matrix
+      - build-ARM-container
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    container: ci/voxbox:${{ matrix.rubygem_puppet }}
+    steps:
+      - name: bundle info
+        run: |
+          bundle info
+          bundle outdated
+
   tests:
     needs:
       - build_ci_container
