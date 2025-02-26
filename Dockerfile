@@ -80,6 +80,8 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 
 RUN apk update \
     && apk upgrade \
+    && apk add openssh-client \
+    && apk add gpg \
     && apk add jq \
     && apk add yamllint \
     && apk add git \
