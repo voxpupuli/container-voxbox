@@ -46,6 +46,7 @@ jobs:
             RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop_performance }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
+            RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
           build_arch: linux/amd64
           docker_username: voxpupulibot
           docker_password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
@@ -78,6 +79,7 @@ jobs:
             RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop_performance }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
+            RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
           build_arch: linux/arm64
           docker_username: voxpupulibot
           docker_password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
