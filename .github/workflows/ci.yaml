@@ -50,6 +50,7 @@ jobs:
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
+            RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
@@ -101,6 +102,7 @@ jobs:
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
+            RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4
