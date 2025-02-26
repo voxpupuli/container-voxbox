@@ -14,7 +14,8 @@
       "rubygem_ra10ke": "3.1.0",
       "rubygem_rubocop_performance": "1.22.1",
       "rubygem_bundler": "2.4.22",
-      "rubygem_onceover": "4.0.0"
+      "rubygem_onceover": "4.0.0",
+      "rubygem_rspec_junit_formatter": "0.6.0"
     },
     {
       "puppet_release": 8,
@@ -30,7 +31,8 @@
       "rubygem_ra10ke": "3.1.0",
       "rubygem_rubocop_performance": "1.22.1",
       "rubygem_bundler": "2.5.22",
-      "rubygem_onceover": "4.0.0"
+      "rubygem_onceover": "4.0.0",
+      "rubygem_rspec_junit_formatter": "0.6.0"
     }
   ]
 }
