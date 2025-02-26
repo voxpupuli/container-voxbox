@@ -45,6 +45,17 @@ Running spec tests:
 docker run -it --rm -v $(pwd):/repo --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 run spec
 ```
 
+Doing, e.g. a release:
+
+```shell
+docker run -it --rm \
+	-v $(pwd):/repo \
+	-v ~/.gitconfig:/etc/gitconfig \
+	-v ~/.ssh:/root/.ssh \
+	-v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} -e SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
+	ghcr.io/voxpupuli/voxbox:8 release
+```
+
 Other commands are:
 
 | Command | What it does |
