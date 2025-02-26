@@ -2,18 +2,21 @@
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
-gem 'facter',               ENV['RUBYGEM_FACTER']
-gem 'modulesync',           ENV['RUBYGEM_MODULESYNC']
-gem 'puppet',               ENV['RUBYGEM_PUPPET']
-gem 'puppet_metadata',      ENV['RUBYGEM_PUPPET_METADATA']
-gem 'r10k',                 ENV['RUBYGEM_R10K']
-gem 'ra10ke',               ENV['RUBYGEM_RA10KE']
-gem 'voxpupuli-acceptance', ENV['RUBYGEM_VOXPUPULI_ACCEPTANCE']
-gem 'voxpupuli-release',    ENV['RUBYGEM_VOXPUPULI_RELEASE']
-gem 'voxpupuli-test',       ENV['RUBYGEM_VOXPUPULI_TEST']
-gem 'rubocop-performance',  ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
+gem 'facter',                ENV['RUBYGEM_FACTER']
+gem 'modulesync',            ENV['RUBYGEM_MODULESYNC']
+gem 'puppet',                ENV['RUBYGEM_PUPPET']
+gem 'puppet_metadata',       ENV['RUBYGEM_PUPPET_METADATA']
+gem 'r10k',                  ENV['RUBYGEM_R10K']
+gem 'ra10ke',                ENV['RUBYGEM_RA10KE']
+gem 'voxpupuli-acceptance',  ENV['RUBYGEM_VOXPUPULI_ACCEPTANCE']
+gem 'voxpupuli-release',     ENV['RUBYGEM_VOXPUPULI_RELEASE']
+gem 'voxpupuli-test',        ENV['RUBYGEM_VOXPUPULI_TEST']
+gem 'rubocop-performance',   ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
+gem 'onceover',              ENV['RUBYGEM_ONCEOVER']
+gem 'rspec_junit_formatter', ENV['RUBYGEM_RSPEC_JUNIT_FORMATTER']
+
+# pinned versions because of bugs
 gem 'ffi', '~> 1.16.3' # ffi 1.17.0 has change dependencies - see https://github.com/ffi/ffi/issues/1105
-gem 'onceover',             ENV['RUBYGEM_ONCEOVER']
 
 # CVE fixes
 gem 'cgi', '~> 0.4.1'             # cgi 0.1.0 has CVEs - remove default and install upstream replacement
