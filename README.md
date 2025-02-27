@@ -4,13 +4,57 @@
 [![License](https://img.shields.io/github/license/voxpupuli/container-voxbox.svg)](https://github.com/voxpupuli/container-voxbox/blob/main/LICENSE)
 [![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
 
+---
+
+- [Vox Pupuli Test Box](#vox-pupuli-test-box)
+   * [Introduction](#introduction)
+   * [Included rubygems](#included-rubygems)
+   * [Additionally included tools](#additionally-included-tools)
+   * [Versions](#versions)
+   * [Usage](#usage)
+      + [Rake](#rake)
+         - [Release Taks](#release-taks)
+         - [Available rake tasks](#available-rake-tasks)
+      + [Onceover](#onceover)
+      + [Shell](#shell)
+      + [Puppet](#puppet)
+         - [puppet-strings](#puppet-strings)
+      + [YAMLlint](#yamllint)
+      + [JQ](#jq)
+      + [cURL](#curl)
+   * [Example Gitlab CI configuration](#example-gitlab-ci-configuration)
+   * [Version Schema](#version-schema)
+   * [How to release?](#how-to-release)
+   * [How to contribute?](#how-to-contribute)
+
 ## Introduction
 
 This container should be used to test voxpupuli puppet modules. It has the voxpupuli-test, -acceptance, -release gems and all dependencies installed.
 
-### Versions
+## Included rubygems
 
-Too see which gems and versions are included in the container, see:
+- facter
+- modulesync
+- onceover
+- puppet
+- r10k
+- rubocop
+- voxpupuli-acceptance
+- voxpupuli-release
+- voxpupuli-test
+
+## Additionally included tools
+
+- curl
+- git
+- gpg
+- jq
+- ssh-client
+- yamllint
+
+## Versions
+
+Too see which tool versions are included in the container, see:
 
 [build_versions.json](build_versions.json)
 
@@ -25,55 +69,25 @@ You can specify a rake task as argument. See [Available rake tasks](#available-r
 
 ```shell
 cd puppet-k8s
-docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8      # rake -T
-docker run -it --rm -v $(pwd):/repo ghcr.io/voxpupuli/voxbox:8 spec # rake spec
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8      # rake -T
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec # rake spec
 ```
 
-### Onceover
+#### Release Taks
 
-If you want to run onceover, you have to override the entrypoint:
-
-```shell
-docker run -it --rm -v $(pwd):/repo --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 help
-```
-
-Onceover allows you to run tests against your control-repository.
-
-Running spec tests:
+Using the release rake task:
 
 ```shell
-docker run -it --rm -v $(pwd):/repo --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 run spec
-```
-
-Doing, e.g. a release:
-
-```shell
-docker run -it --rm \
-	-v $(pwd):/repo \
-	-v ~/.gitconfig:/etc/gitconfig \
+podman run -it --rm \
+	-v $PWD:/repo:Z \
+	-v ~/.gitconfig:/etc/gitconfig:ro \
 	-v ~/.ssh:/root/.ssh \
-	-v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} -e SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
+	-v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
+	-e SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
 	ghcr.io/voxpupuli/voxbox:8 release
 ```
 
-Other commands are:
-
-| Command | What it does |
-|---|---|
-| `show puppetfile` | Analyze the Puppetfile and show open updates |
-| `update puppetfile` | Update modules |
-
-Further commands, required configuration and usage is described in the [onceover repository](https://github.com/voxpupuli/onceover).
-
-### Other
-
-if you need a shell, you have to override the entrypoint:
-
-```shell
-docker run -it --rm -v $(pwd):/repo --entrypoint sh ghcr.io/voxpupuli/voxbox:8
-```
-
-### Available rake tasks
+#### Available rake tasks
 
 ```shell
 rake beaker                                                                     # Run RSpec code examples
@@ -153,12 +167,79 @@ rake validate                                                                   
 rake voxpupuli:custom:lint_all                                                  # Lint with all puppet-lint checks
 ```
 
-## Additionally included Tools
+### Onceover
 
-- curl
-- git
-- jq
-- yamllint
+If you want to run onceover, you have to override the entrypoint:
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 help
+```
+
+Onceover allows you to run tests against your control-repository.
+
+Running spec tests:
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 run spec
+```
+
+Other commands are:
+
+| Command | What it does |
+|---|---|
+| `show puppetfile` | Analyze the Puppetfile and show open updates |
+| `update puppetfile` | Update modules |
+
+Further commands, required configuration and usage is described in the [onceover repository](https://github.com/voxpupuli/onceover).
+
+### Shell
+
+If you need a shell, you have to override the entrypoint:
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
+```
+
+### Puppet
+
+If you want to execute puppet change the entrypoint to `puppet` and pass subcommands/parameters to it.
+
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 --help
+```
+
+#### puppet-strings
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 strings --help
+```
+
+### YAMLlint
+
+If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:8 .
+```
+
+### JQ
+
+If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
+
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 --help
+```
+
+### cURL
+
+If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
+
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
+```
 
 ## Example Gitlab CI configuration
 
@@ -178,10 +259,10 @@ latest
 Example usage:
 
 ```shell
-docker pull ghcr.io/voxpupuli/voxbox:8.5.1-v1.2.3
-docker pull ghcr.io/voxpupuli/voxbox:8-v1.2.3
-docker pull ghcr.io/voxpupuli/voxbox:8
-docker pull ghcr.io/voxpupuli/voxbox:latest
+podman pull ghcr.io/voxpupuli/voxbox:8.5.1-v1.2.3
+podman pull ghcr.io/voxpupuli/voxbox:8-v1.2.3
+podman pull ghcr.io/voxpupuli/voxbox:8
+podman pull ghcr.io/voxpupuli/voxbox:latest
 ```
 
 | Name | Description |
