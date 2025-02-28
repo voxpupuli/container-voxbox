@@ -2,7 +2,7 @@
 include:
   - puppet_release: 8
     base_image: 'docker.io/ruby:3.2.5-alpine3.20'
-    rubygem_bundler: '2.5.22'
+    rubygem_bundler: '2.6.5'
     rubygem_facter: '4.10.0'
     rubygem_modulesync: '3.2.0'
     rubygem_onceover: '4.0.0'
