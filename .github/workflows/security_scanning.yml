@@ -45,16 +45,17 @@ jobs:
           push: false
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
-            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
-            RUBYGEM_FACTER=${{ matrix.facter_version }}
-            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli_test }}
-            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli_acceptance }}
-            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli_release }}
-            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
-            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
+            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
+            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
+            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
             RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
+            RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop-performance }}
+            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli-acceptance }}
+            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli-release }}
+            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
 
       - name: Scan image with Anchore Grype
         uses: anchore/scan-action@v6
