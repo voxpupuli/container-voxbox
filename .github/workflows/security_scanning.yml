@@ -18,8 +18,11 @@ jobs:
       - name: Source checkout
         uses: actions/checkout@v4
 
+      - name: 'Setup yq'
+        uses: dcarbone/install-yq-action@v1.3.1
+
       - id: set-matrix
-        run: echo "matrix=$(jq -c . build_versions.json)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(yq -o json build_versions.yaml | jq -c)" >> $GITHUB_OUTPUT
 
   scan_ci_container:
     name: 'Scan CI container'
