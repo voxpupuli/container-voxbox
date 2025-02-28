@@ -12,7 +12,7 @@ variables:
 
 default:
   image:
-    name: ghcr.io/voxpupuli/voxbox:7.34.0-main
+    name: ghcr.io/voxpupuli/voxbox:8
     entrypoint: [""]
 
 ### Templates #################################################################

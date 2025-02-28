@@ -31,6 +31,10 @@
 
 This container should be used to test voxpupuli puppet modules. It has the voxpupuli-test, -acceptance, -release gems and all dependencies installed.
 
+## Informations
+
+- On February 28, 2025, Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
+
 ## Included rubygems
 
 - facter
