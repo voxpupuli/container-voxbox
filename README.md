@@ -13,7 +13,7 @@
   - [Versions](#versions)
   - [Usage](#usage)
     - [Rake](#rake)
-      - [release Taks](#release-task)
+      - [release Task](#release-task)
       - [spec Task](#spec-task)
       - [Available rake tasks](#available-rake-tasks)
     - [Onceover](#onceover)
