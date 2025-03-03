@@ -72,10 +72,15 @@ Make sure to mount the current directory into the container under `/repo`.
 The default entrypoint is rake. Without any arguments it will run `rake -T`.
 You can specify a rake task as argument. See [Available rake tasks](#available-rake-tasks) for more information.
 
+To guarantee a consistent rake environment, use `-f /Rakefile` to explicitly specify your Rakefile,
+rather than relying on potentially outdated versions in a repository.
+The Rakefile being used can be viewed [here](voxbox/Rakefile).
+
 ```shell
-cd puppet-k8s
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8      # rake -T
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec # rake spec
+cd puppet-example
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8                   # rake -T
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec              # rake spec
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 -f /Rakefile spec # rake spec with "safe" Rakefile
 ```
 
 #### release Task
