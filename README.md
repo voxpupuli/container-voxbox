@@ -7,25 +7,26 @@
 ---
 
 - [Vox Pupuli Test Box](#vox-pupuli-test-box)
-   * [Introduction](#introduction)
-   * [Included rubygems](#included-rubygems)
-   * [Additionally included tools](#additionally-included-tools)
-   * [Versions](#versions)
-   * [Usage](#usage)
-      + [Rake](#rake)
-         - [Release Taks](#release-taks)
-         - [Available rake tasks](#available-rake-tasks)
-      + [Onceover](#onceover)
-      + [Shell](#shell)
-      + [Puppet](#puppet)
-         - [puppet-strings](#puppet-strings)
-      + [YAMLlint](#yamllint)
-      + [JQ](#jq)
-      + [cURL](#curl)
-   * [Example Gitlab CI configuration](#example-gitlab-ci-configuration)
-   * [Version Schema](#version-schema)
-   * [How to release?](#how-to-release)
-   * [How to contribute?](#how-to-contribute)
+  - [Introduction](#introduction)
+  - [Included rubygems](#included-rubygems)
+  - [Additionally included tools](#additionally-included-tools)
+  - [Versions](#versions)
+  - [Usage](#usage)
+    - [Rake](#rake)
+      - [release Taks](#release-task)
+      - [spec Task](#spec-task)
+      - [Available rake tasks](#available-rake-tasks)
+    - [Onceover](#onceover)
+    - [Shell](#shell)
+    - [Puppet](#puppet)
+      - [puppet-strings](#puppet-strings)
+    - [YAMLlint](#yamllint)
+    - [JQ](#jq)
+    - [cURL](#curl)
+  - [Example Gitlab CI configuration](#example-gitlab-ci-configuration)
+  - [Version Schema](#version-schema)
+  - [How to release?](#how-to-release)
+  - [How to contribute?](#how-to-contribute)
 
 ## Introduction
 
@@ -77,18 +78,26 @@ podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8      # rake -T
 podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec # rake spec
 ```
 
-#### Release Taks
+#### release Task
 
 Using the release rake task:
 
 ```shell
 podman run -it --rm \
-	-v $PWD:/repo:Z \
-	-v ~/.gitconfig:/etc/gitconfig:ro \
-	-v ~/.ssh:/root/.ssh \
-	-v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
-	-e SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
-	ghcr.io/voxpupuli/voxbox:8 release
+   -v $PWD:/repo:Z \
+   -v ~/.gitconfig:/etc/gitconfig:ro \
+   -v ~/.ssh:/root/.ssh \
+   -v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
+   -e SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
+   ghcr.io/voxpupuli/voxbox:8 release
+```
+
+#### spec Task
+
+Running only a specific spec:
+
+```shell
+podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 -f /Rakefile spec
 ```
 
 #### Available rake tasks
@@ -208,7 +217,6 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
 
 If you want to execute puppet change the entrypoint to `puppet` and pass subcommands/parameters to it.
 
-
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 --help
 ```
@@ -231,7 +239,6 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxb
 
 If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
 
-
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 --help
 ```
@@ -239,7 +246,6 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 -
 ### cURL
 
 If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
-
 
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
