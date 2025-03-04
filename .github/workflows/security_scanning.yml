@@ -46,7 +46,7 @@ jobs:
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
-            RUBYGEM_FACTER=${{ matrix.facter_version }}
+            RUBYGEM_FACTER=${{ matrix.rubygem_facter }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
