@@ -129,6 +129,20 @@ jobs:
           docker run --user ${RUNNER_UID}:${RUNNER_GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
           docker run --user ${RUNNER_UID}:${RUNNER_GID} --rm  -v $(pwd):/repo ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
 
+  info-output:
+    runs-on: ubuntu-24.04
+    needs:
+      - setup-matrix
+      - build-ARM-container
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    container: ci/voxbox:${{ matrix.rubygem_puppet }}
+    steps:
+      - name: bundle info
+        run: |
+          bundle info
+          bundle outdated
+
   tests:
     needs:
       - build-x86-container
