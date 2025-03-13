@@ -15,3 +15,4 @@ include:
     rubygem_voxpupuli-acceptance: '3.2.0'
     rubygem_voxpupuli-release: '3.1.0'
     rubygem_voxpupuli-test: '9.2.0'
+    rubygem_puppet-ghostbuster: '1.2.1'

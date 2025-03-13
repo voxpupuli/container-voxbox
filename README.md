@@ -256,6 +256,30 @@ If you want to execute curl change the entrypoint to `curl` and pass a query/par
 podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
 ```
 
+## puppet-ghostbuster
+
+If you want to execute puppet-ghostbuster change the entrypoint to `ash` and pass the command to the container.
+Ghostbuster needs a connection to the puppetdb, so you have to provide the environment variables.
+You can find them in the documentation of the [puppet-ghostbuster](https://github.com/voxpupuli/puppet-ghostbuster) repository.
+
+Ghostbuster supports the following checks:
+
+- ghostbuster_classes
+- ghostbuster_defines
+- ghostbuster_facts
+- ghostbuster_files
+- ghostbuster_functions
+- ghostbuster_hiera_files
+- ghostbuster_templates
+- ghostbuster_types
+
+They can be combined with `--only-checks` and listed in a comma separated list.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
+find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
+```
+
 ## Example Gitlab CI configuration
 
 see [.gitlab-ci.yml](.gitlab-ci.yml)
