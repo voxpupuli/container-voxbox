@@ -2,7 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v2.3.0](https://github.com/voxpupuli/container-voxbox/tree/v2.3.0) (2024-11-28)
+## [v3.0.0](https://github.com/voxpupuli/container-voxbox/tree/v3.0.0) (2025-03-13)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.3.0...v3.0.0)
+
+**Breaking changes:**
+
+- feat: deprecate voxbox:7 [\#83](https://github.com/voxpupuli/container-voxbox/pull/83) ([rwaffen](https://github.com/rwaffen))
+
+**Implemented enhancements:**
+
+- feat: add ghostbuster [\#98](https://github.com/voxpupuli/container-voxbox/pull/98) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency ra10ke to v4 [\#92](https://github.com/voxpupuli/container-voxbox/pull/92) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency r10k to v5 [\#91](https://github.com/voxpupuli/container-voxbox/pull/91) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency puppet\_metadata to v4.6.0 [\#90](https://github.com/voxpupuli/container-voxbox/pull/90) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v2.6.5 [\#88](https://github.com/voxpupuli/container-voxbox/pull/88) ([renovate[bot]](https://github.com/apps/renovate))
+- fix: renovate looks for the name rubygem\_\*, so fix the names [\#87](https://github.com/voxpupuli/container-voxbox/pull/87) ([rwaffen](https://github.com/rwaffen))
+- feat: add renovate for rubygem updates [\#85](https://github.com/voxpupuli/container-voxbox/pull/85) ([rwaffen](https://github.com/rwaffen))
+- feat: remove ffi pinning, does work again [\#84](https://github.com/voxpupuli/container-voxbox/pull/84) ([rwaffen](https://github.com/rwaffen))
+- feat: add rubygem rspec\_junit\_formatter for junit output on spec tests [\#81](https://github.com/voxpupuli/container-voxbox/pull/81) ([rwaffen](https://github.com/rwaffen))
+- feat: add some package to do releases [\#78](https://github.com/voxpupuli/container-voxbox/pull/78) ([lbetz](https://github.com/lbetz))
+- feat: add onceover rubygem [\#72](https://github.com/voxpupuli/container-voxbox/pull/72) ([tuxmea](https://github.com/tuxmea))
+- feat: unpin apk packages, remove overcommit, switch back to github runners [\#69](https://github.com/voxpupuli/container-voxbox/pull/69) ([rwaffen](https://github.com/rwaffen))
+
+**Closed issues:**
+
+- test rubygem ffi 1.17.0 again [\#80](https://github.com/voxpupuli/container-voxbox/issues/80)
+- check if onceover can be implemented into voxbox [\#70](https://github.com/voxpupuli/container-voxbox/issues/70)
+- switch ci container build back to github runners [\#68](https://github.com/voxpupuli/container-voxbox/issues/68)
+
+**Merged pull requests:**
+
+- docs: add hint about using internal Rakefile [\#94](https://github.com/voxpupuli/container-voxbox/pull/94) ([rwaffen](https://github.com/rwaffen))
+- docs: add how to run a single spec, fix markdown linter warnings [\#93](https://github.com/voxpupuli/container-voxbox/pull/93) ([rwaffen](https://github.com/rwaffen))
+- docs: update tool docu, add toc, re-order sections [\#82](https://github.com/voxpupuli/container-voxbox/pull/82) ([rwaffen](https://github.com/rwaffen))
+- docs: Update Readme for onceover, add onceover rake tasks [\#75](https://github.com/voxpupuli/container-voxbox/pull/75) ([tuxmea](https://github.com/tuxmea))
+
+## [v2.3.0](https://github.com/voxpupuli/container-voxbox/tree/v2.3.0) (2024-12-02)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.2.0...v2.3.0)
 
