@@ -14,7 +14,7 @@ gem 'voxpupuli-test',        ENV['RUBYGEM_VOXPUPULI_TEST']
 gem 'rubocop-performance',   ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
 gem 'onceover',              ENV['RUBYGEM_ONCEOVER']
 gem 'rspec_junit_formatter', ENV['RUBYGEM_RSPEC_JUNIT_FORMATTER']
-
+gem 'puppet-ghostbuster',    ENV['RUBYGEM_PUPPET_GHOSTBUSTER']
 # CVE fixes
 gem 'cgi', '~> 0.4.1'             # cgi 0.1.0 has CVEs - remove default and install upstream replacement
 gem 'stringio', '~> 3.1'          # stringio 0.1.0 has CVEs - remove default and install upstream replacement

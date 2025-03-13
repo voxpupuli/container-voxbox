@@ -56,6 +56,7 @@ jobs:
             RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli-acceptance }}
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli-release }}
             RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
+            RUBYGEM_PUPPET_GHOSTBUSTER=${{ matrix.rubygem_puppet-ghostbuster }}
 
       - name: Scan image with Anchore Grype
         uses: anchore/scan-action@v6
