@@ -20,6 +20,7 @@
     - [Shell](#shell)
     - [Puppet](#puppet)
       - [puppet-strings](#puppet-strings)
+    - [puppet-ghostbuster](#puppet-ghostbuster)
     - [YAMLlint](#yamllint)
     - [JQ](#jq)
     - [cURL](#curl)
@@ -34,7 +35,7 @@ This container should be used to test voxpupuli puppet modules. It has the voxpu
 
 ## Informations
 
-- On February 28, 2025, Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
+- ⚠ On February 28, 2025, Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
 
 ## Included rubygems
 
@@ -42,6 +43,7 @@ This container should be used to test voxpupuli puppet modules. It has the voxpu
 - modulesync
 - onceover
 - puppet
+- puppet-ghostbuster
 - r10k
 - rubocop
 - voxpupuli-acceptance
@@ -61,7 +63,7 @@ This container should be used to test voxpupuli puppet modules. It has the voxpu
 
 Too see which tool versions are included in the container, see:
 
-[build_versions.json](build_versions.json)
+[build_versions.yaml](build_versions.yaml)
 
 ## Usage
 
@@ -232,30 +234,6 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox
 podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 strings --help
 ```
 
-### YAMLlint
-
-If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
-
-```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:8 .
-```
-
-### JQ
-
-If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
-
-```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 --help
-```
-
-### cURL
-
-If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
-
-```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
-```
-
 ## puppet-ghostbuster
 
 If you want to execute puppet-ghostbuster change the entrypoint to `ash` and pass the command to the container.
@@ -278,6 +256,30 @@ They can be combined with `--only-checks` and listed in a comma separated list.
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
 find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
+```
+
+### YAMLlint
+
+If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:8 .
+```
+
+### JQ
+
+If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 --help
+```
+
+### cURL
+
+If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
 ```
 
 ## Example Gitlab CI configuration
