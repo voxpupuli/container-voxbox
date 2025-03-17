@@ -6,6 +6,22 @@ require 'onceover/rake_tasks'
 
 Ra10ke::RakeTask.new
 
+# disable ghostbuster globally
+puppet_lint_disable_checks = %w[
+  ghostbuster_classes
+  ghostbuster_defines
+  ghostbuster_facts
+  ghostbuster_files
+  ghostbuster_functions
+  ghostbuster_hiera_files
+  ghostbuster_templates
+  ghostbuster_types
+]
+
+puppet_lint_disable_checks.each do |check|
+  PuppetLint.configuration.send(:"disable_#{check}")
+end
+
 namespace :voxpupuli do
   namespace :custom do
     desc 'Lint with all puppet-lint checks'
@@ -26,6 +42,25 @@ namespace :voxpupuli do
       end
 
       Rake::Task[:lint].invoke
+    end
+
+    desc 'Who you gonna call? Ghostbusters!'
+    task :ghostbuster do
+      # enable ghostbuster
+      puppet_lint_enable_checks = %w[
+        ghostbuster_classes
+        ghostbuster_defines
+        ghostbuster_facts
+        ghostbuster_files
+        ghostbuster_functions
+        ghostbuster_hiera_files
+        ghostbuster_templates
+        ghostbuster_types
+      ]
+
+      puppet_lint_enable_checks.each do |check|
+        PuppetLint.configuration.send(:"enable_#{check}")
+      end
     end
   end
 end
