@@ -15,9 +15,16 @@ gem 'rubocop-performance',   ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
 gem 'onceover',              ENV['RUBYGEM_ONCEOVER']
 gem 'rspec_junit_formatter', ENV['RUBYGEM_RSPEC_JUNIT_FORMATTER']
 gem 'puppet-ghostbuster',    ENV['RUBYGEM_PUPPET_GHOSTBUSTER']
+
 # CVE fixes
 gem 'cgi', '~> 0.4.1'             # cgi 0.1.0 has CVEs - remove default and install upstream replacement
 gem 'stringio', '~> 3.1'          # stringio 0.1.0 has CVEs - remove default and install upstream replacement
 gem 'rexml', '~> 3.3', '>= 3.3.6' # rexml < 3.3 has CVEs - remove default and install upstream replacement
-gem 'rdoc', '~> 6.7'             # rdoc 6.2.1 has CVEs - remove default and install upstream replacement
-# vim: syntax=ruby
+gem 'rdoc', '~> 6.7'              # rdoc 6.2.1 has CVEs - remove default and install upstream replacement
+
+# Pin dependencies to avoid installing duplicate versions
+# see https://github.com/voxpupuli/container-voxbox/issues/97
+gem 'racc',     '1.6.2'
+gem 'minitest', '5.16.3'
+gem 'drb',      '2.1.1'
+gem 'csv',      '3.2.6'
