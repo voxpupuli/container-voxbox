@@ -24,7 +24,10 @@
     - [YAMLlint](#yamllint)
     - [JQ](#jq)
     - [cURL](#curl)
-  - [Example Gitlab CI configuration](#example-gitlab-ci-configuration)
+  - [GitLab](#gitlab)
+    - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
+    - [GitLab Codequality Report](#gitlab-codequality-report)
+    - [GitLab Unit Test Report](#gitlab-unit-test-report)
   - [Version Schema](#version-schema)
   - [How to release?](#how-to-release)
   - [How to contribute?](#how-to-contribute)
@@ -282,9 +285,63 @@ If you want to execute curl change the entrypoint to `curl` and pass a query/par
 podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
 ```
 
-## Example Gitlab CI configuration
+## GitLab
+
+### Example GitLab CI configuration
 
 see [.gitlab-ci.yml](.gitlab-ci.yml)
+
+### GitLab Codequality Report
+
+- <https://github.com/puppetlabs/puppet-lint?tab=readme-ov-file#integration-with-gitlab-code-quality>
+- <https://docs.gitlab.com/ci/testing/code_quality/>
+
+Example usage:
+
+```yaml
+code-quality:
+  image:
+    name: ghcr.io/voxpupuli/voxbox:8
+    entrypoint: ['']
+  stage: verify
+  script:
+    - rake -f /Rakefile voxpupuli:custom:lint_all
+  variables:
+    # setting this variable makes puppet-lint create the json file
+    # needed for the code quality report
+    CODECLIMATE_REPORT_FILE: 'gl-code-quality-report.json'
+  artifacts:
+    when: always
+    reports:
+      codequality: gl-code-quality-report.json
+    expire_in: 1 week
+```
+
+### GitLab Unit Test Report
+
+add to .rspec file:
+
+```text
+--format RspecJunitFormatter
+--out rspec.xml
+```
+
+add to .gitlab-ci.yml:
+
+```yaml
+rspec:
+  image:
+    name: ghcr.io/voxpupuli/voxbox:8
+    entrypoint: ['']
+  stage: test
+  script:
+    - rake -f /Rakefile spec
+  artifacts:
+    when: always
+    reports:
+      junit: rspec.xml
+    expire_in: 1 week
+```
 
 ## Version Schema
 
