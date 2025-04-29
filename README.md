@@ -24,6 +24,7 @@
     - [YAMLlint](#yamllint)
     - [JQ](#jq)
     - [cURL](#curl)
+    - [RuboCop](#rubocop)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
@@ -34,11 +35,12 @@
 
 ## Introduction
 
-This container should be used to test voxpupuli puppet modules. It has the voxpupuli-test, -acceptance, -release gems and all dependencies installed.
+This container should be used to test voxpupuli OpenVox/Puppet modules.
+It has the voxpupuli-test, -acceptance, -release gems and all dependencies installed.
 
 ## Informations
 
-- ⚠ On February 28, 2025, Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
+- ⚠ On February 28, 2025, OpenVox/Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
 
 ## Included rubygems
 
@@ -72,7 +74,7 @@ Too see which tool versions are included in the container, see:
 
 ### Rake
 
-Change into the root of a puppet module and run the container.
+Change into the root of a OpenVox/Puppet module and run the container.
 Make sure to mount the current directory into the container under `/repo`.
 The default entrypoint is rake. Without any arguments it will run `rake -T`.
 You can specify a rake task as argument. See [Available rake tasks](#available-rake-tasks) for more information.
@@ -240,7 +242,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox
 ## puppet-ghostbuster
 
 If you want to execute puppet-ghostbuster change the entrypoint to `ash` and pass the command to the container.
-Ghostbuster needs a connection to the puppetdb, so you have to provide the environment variables.
+Ghostbuster needs a connection to the OpenVoxDB/PuppetDB, so you have to provide the environment variables.
 You can find them in the documentation of the [puppet-ghostbuster](https://github.com/voxpupuli/puppet-ghostbuster) repository.
 
 Ghostbuster supports the following checks:
@@ -283,6 +285,15 @@ If you want to execute curl change the entrypoint to `curl` and pass a query/par
 
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
+```
+
+### RuboCop
+
+If you want to execute RuboCop directly change the entrypoint to `rubocop` and pass a subcommands/parameter to the container.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8
+podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8 --auto-gen-config
 ```
 
 ## GitLab
