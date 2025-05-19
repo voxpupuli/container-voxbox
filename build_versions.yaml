@@ -9,7 +9,7 @@ include:
     rubygem_puppet_metadata: '4.6.0'
     rubygem_puppet: '8.10.0'
     rubygem_r10k: '5.0.0'
-    rubygem_ra10ke: '4.2.0'
+    rubygem_ra10ke: '4.3.0'
     rubygem_rspec_junit_formatter: '0.6.0'
     rubygem_rubocop-performance: '1.22.1'
     rubygem_voxpupuli-acceptance: '3.2.0'
