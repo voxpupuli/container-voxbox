@@ -13,7 +13,7 @@ include:
     rubygem_ra10ke: '4.3.0'
     rubygem_rspec_junit_formatter: '0.6.0'
     # need to be compatible with rubocop 1.50 because voxpupuli-test demands it
-    rubygem_rubocop-performance: '1.22.1'
+    rubygem_rubocop-performance: '1.23.0'
     rubygem_voxpupuli-acceptance: '3.5.1'
     rubygem_voxpupuli-release: '3.2.3'
     rubygem_voxpupuli-test: '9.2.1'
