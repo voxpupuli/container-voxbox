@@ -7,6 +7,7 @@ include:
     rubygem_modulesync: '3.2.0'
     rubygem_onceover: '4.0.0'
     rubygem_puppet_metadata: '4.6.0'
+    rubygem_puppet-ghostbuster: '1.2.1'
     rubygem_puppet: '8.10.0'
     rubygem_r10k: '5.0.0'
     rubygem_ra10ke: '4.3.0'
@@ -15,4 +16,3 @@ include:
     rubygem_voxpupuli-acceptance: '3.2.0'
     rubygem_voxpupuli-release: '3.1.0'
     rubygem_voxpupuli-test: '9.2.0'
-    rubygem_puppet-ghostbuster: '1.2.1'
