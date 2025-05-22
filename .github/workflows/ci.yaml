@@ -49,14 +49,16 @@ jobs:
             RUBYGEM_FACTER=${{ matrix.rubygem_facter }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
+            RUBYGEM_PUPPET_GHOSTBUSTER=${{ matrix.rubygem_puppet-ghostbuster }}
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
             RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
+            RUBYGEM_R10K=${{ matrix.rubygem_r10k }}
+            RUBYGEM_RA10KE=${{ matrix.rubygem_ra10ke }}
             RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
             RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop-performance }}
             RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli-acceptance }}
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli-release }}
             RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
-            RUBYGEM_PUPPET_GHOSTBUSTER=${{ matrix.rubygem_puppet-ghostbuster }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v4

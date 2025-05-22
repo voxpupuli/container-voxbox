@@ -24,7 +24,7 @@ gem 'rdoc', '~> 6.7'              # rdoc 6.2.1 has CVEs - remove default and ins
 
 # Pin dependencies to avoid installing duplicate versions
 # see https://github.com/voxpupuli/container-voxbox/issues/97
-gem 'racc',     '1.6.2'
+gem 'racc',     '1.8.1'
 gem 'minitest', '5.16.3'
 gem 'drb',      '2.1.1'
 gem 'csv',      '3.2.6'
