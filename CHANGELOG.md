@@ -2,7 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v3.0.0](https://github.com/voxpupuli/container-voxbox/tree/v3.0.0) (2025-03-13)
+## [v3.1.0](https://github.com/voxpupuli/container-voxbox/tree/v3.1.0) (2025-05-22)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v3.0.0...v3.1.0)
+
+**Fixed bugs:**
+
+- codeowners are broken [\#95](https://github.com/voxpupuli/container-voxbox/issues/95)
+- fix: actually use specified r10k and ra10ke versions [\#114](https://github.com/voxpupuli/container-voxbox/pull/114) ([rwaffen](https://github.com/rwaffen))
+- fix: resolve gem problems [\#104](https://github.com/voxpupuli/container-voxbox/pull/104) ([rwaffen](https://github.com/rwaffen))
+
+**Closed issues:**
+
+- fix gem problems [\#97](https://github.com/voxpupuli/container-voxbox/issues/97)
+
+**Merged pull requests:**
+
+- docs: add rubocop entrypoint howto, update wording regarding OpenVox and Puppet [\#110](https://github.com/voxpupuli/container-voxbox/pull/110) ([rwaffen](https://github.com/rwaffen))
+- docs: add gitlab unit test report and codequality report [\#109](https://github.com/voxpupuli/container-voxbox/pull/109) ([rwaffen](https://github.com/rwaffen))
+- docs: put ghostbuster in order, update build\_versions link [\#102](https://github.com/voxpupuli/container-voxbox/pull/102) ([rwaffen](https://github.com/rwaffen))
+
+## [v3.0.0](https://github.com/voxpupuli/container-voxbox/tree/v3.0.0) (2025-03-14)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v2.3.0...v3.0.0)
 
