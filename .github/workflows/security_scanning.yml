@@ -41,7 +41,7 @@ jobs:
       - name: Build CI container
         uses: docker/build-push-action@v6
         with:
-          tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
+          tags: 'ci/voxbox:${{ matrix.rubygem_openvox }}'
           push: false
           platforms: linux/${{ matrix.platform }}
           build-args: |
@@ -65,7 +65,7 @@ jobs:
         uses: anchore/scan-action@v6
         id: scan
         with:
-          image: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
+          image: 'ci/voxbox:${{ matrix.rubygem_openvox }}'
           fail-build: false
 
       - name: Inspect action SARIF report
