@@ -94,11 +94,11 @@ jobs:
 
       - name: Create multiarch manifests
         run: |
-          docker buildx imagetools create -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_puppet }}-${{ github.ref_name }} \
+          docker buildx imagetools create -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_openvox }}-${{ github.ref_name }} \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-arm64 \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-amd64
 
-          docker buildx imagetools create -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_puppet }}-latest \
+          docker buildx imagetools create -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_openvox }}-latest \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-arm64 \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-amd64
 
@@ -118,11 +118,11 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-arm64 \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-amd64
 
-          docker buildx imagetools create -t docker.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_puppet }}-${{ github.ref_name }} \
+          docker buildx imagetools create -t docker.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_openvox }}-${{ github.ref_name }} \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-arm64 \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-amd64
 
-          docker buildx imagetools create -t docker.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_puppet }}-latest \
+          docker buildx imagetools create -t docker.io/${{ github.repository_owner }}/voxbox:${{ matrix.rubygem_openvox }}-latest \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-arm64 \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.puppet_release }}-amd64
 

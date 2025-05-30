@@ -43,8 +43,8 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v6
         with:
-          tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
           file: Containerfile
+          tags: 'ci/voxbox:${{ matrix.rubygem_openvox }}'
           push: false
           platforms: linux/${{ matrix.platform }}
           build-args: |
@@ -71,15 +71,15 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile -T
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile metadata_lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:dependencies
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile r10k:syntax
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile rubocop
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile spec
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile strings:validate:reference
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_puppet }} -f /Rakefile syntax
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile -T
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile lint
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile metadata_lint
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:dependencies
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:syntax
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile rubocop
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile spec
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
 
   tests:
     needs:
