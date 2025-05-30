@@ -53,7 +53,7 @@ jobs:
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
             RUBYGEM_PUPPET_GHOSTBUSTER=${{ matrix.rubygem_puppet-ghostbuster }}
             RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
-            RUBYGEM_PUPPET=${{ matrix.rubygem_puppet }}
+            RUBYGEM_OPENVOX=${{ matrix.rubygem_openvox }}
             RUBYGEM_R10K=${{ matrix.rubygem_r10k }}
             RUBYGEM_RA10KE=${{ matrix.rubygem_ra10ke }}
             RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}

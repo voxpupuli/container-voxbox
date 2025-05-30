@@ -5,6 +5,7 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 gem 'facter',                ENV['RUBYGEM_FACTER']
 gem 'modulesync',            ENV['RUBYGEM_MODULESYNC']
 gem 'onceover',              ENV['RUBYGEM_ONCEOVER']
+gem 'openvox',               ENV['RUBYGEM_OPENVOX']
 gem 'puppet_metadata',       ENV['RUBYGEM_PUPPET_METADATA']
 gem 'puppet-ghostbuster',    ENV['RUBYGEM_PUPPET_GHOSTBUSTER']
 gem 'puppet',                ENV['RUBYGEM_PUPPET']
