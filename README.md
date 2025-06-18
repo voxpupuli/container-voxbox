@@ -202,10 +202,34 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxb
 
 Onceover allows you to run tests against your control-repository.
 
+Initialize onceover:
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:latest init
+```
+
 Running spec tests:
 
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 run spec
+```
+
+Running spec test with internal git+ssh modules in Puppetfile:
+
+```shell
+podman run -it --rm \
+  -v ~/.ssh:/root/.ssh:Z \
+  -v $PWD:/repo:Z \
+  --entrypoint onceover ghcr.io/voxpupuli/voxbox:latest run spec
+```
+
+Running spec tests with puppet output:
+
+```shell
+podman run -it --rm \
+  -v $PWD:/repo:Z \
+  -e SHOW_PUPPET_OUTPUT=true \
+  --entrypoint onceover ghcr.io/voxpupuli/voxbox:latest run spec
 ```
 
 Other commands are:
