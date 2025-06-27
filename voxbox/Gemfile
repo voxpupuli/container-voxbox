@@ -2,8 +2,8 @@
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
-gem 'facter',                ENV['RUBYGEM_FACTER']
 gem 'modulesync',            ENV['RUBYGEM_MODULESYNC']
+gem 'openfact',              ENV['RUBYGEM_OPENFACT']
 gem 'openvox',               ENV['RUBYGEM_OPENVOX']
 gem 'puppet_metadata',       ENV['RUBYGEM_PUPPET_METADATA']
 gem 'r10k',                  ENV['RUBYGEM_R10K']
