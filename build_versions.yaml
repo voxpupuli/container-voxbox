@@ -8,9 +8,9 @@ include:
     rubygem_onceover: '5.0.0'
     rubygem_puppet_metadata: '5.0.0'
     rubygem_puppet-ghostbuster: '1.2.1'
-    rubygem_openvox: '8.19.0'
-    rubygem_r10k: '5.0.0'
-    rubygem_ra10ke: '4.3.0'
+    rubygem_openvox: '8.19.2'
+    rubygem_r10k: '5.0.1'
+    rubygem_ra10ke: '4.4.0'
     rubygem_rspec_junit_formatter: '0.6.0'
     # need to be compatible with rubocop 1.50 because voxpupuli-test demands it
     rubygem_rubocop-performance: '1.23.0'
