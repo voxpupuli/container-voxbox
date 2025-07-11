@@ -43,6 +43,7 @@ jobs:
         with:
           tags: 'ci/voxbox:${{ matrix.rubygem_puppet }}'
           push: false
+          file: Containerfile
           platforms: linux/${{ matrix.platform }}
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}

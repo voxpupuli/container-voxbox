@@ -56,6 +56,7 @@ RUN apk update \
     && bundle config set path.system true \
     && bundle config set jobs $(nproc) \
     && bundle install --gemfile=/Gemfile \
+    && bundle clean --force \
     && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/cgi-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/cgi-*.gemspec \
@@ -63,10 +64,16 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/stringio-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/rdoc-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/rdoc-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/gems/default/rexml-* \
-    && rm -rf /usr/local/lib/ruby/gems/2.7.0/specifications/default/rexml-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/rexml-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/rexml-*.gemspec
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/rexml-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/racc-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/racc-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/drb-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/drb-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/csv-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/csv-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/minitest-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/minitest-*.gemspec
 
 ###############################################################################
 
@@ -79,7 +86,7 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
       org.label-schema.license="AGPL-3.0-or-later" \
       org.label-schema.vcs-url="https://github.com/voxpupuli/container-voxbox" \
       org.label-schema.schema-version="1.0" \
-      org.label-schema.dockerfile="/Dockerfile"
+      org.label-schema.dockerfile="/Containerfile"
 
 RUN apk update \
     && apk upgrade \
@@ -94,7 +101,7 @@ RUN apk update \
 
 COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
 COPY --from=builder /usr/local/bundle /usr/local/bundle
-COPY Dockerfile /
+COPY Containerfile /
 COPY voxbox/Rakefile /
 
 WORKDIR /repo
