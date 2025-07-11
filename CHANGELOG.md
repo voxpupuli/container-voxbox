@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v3.2.0](https://github.com/voxpupuli/container-voxbox/tree/v3.2.0) (2025-07-11)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v3.1.0...v3.2.0)
+
+**Merged pull requests:**
+
+- feat: switch to Containerfile and update CI workflows to use it, update gemset to eliminate duplicates [\#128](https://github.com/voxpupuli/container-voxbox/pull/128) ([rwaffen](https://github.com/rwaffen))
+- docs: add more hints for using onceover [\#121](https://github.com/voxpupuli/container-voxbox/pull/121) ([rwaffen](https://github.com/rwaffen))
+
 ## [v3.1.0](https://github.com/voxpupuli/container-voxbox/tree/v3.1.0) (2025-05-22)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v3.0.0...v3.1.0)
