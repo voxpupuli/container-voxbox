@@ -23,7 +23,7 @@ available options:
   --entrypoint  : use a different entrypoint
                   examples for available endpoints are: 
                   onceover, 
-                  default: no entrypoint sepcified
+                  default: no entrypoint specified
   --image image : use a different image (default ${PODIMAGE})
   --env VAR=val : specify environment variables (can be used multiple times)
                   Remark: the term './' in a assignment will be replaced with
@@ -37,7 +37,7 @@ available options:
 available command:
    help  : print this help message and exit
    
-Commands/Options no listed here are passed to voxbox as is.
+commands/options not listed here are passed to VoxBox as is.
 use the '--noop' option to print the detailed call to VoxBox.
 EOF
   exit
@@ -61,7 +61,7 @@ PODOPTIONS=''
 PODENV=''
 PODIMAGE='ghcr.io/voxpupuli/voxbox:8'
 VOXBOXCOMMAND=''
-while [[ $# -gt 0 ]] do
+while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
     help)
