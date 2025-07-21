@@ -34,7 +34,7 @@ available options:
   --volume vol  : specify an additional volume to put into the container
                   see podman man page how to specify 'vol'. (no path magic is done ;)) 
   --runcmd      : this lets you change the program used to start the container
-                  if not set explicit it looks for podman, orbstack and finally docker.
+                  if not set explicit it looks for podman or docker.
 
 available command:
    help  : print this help message and exit
@@ -109,14 +109,12 @@ done
 # lets see what we have as default runcmd:
 if [ -n "${RUNCMD}" ] ; then
   true
-elif [ -n $(which podman) ] ; then 
+elif command -v podman >/dev/null 2>&1 ; then
   RUNCMD='podman'
-elif [ -n $(which orbstack) ] ; then
-  RUNCMD='orbstack'
-elif [ -n $(which docker) ] ; then
+elif command -v docker >/dev/null 2>&1 ; then
   RUNCMD='docker'
 else
-  echo "ERROR: could not find podman/orbstack or docker to start container" >&2
+  echo "ERROR: could not find podman or docker to start container" >&2
   exit 200
 fi
 
