@@ -1,0 +1,121 @@
+#!/bin/bash
+set -e
+
+get_path () {
+  # calculates the 'root' path to run the container
+  if [ "${1}" == '' ] ; then
+    echo "ERROR: ensure you start this script either in a openvox control or a module directory" >&2
+    exit 200
+  elif [ -f "${1}/metadata.json" ] || [ -f "${1}/Puppetfile" ] ; then 
+    echo $1
+  else
+    get_path $(echo $1|sed 's|/[^/]*$||')
+  fi
+}
+
+usage() {
+  # print usage of this script and exit
+  cat << EOF
+Usage: ${0} [options] [command]
+
+available options:
+  --noop        : print the command to run, but do not run it
+  --entrypoint  : use a different entrypoint
+                  examples for available endpoints are: 
+                  onceover, ash, puppet, yamllint, jq, curl, rubocop
+                  default: no entrypoint specified
+  --image image : use a different image (default ${PODIMAGE})
+  --env VAR=val : specify environment variables (can be used multiple times)
+                  Remark: the term './' in a assignment will be replaced with
+                  the correct path to be used in the container.
+                  Example: if you start the script in ~/openvox-supermodule/spec/classes
+                           and set --env SPEC=./supermodule_spec.rb we will
+                           run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
+  --volume vol  : specify an additional volume to put into the container
+                  see podman man page how to specify 'vol'. (no path magic is done ;)) 
+  --runcmd      : this lets you change the program used to start the container
+                  if not set explicit it looks for podman or docker.
+
+available command:
+   help  : print this help message and exit
+   
+commands/options not listed here are passed to VoxBox as is.
+use the '--noop' option to print the detailed call to VoxBox.
+EOF
+  exit
+}
+
+run_container () {
+  P=$(get_path $PWD)
+  command="${RUNCMD} run -it --rm $(sed "s|=${P}/|=|g" <<< "${PODENV}") -v ${P}:/repo:Z ${PODOPTIONS} ${PODIMAGE} ${VOXBOXCOMMAND}"
+  if [ ${NOOP} -eq 0 ] ; then
+     ${command}
+  else
+     echo command to run:
+     echo ${command}
+     echo
+  fi
+}
+
+
+# get options
+NOOP=0
+PODOPTIONS=''
+PODENV=''
+PODIMAGE='ghcr.io/voxpupuli/voxbox:8'
+VOXBOXCOMMAND=''
+while [[ $# -gt 0 ]]; do
+  key="$1"
+  case $key in
+    help)
+       usage
+    ;;
+    --noop)
+       NOOP=1
+       shift
+    ;;
+    --runcmd)
+       shift
+       RUNCMD=${1}
+       shift
+    ;;
+    --entrypoint)
+       shift
+       PODOPTIONS="--entrypoint ${1} ${PODOPTIONS}"
+       shift
+    ;;
+    --image)
+       shift
+       PODIMAGE=$1
+       shift
+    ;;
+    --volume)
+       shift
+       PODOPTIONS="-v ${1} ${PODOPTIONS}"
+       shift
+    ;;
+    --env)
+       shift
+       PODENV="-e $(sed "s|=./|=${PWD}/|" <<< "${1}") ${PODENV}"
+       shift
+    ;;
+    *)
+       VOXBOXCOMMAND="${VOXBOXCOMMAND} ${key}"
+       shift
+    ;;
+  esac
+done
+
+# lets see what we have as default runcmd:
+if [ -n "${RUNCMD}" ] ; then
+  true
+elif command -v podman >/dev/null 2>&1 ; then
+  RUNCMD='podman'
+elif command -v docker >/dev/null 2>&1 ; then
+  RUNCMD='docker'
+else
+  echo "ERROR: could not find podman or docker to start container" >&2
+  exit 200
+fi
+
+run_container
