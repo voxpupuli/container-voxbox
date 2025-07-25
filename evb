@@ -22,7 +22,7 @@ available options:
   --noop        : print the command to run, but do not run it
   --entrypoint  : use a different entrypoint
                   examples for available endpoints are: 
-                  onceover, 
+                  onceover, ash, puppet, yamllint, jq, curl, rubocop
                   default: no entrypoint specified
   --image image : use a different image (default ${PODIMAGE})
   --env VAR=val : specify environment variables (can be used multiple times)
