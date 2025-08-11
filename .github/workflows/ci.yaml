@@ -14,7 +14,7 @@ jobs:
       build_matrix: ${{ steps.set-build-matrix.outputs.build_matrix }}
     steps:
       - name: Source checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 'Setup yq'
         uses: dcarbone/install-yq-action@v1.3.1
@@ -35,7 +35,7 @@ jobs:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.build_matrix) }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build image
         uses: docker/build-push-action@v6
@@ -62,7 +62,7 @@ jobs:
             RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
 
       - name: Clone voxpupuli/puppet-example repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: voxpupuli/puppet-example
 
