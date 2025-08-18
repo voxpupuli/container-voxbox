@@ -23,7 +23,7 @@
       "matchStrings": [
         "#\\s*renovate:\\s*depName=(?<depName>.*?)\\s*openVoxRelease=(?<openVoxRelease>\\d+)\\s*\\n\\s*(?<key>\\w+_version):\\s*\"(?<currentValue>.*?)\""
       ],
-      "registryUrlTemplate": "https://apt.overlookinfratech.com?suite=ubuntu24.04&components=openvox{{openVoxRelease}}&binaryArch=amd64"
+      "registryUrlTemplate": "https://apt.voxpupuli.org?suite=ubuntu24.04&components=openvox{{openVoxRelease}}&binaryArch=amd64"
     }
   ],
   "extends": [
@@ -37,6 +37,6 @@
     "enabled": true,
     "addLabels": [
       "security"
-    ],
+    ]
   }
 }
