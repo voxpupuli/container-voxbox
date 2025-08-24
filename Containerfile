@@ -90,14 +90,18 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 ENV RUBYOPT="-W:no-experimental"
 
 RUN apk update \
-    && apk upgrade \
+    && apk upgrade --no-cache --prune \
     && apk add --no-cache openssh-client \
     && apk add --no-cache gpg \
     && apk add --no-cache jq \
     && apk add --no-cache yamllint \
     && apk add --no-cache git \
     && apk add --no-cache curl \
-    && rm -rf /usr/local/lib/ruby/gems
+    && addgroup -g 1001 -S voxbox \
+    && adduser -u 1001 -S -G voxbox voxbox \
+    && rm -rf /usr/local/lib/ruby/gems \
+    && mkdir /repo \
+    && chown voxbox:voxbox /repo
 
 COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
 COPY --from=builder /usr/local/bundle /usr/local/bundle
@@ -107,6 +111,7 @@ COPY voxbox/Rakefile /
 COPY voxbox/Gemfile /
 
 WORKDIR /repo
+USER voxbox
 
 ENTRYPOINT [ "rake" ]
 CMD [ "-f", "/Rakefile", "-T" ]
