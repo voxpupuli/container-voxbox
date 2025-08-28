@@ -321,11 +321,13 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbo
 ```
 
 ## EasyVoxBox (evb)
+
 The [evb script](evb) shortens the commands to be typed for running voxbox. Additionaly, it does not care about the sequence of
-options, wich can be usefull for setting shell aliases. To run the command you must change into any subdirectory of a openvox module 
-(with a metadata.json file) or a control repository (with a Puppetfile). 
+options, wich can be usefull for setting shell aliases. To run the command you must change into any subdirectory of a openvox module
+(with a metadata.json file) or a control repository (with a Puppetfile).
 
 Display the evb help message:
+
 ```shell
 $ evb help
 Usage: /usr/local/bin/evb [options] [command]
@@ -333,7 +335,7 @@ Usage: /usr/local/bin/evb [options] [command]
 available options:
   --noop        : print the command to run, but do not run it
   --entrypoint  : use a different entrypoint
-                  examples for available endpoints are: 
+                  examples for available endpoints are:
                   onceover, ash, puppet, yamllint, jq, curl, rubocop
                   default: no entrypoint specified
   --image image : use a different image (default ghcr.io/voxpupuli/voxbox:8)
@@ -344,7 +346,7 @@ available options:
                            and set --env SPEC=./supermodule_spec.rb we will
                            run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
   --volume vol  : specify an additional volume to put into the container
-                  see podman man page how to specify 'vol'. (no path magic is done ;)) 
+                  see podman man page how to specify 'vol'. (no path magic is done ;))
   --runcmd      : this lets you change the program used to start the container
                   if not set explicit it looks for podman or docker.
 
@@ -356,6 +358,7 @@ use the '--noop' option to print the detailed call to VoxBox.
 ```
 
 See the command that would be executed (dropping the --noop option will run the command):
+
 ```shell
 evb --noop                                     # for rake -T
 evb --noop spec                                # for rake spec
