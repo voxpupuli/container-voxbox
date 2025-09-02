@@ -284,7 +284,7 @@ They can be combined with `--only-checks` and listed in a comma separated list.
 
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
-find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
+find . -type f -exec bundle exec --gemfile /Gemfile puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
 ```
 
 ### YAMLlint
