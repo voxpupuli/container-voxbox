@@ -103,6 +103,7 @@ COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY Containerfile /
 COPY voxbox/Rakefile /
+COPY voxbox/Gemfile /
 
 WORKDIR /repo
 
