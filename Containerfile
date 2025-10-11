@@ -89,15 +89,13 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
       org.label-schema.dockerfile="/Containerfile"
 
 RUN apk update \
-    && apk upgrade \
-    && apk add openssh-client \
-    && apk add gpg \
-    && apk add jq \
-    && apk add yamllint \
-    && apk add git \
-    && apk add curl \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /usr/local/lib/ruby/gems
+    && apk upgrade --no-cache --prune \
+    && apk add --no-cache openssh-client gpg jq yamllint git curl \
+    && addgroup -g 1001 -S voxbox \
+    && adduser -u 1001 -S -G voxbox voxbox \
+    && rm -rf /usr/local/lib/ruby/gems \
+    && mkdir /repo \
+    && chown voxbox:voxbox /repo
 
 COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
 COPY --from=builder /usr/local/bundle /usr/local/bundle
@@ -106,6 +104,7 @@ COPY voxbox/Rakefile /
 COPY voxbox/Gemfile /
 
 WORKDIR /repo
+USER voxbox
 
 ENTRYPOINT [ "rake" ]
 CMD [ "-f", "/Rakefile", "-T" ]
