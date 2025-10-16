@@ -1,6 +1,6 @@
 ---
 include:
-  - puppet_release: 8
+  - openvox_release: 8
     base_image: 'docker.io/ruby:3.2.5-alpine3.20'
     rubygem_bundler: '2.7.2'
     rubygem_modulesync: '4.2.0'
