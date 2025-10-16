@@ -44,10 +44,10 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 
 ## Included rubygems
 
-- facter
 - modulesync
 - onceover
-- puppet
+- openfact
+- openvox
 - puppet-ghostbuster
 - r10k
 - rubocop

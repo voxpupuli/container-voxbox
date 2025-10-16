@@ -2,12 +2,12 @@
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
-gem 'facter',                ENV['RUBYGEM_FACTER']
 gem 'modulesync',            ENV['RUBYGEM_MODULESYNC']
 gem 'onceover',              ENV['RUBYGEM_ONCEOVER']
+gem 'openfact',              ENV['RUBYGEM_OPENFACT']
+gem 'openvox',               ENV['RUBYGEM_OPENVOX']
 gem 'puppet_metadata',       ENV['RUBYGEM_PUPPET_METADATA']
 gem 'puppet-ghostbuster',    ENV['RUBYGEM_PUPPET_GHOSTBUSTER']
-gem 'puppet',                ENV['RUBYGEM_PUPPET']
 gem 'r10k',                  ENV['RUBYGEM_R10K']
 gem 'ra10ke',                ENV['RUBYGEM_RA10KE']
 gem 'rspec_junit_formatter', ENV['RUBYGEM_RSPEC_JUNIT_FORMATTER']
