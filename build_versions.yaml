@@ -5,7 +5,7 @@ include:
     rubygem_bundler: '2.7.2'
     rubygem_modulesync: '4.2.0'
     rubygem_onceover: '5.0.2'
-    rubygem_openfact: '5.0.0'
+    rubygem_openfact: '5.1.0'
     rubygem_openvox: '8.23.1'
     rubygem_puppet_metadata: '5.3.0'
     rubygem_puppet-ghostbuster: '2.0.0'
