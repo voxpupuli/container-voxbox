@@ -10,7 +10,7 @@ include:
     rubygem_puppet_metadata: '5.3.0'
     rubygem_puppet-ghostbuster: '1.2.1'
     rubygem_r10k: '5.0.2'
-    rubygem_ra10ke: '4.4.0'
+    rubygem_ra10ke: '4.5.0'
     rubygem_rspec_junit_formatter: '0.6.0'
     rubygem_rubocop-performance: '1.23.0' # need to be compatible with rubocop 1.50 because voxpupuli-test demands it
     rubygem_voxpupuli-acceptance: '4.1.0'
