@@ -6,7 +6,7 @@ include:
     rubygem_facter: '4.10.0'
     rubygem_modulesync: '3.4.2'
     rubygem_onceover: '5.0.0'
-    rubygem_puppet_metadata: '5.0.0'
+    rubygem_puppet_metadata: '5.3.0'
     rubygem_puppet-ghostbuster: '1.2.1'
     rubygem_puppet: '8.10.0'
     rubygem_r10k: '5.0.1'
