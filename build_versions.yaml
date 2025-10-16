@@ -15,5 +15,5 @@ include:
     # need to be compatible with rubocop 1.50 because voxpupuli-test demands it
     rubygem_rubocop-performance: '1.23.0'
     rubygem_voxpupuli-acceptance: '3.8.0'
-    rubygem_voxpupuli-release: '4.0.0'
+    rubygem_voxpupuli-release: '5.0.1'
     rubygem_voxpupuli-test: '11.1.0'
