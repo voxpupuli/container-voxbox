@@ -8,8 +8,8 @@ if [ "$1" == "build" ]; then
 fi
 
 if [ "$1" == "tag" ]; then
-    # jq -s '(.[0].platforms[] | .platform) as $platform | (.[1].include[] | .puppet_release) as $release | { puppet_release: $release, platform: $platform }' build_platforms.json build_versions.json | jq -s '{include: .}'
-    jq -cr '.include |= map({ puppet_release: .puppet_release, rubygem_puppet: .rubygem_puppet })' build_versions.json
+    # jq -s '(.[0].platforms[] | .platform) as $platform | (.[1].include[] | .openvox_release) as $release | { openvox_release: $release, platform: $platform }' build_platforms.json build_versions.json | jq -s '{include: .}'
+    jq -cr '.include |= map({ openvox_release: .openvox_release, rubygem_openvox: .rubygem_openvox })' build_versions.json
 fi
 
 rm build_platforms.json
