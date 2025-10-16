@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v4.0.0](https://github.com/voxpupuli/container-voxbox/tree/v4.0.0) (2025-10-16)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v3.2.0...v4.0.0)
+
+**Implemented enhancements:**
+
+- add a script evb \(=EasyVoxBox\) for more comfortable use of VoxBox [\#136](https://github.com/voxpupuli/container-voxbox/pull/136) ([trefzer](https://github.com/trefzer))
+- feat: change to openvox/openfact gem [\#119](https://github.com/voxpupuli/container-voxbox/pull/119) ([rwaffen](https://github.com/rwaffen))
+
+**Fixed bugs:**
+
+- fix ghostbuster [\#142](https://github.com/voxpupuli/container-voxbox/pull/142) ([tuxmea](https://github.com/tuxmea))
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency onceover to v5 [\#125](https://github.com/voxpupuli/container-voxbox/pull/125) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v3.2.0](https://github.com/voxpupuli/container-voxbox/tree/v3.2.0) (2025-07-11)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v3.1.0...v3.2.0)
