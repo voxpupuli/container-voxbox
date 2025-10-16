@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v4.0.1](https://github.com/voxpupuli/container-voxbox/tree/v4.0.1) (2025-10-16)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v4.0.0...v4.0.1)
+
+**Fixed bugs:**
+
+- fix: repair labeler CI [\#162](https://github.com/voxpupuli/container-voxbox/pull/162) ([rwaffen](https://github.com/rwaffen))
+- fix: use openvox in all CI [\#161](https://github.com/voxpupuli/container-voxbox/pull/161) ([rwaffen](https://github.com/rwaffen))
+
 ## [v4.0.0](https://github.com/voxpupuli/container-voxbox/tree/v4.0.0) (2025-10-16)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v3.2.0...v4.0.0)
