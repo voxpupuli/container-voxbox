@@ -16,6 +16,7 @@ gem 'rubocop-performance',   ENV['RUBYGEM_RUBOCOP_PERFORMANCE']
 gem 'voxpupuli-acceptance',  ENV['RUBYGEM_VOXPUPULI_ACCEPTANCE']
 gem 'voxpupuli-release',     ENV['RUBYGEM_VOXPUPULI_RELEASE']
 gem 'voxpupuli-test',        ENV['RUBYGEM_VOXPUPULI_TEST']
+gem 'librarian-puppet',      ENV['RUBYGEM_LIBRARIAN_PUPPET']
 
 # CVE fixes
 gem 'cgi',      '~> 0.5'  # cgi 0.1.0 has CVEs - remove default and install upstream replacement
