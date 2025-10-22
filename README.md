@@ -25,6 +25,7 @@
     - [JQ](#jq)
     - [cURL](#curl)
     - [RuboCop](#rubocop)
+    - [eyaml](#hiera-eyaml)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
@@ -318,6 +319,14 @@ If you want to execute RuboCop directly change the entrypoint to `rubocop` and p
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8
 podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8 --auto-gen-config
+```
+
+### hiera-eyaml
+
+If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint like so :
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint eyaml ghcr.io/voxpupuli/voxbox:8 edit /repo/
 ```
 
 ## EasyVoxBox (evb)
