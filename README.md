@@ -46,6 +46,10 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 
 ## Included rubygems
 
+see: [Gemfile](voxbox/Gemfile)
+
+- hiera-eyaml
+- librarian
 - modulesync
 - onceover
 - openfact
@@ -56,7 +60,6 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 - voxpupuli-acceptance
 - voxpupuli-release
 - voxpupuli-test
-- librarian
 
 ## Additionally included tools
 
