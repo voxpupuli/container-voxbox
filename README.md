@@ -25,6 +25,7 @@
     - [JQ](#jq)
     - [cURL](#curl)
     - [RuboCop](#rubocop)
+    - [Librarian](#librarian)
     - [eyaml](#hiera-eyaml)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
@@ -55,6 +56,7 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 - voxpupuli-acceptance
 - voxpupuli-release
 - voxpupuli-test
+- librarian
 
 ## Additionally included tools
 
@@ -319,6 +321,14 @@ If you want to execute RuboCop directly change the entrypoint to `rubocop` and p
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8
 podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8 --auto-gen-config
+```
+
+### Librarian
+
+If you want to execute librarian change the entrypoint to `librarian-puppet` and pass a query/parameter to the container.
+
+```shell
+podman run -it --rm -v $PWD:/repo:Z --entrypoint librarian-puppet ghcr.io/voxpupuli/voxbox:8 help
 ```
 
 ### hiera-eyaml
