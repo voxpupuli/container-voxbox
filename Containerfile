@@ -82,13 +82,12 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 
 RUN apk update \
     && apk upgrade \
-    && apk add openssh-client \
-    && apk add gpg \
-    && apk add jq \
-    && apk add yamllint \
-    && apk add git \
-    && apk add curl \
-    && rm -rf /var/cache/apk/* \
+    && apk add --no-cache openssh-client \
+    && apk add --no-cache gpg \
+    && apk add --no-cache jq \
+    && apk add --no-cache yamllint \
+    && apk add --no-cache git \
+    && apk add --no-cache curl \
     && rm -rf /usr/local/lib/ruby/gems
 
 COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
