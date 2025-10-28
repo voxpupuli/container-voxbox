@@ -13,8 +13,8 @@ permissions:
 jobs:
   labeler:
     name: Labeler
-    if: github.repository_owner == 'voxpupuli'
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'voxpupuli'
     permissions:
       pull-requests: write
     steps:
