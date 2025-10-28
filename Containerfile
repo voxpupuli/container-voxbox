@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=docker.io/ruby:3.2-alpine
+ARG BASE_IMAGE=docker.io/ruby:3.4-alpine
 
 FROM $BASE_IMAGE AS builder
 
