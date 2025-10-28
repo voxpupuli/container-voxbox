@@ -47,6 +47,8 @@ jobs:
           platforms: linux/${{ matrix.platform }}
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
+            RUBYGEM_HIERA_EYAML=${{ matrix.rubygem_hiera-eyaml }}
+            RUBYGEM_LIBRARIAN_PUPPET=${{ matrix.rubygem_librarian-puppet }}
             RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
             RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
             RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
