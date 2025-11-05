@@ -65,6 +65,7 @@ jobs:
             RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli-acceptance }}
             RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli-release }}
             RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
+            RUBYGEM_WEBMOCK=${{ matrix.rubygem_webmock }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v5
