@@ -18,3 +18,4 @@ include:
     rubygem_voxpupuli-acceptance: '4.1.0'
     rubygem_voxpupuli-release: '5.0.1'
     rubygem_voxpupuli-test: '13.1.0'
+    rubygem_webmock: '3.26.1'
