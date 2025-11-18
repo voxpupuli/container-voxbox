@@ -344,8 +344,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint eyaml ghcr.io/voxpupuli/voxbox:
 
 ## EasyVoxBox (evb)
 
-The [evb script](evb) shortens the commands to be typed for running voxbox. Additionaly, it does not care about the sequence of
-options, wich can be usefull for setting shell aliases. To run the command you must change into any subdirectory of a openvox module
+The [evb script](evb) shortens the commands to be typed for running voxbox. Additionally, it does not care about the sequence of
+options, which can be useful for setting shell aliases. To run the command you must change into any subdirectory of an openvox module
 (with a metadata.json file) or a control repository (with a Puppetfile).
 
 Display the evb help message:
