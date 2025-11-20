@@ -147,7 +147,7 @@ jobs:
 
   info-output:
     runs-on: ubuntu-latest
-    name: Info output
+    name: Bundle Info
     needs:
       - setup-matrix
       - build-and-push-container
@@ -157,7 +157,8 @@ jobs:
     steps:
       - name: bundle info
         run: |
-          bundle info
+          bundle show
+          bundle check
           bundle outdated
 
   update-dockerhub-description:
