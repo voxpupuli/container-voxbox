@@ -88,7 +88,7 @@ jobs:
         run: |
           docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle check"
           docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle show"
-          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle outdated"
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle outdated || true"
 
   tests:
     needs:

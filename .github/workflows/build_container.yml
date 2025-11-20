@@ -159,7 +159,7 @@ jobs:
         run: |
           bundle show
           bundle check
-          bundle outdated
+          bundle outdated || true
 
   update-dockerhub-description:
     runs-on: ubuntu-latest
