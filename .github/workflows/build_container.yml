@@ -157,8 +157,8 @@ jobs:
     steps:
       - name: bundle info
         run: |
-          bundle show
           bundle check
+          bundle env
           bundle outdated || true
 
   update-dockerhub-description:
