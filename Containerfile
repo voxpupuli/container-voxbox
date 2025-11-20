@@ -67,7 +67,11 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/csv-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/csv-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/minitest-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/minitest-*.gemspec
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/minitest-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/base64-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/base64-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/bigdecimal-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/bigdecimal-*.gemspec
 
 ###############################################################################
 
@@ -81,6 +85,9 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
       org.label-schema.vcs-url="https://github.com/voxpupuli/container-voxbox" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.dockerfile="/Containerfile"
+
+# Disable warnings for experimental features
+ENV RUBYOPT="-W:no-experimental"
 
 RUN apk update \
     && apk upgrade \
