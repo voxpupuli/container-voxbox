@@ -106,9 +106,7 @@ RUN apk update \
 COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder /Gemfile.lock /Gemfile.lock
-COPY Containerfile /
-COPY voxbox/Rakefile /
-COPY voxbox/Gemfile /
+COPY Containerfile voxbox/Rakefile voxbox/Gemfile /
 
 WORKDIR /repo
 USER voxbox

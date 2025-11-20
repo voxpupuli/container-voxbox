@@ -72,24 +72,18 @@ jobs:
         with:
           repository: voxpupuli/puppet-example
 
-      - name: Configure podman
-        run: |
-          systemctl start --user podman.socket
-          echo "DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock" >> "$GITHUB_ENV"
-          docker save ci/voxbox:${{ matrix.rubygem_puppet }} | podman load
-
       - name: Test container
         run: |
-          export PODMAN_OPTIONS="--rm -v $PWD:/repo:Z --userns=keep-id"
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile -T
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile lint
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile metadata_lint
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:dependencies
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:syntax
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile rubocop
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile spec
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
-          podman run $PODMAN_OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
+          export OPTIONS="--rm -v $PWD:/repo:Z --userns=keep-id"
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile -T
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile lint
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile metadata_lint
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:dependencies
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:syntax
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile rubocop
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile spec
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
+          docker run $OPTIONS  ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
 
       - name: Bundle Info
         run: |
