@@ -145,6 +145,22 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-arm64 \
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-amd64
 
+  info-output:
+    runs-on: ubuntu-latest
+    name: Bundle Info
+    needs:
+      - setup-matrix
+      - build-and-push-container
+    strategy:
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.build_matrix) }}
+    container: ghcr.io/voxpupuli/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-arm64
+    steps:
+      - name: bundle info
+        run: |
+          bundle check
+          bundle env
+          bundle outdated || true
+
   update-dockerhub-description:
     runs-on: ubuntu-latest
     needs:

@@ -84,6 +84,12 @@ jobs:
           docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
           docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
 
+      - name: Bundle Info
+        run: |
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle check"
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle env"
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle outdated || true"
+
   tests:
     needs:
       - build_ci_container
