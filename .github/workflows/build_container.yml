@@ -146,13 +146,14 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-amd64
 
   info-output:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    name: Info output
     needs:
       - setup-matrix
-      - build-ARM-container
+      - build-and-push-container
     strategy:
-      matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
-    container: ghcr.io/voxpupuli/voxbox:${{ matrix.puppet_release }}-${{ github.sha }}-arm64
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.build_matrix) }}
+    container: ghcr.io/voxpupuli/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-arm64
     steps:
       - name: bundle info
         run: |
