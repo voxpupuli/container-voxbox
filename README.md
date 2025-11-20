@@ -240,10 +240,10 @@ podman run -it --rm \
 
 Other commands are:
 
-| Command | What it does |
-|---|---|
-| `show puppetfile` | Analyze the Puppetfile and show open updates |
-| `update puppetfile` | Update modules |
+| Command              | What it does                                 |
+| -------------------- | -------------------------------------------- |
+| `show puppetfile`    | Analyze the Puppetfile and show open updates |
+|  `update puppetfile` | Update modules                               |
 
 Further commands, required configuration and usage is described in the [onceover repository](https://github.com/voxpupuli/onceover).
 
@@ -412,14 +412,14 @@ Example usage:
 code-quality:
   image:
     name: ghcr.io/voxpupuli/voxbox:8
-    entrypoint: ['']
+    entrypoint: [""]
   stage: verify
   script:
     - rake -f /Rakefile voxpupuli:custom:lint_all
   variables:
     # setting this variable makes puppet-lint create the json file
     # needed for the code quality report
-    CODECLIMATE_REPORT_FILE: 'gl-code-quality-report.json'
+    CODECLIMATE_REPORT_FILE: "gl-code-quality-report.json"
   artifacts:
     when: always
     reports:
@@ -442,7 +442,7 @@ add to .gitlab-ci.yml:
 rspec:
   image:
     name: ghcr.io/voxpupuli/voxbox:8
-    entrypoint: ['']
+    entrypoint: [""]
   stage: test
   script:
     - rake -f /Rakefile spec
@@ -473,14 +473,14 @@ podman pull ghcr.io/voxpupuli/voxbox:8
 podman pull ghcr.io/voxpupuli/voxbox:latest
 ```
 
-| Name | Description |
-| --- | --- |
-| puppet.major    | Describes the contained major Puppet version (7 or 8) |
-| puppet.minor    | Describes the contained minor Puppet version |
-| puppet.patch    | Describes the contained patchlevel Puppet version |
-| container.major | Describes breaking changes without backward compatibility |
+| Name            | Description                                                       |
+| --------------- | ----------------------------------------------------------------- |
+| puppet.major    | Describes the contained major Puppet version (7 or 8)             |
+| puppet.minor    | Describes the contained minor Puppet version                      |
+| puppet.patch    | Describes the contained patchlevel Puppet version                 |
+| container.major | Describes breaking changes without backward compatibility         |
 | container.minor | Describes new features or refactoring with backward compatibility |
-| container.patch | Describes if minor changes or bugfixes have been implemented |
+| container.patch | Describes if minor changes or bugfixes have been implemented      |
 
 ## How to release?
 
