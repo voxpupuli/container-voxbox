@@ -74,15 +74,16 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile -T
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile metadata_lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:dependencies
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:syntax
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile rubocop
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile spec
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
+          export OPTIONS="--rm -v $PWD:/repo:Z"
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile -T
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile lint
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile metadata_lint
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:dependencies
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:syntax
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile rubocop
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile spec
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
+          docker run $OPTIONS ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
 
       - name: Bundle Info
         run: |
