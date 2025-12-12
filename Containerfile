@@ -108,5 +108,5 @@ COPY voxbox/Gemfile /
 
 WORKDIR /repo
 
-ENTRYPOINT [ "rake" ]
-CMD [ "-f", "/Rakefile", "-T" ]
+ENTRYPOINT [ "rake", "-f", "/Rakefile" ]
+CMD [ "-T" ]
