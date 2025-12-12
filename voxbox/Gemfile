@@ -33,3 +33,36 @@ gem 'stringio', '~> 3.1'  # stringio 0.1.0 has CVEs - remove default and install
 # removed default gems, install upstream replacements
 gem 'bigdecimal', '~> 3.3.1'
 gem 'base64',     '~> 0.3.0'
+
+# extra linters
+# inkompatibel mit puppet-lint-5.x
+# gem 'puppet-lint-duplicate_class_parameters-check' # https://github.com/deanwilson/puppet-lint_duplicate_class_parameters-check
+# gem 'puppet-lint-hiera' # https://github.com/garrettrowell/puppet-lint-hiera
+# gem 'puppet-lint-improved_arrow_alignment' # https://github.com/garrettrowell/puppet-lint-improved_arrow_alignment
+# gem 'puppet-lint-legacy_facts-check' # moved to core puppet-lint
+# gem 'puppet-lint-parameter_type-check' # https://github.com/iasha102/puppet-lint-parameter_type-check
+# gem 'puppet-lint-roles_and_profiles-check' # https://github.com/camptocamp/puppet-lint-roles_and_profiles-check
+# gem 'puppet-lint-space_after_comma-check' # https://github.com/mihailgmihaylov/puppet-lint-space_after_comma-check
+# gem 'puppet-lint-spaceship_operator_without_tag-check' # voxpupuli - needs update
+# gem 'puppet-lint-template_file_extension-check' # https://github.com/deanwilson/puppet-lint-template_file_extension-check
+# gem 'puppet-lint-top_scope_facts-check' # https://github.com/mmckinst/puppet-lint-top_scope_facts-check
+# gem 'puppet-lint-trailing_newline-check' # https://github.com/rodjek/puppet-lint-trailing_newline-check
+# gem 'puppet-lint-uncuddled_else-check' # https://github.com/usev6/puppet-lint-uncuddled_else-check
+
+# enthalten in voxpupuli-puppet-lint-plugins
+# gem 'puppet-lint-exec_idempotent-check'
+# gem 'puppet-lint-lookup_in_parameter-check'
+# gem 'puppet-lint-manifest_whitespace-check'
+# gem 'puppet-lint-optional_default-check'
+# gem 'puppet-lint-param-docs'
+# gem 'puppet-lint-param-types'
+# gem 'puppet-lint-resource_reference_syntax'
+# gem 'puppet-lint-strict_indent-check'
+# gem 'puppet-lint-topscope-variable-check'
+# gem 'puppet-lint-trailing_comma-check'
+# gem 'puppet-lint-variable_contains_upcase'
+# gem 'puppet-lint-version_comparison-check'
+
+gem 'voxpupuli-puppet-lint-plugins'
+gem 'puppet-lint-module_reference-check' # https://github.com/dodevops/puppet-lint-module_reference-check
+gem 'puppet-lint-summary_comment-check' # https://github.com/dodevops/puppet-lint-summary_comment-check
