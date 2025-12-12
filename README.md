@@ -82,10 +82,12 @@ Too see which tool versions are included in the container, see:
 
 Change into the root of a OpenVox/Puppet module and run the container.
 Make sure to mount the current directory into the container under `/repo`.
-The default entrypoint is rake. Without any arguments it will run `rake -T`.
-You can specify a rake task as argument. See [Available rake tasks](#available-rake-tasks) for more information.
+The default entrypoint is rake.
+Without any arguments it will run `rake -f /Rakefile -T`.
+You can specify a rake task as argument.
+See [Available rake tasks](#available-rake-tasks) for more information.
 
-To guarantee a consistent rake environment, use `-f /Rakefile` to explicitly specify your Rakefile,
+To guarantee a consistent rake environment, we use `-f /Rakefile` to explicitly specify a Rakefile,
 rather than relying on potentially outdated versions in a repository.
 The Rakefile being used can be viewed [here](voxbox/Rakefile).
 
@@ -93,7 +95,6 @@ The Rakefile being used can be viewed [here](voxbox/Rakefile).
 cd puppet-example
 podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8                   # rake -T
 podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec              # rake spec
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 -f /Rakefile spec # rake spec with "safe" Rakefile
 ```
 
 #### release Task
@@ -115,7 +116,7 @@ podman run -it --rm \
 Running only a specific spec:
 
 ```shell
-podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 -f /Rakefile spec
+podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec
 ```
 
 #### Available rake tasks
