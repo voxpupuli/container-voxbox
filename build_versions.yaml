@@ -2,7 +2,7 @@
 include:
   - openvox_release: 8
     base_image: 'docker.io/ruby:3.2-alpine'
-    rubygem_bundler: '4.0.1'
+    rubygem_bundler: '4.0.2'
     rubygem_hiera-eyaml: '4.3.0'
     rubygem_librarian-puppet: '6.0.0'
     rubygem_modulesync: '4.2.0'
