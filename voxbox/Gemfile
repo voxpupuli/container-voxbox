@@ -31,5 +31,5 @@ gem 'stringio', '~> 3.1'  # stringio 0.1.0 has CVEs - remove default and install
 
 # GEM fixes
 # removed default gems, install upstream replacements
-gem 'bigdecimal', '~> 3.3.1'
+gem 'bigdecimal', '~> 4.0.0'
 gem 'base64',     '~> 0.3.0'
