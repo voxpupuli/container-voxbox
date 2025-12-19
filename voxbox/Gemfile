@@ -25,7 +25,7 @@ gem 'csv',      '~> 3.2'  # csv 3.1.2 has CVEs - remove default and install upst
 gem 'drb',      '~> 2.2'  # drb 2.1.1 has CVEs - remove default and install upstream replacement
 gem 'minitest', '~> 5.25' # minitest 5.16.3 has CVEs - remove default and install upstream replacement
 gem 'racc',     '~> 1.8'  # racc 1.6.2 has CVEs - remove default and install upstream replacement
-gem 'rdoc',     '~> 6.14' # rdoc 6.2.1 has CVEs - remove default and install upstream replacement
+gem 'rdoc',     '~> 7.0' # rdoc 6.2.1 has CVEs - remove default and install upstream replacement
 gem 'rexml',    '~> 3.4'  # rexml < 3.3 has CVEs - remove default and install upstream replacement
 gem 'stringio', '~> 3.1'  # stringio 0.1.0 has CVEs - remove default and install upstream replacement
 
