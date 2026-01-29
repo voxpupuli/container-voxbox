@@ -44,35 +44,16 @@ jobs:
       - name: Build CI container
         uses: docker/build-push-action@v6
         with:
-          tags: 'ci/voxbox:${{ matrix.rubygem_openvox }}'
+          tags: 'ci/voxbox:${{ matrix.openvox_version }}'
           push: false
           file: Containerfile
           platforms: linux/${{ matrix.platform }}
-          build-args: |
-            BASE_IMAGE=${{ matrix.base_image }}
-            RUBYGEM_HIERA_EYAML=${{ matrix.rubygem_hiera-eyaml }}
-            RUBYGEM_LIBRARIAN_PUPPET=${{ matrix.rubygem_librarian-puppet }}
-            RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
-            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
-            RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
-            RUBYGEM_OPENFACT=${{ matrix.rubygem_openfact }}
-            RUBYGEM_OPENVOX=${{ matrix.rubygem_openvox }}
-            RUBYGEM_PUPPET_GHOSTBUSTER=${{ matrix.rubygem_puppet-ghostbuster }}
-            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
-            RUBYGEM_R10K=${{ matrix.rubygem_r10k }}
-            RUBYGEM_RA10KE=${{ matrix.rubygem_ra10ke }}
-            RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
-            RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop-performance }}
-            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli-acceptance }}
-            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli-release }}
-            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
-            RUBYGEM_WEBMOCK=${{ matrix.rubygem_webmock }}
 
       - name: Scan image with Anchore Grype
         uses: anchore/scan-action@v7
         id: scan
         with:
-          image: 'ci/voxbox:${{ matrix.rubygem_openvox }}'
+          image: 'ci/voxbox:${{ matrix.openvox_version }}'
           fail-build: false
 
       - name: Inspect action SARIF report
