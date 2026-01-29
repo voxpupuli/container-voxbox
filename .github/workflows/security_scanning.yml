@@ -28,7 +28,7 @@ jobs:
         run: echo "build_matrix=$(bash matrix.sh build)" >> $GITHUB_OUTPUT
 
   scan_ci_container:
-    name: 'Scan CI container'
+    name: "Scan CI container (${{ matrix.label }})"
     runs-on: ${{ matrix.runner }}
     permissions:
       actions: read
@@ -82,3 +82,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
+          category: "grype-${{ matrix.label }}"

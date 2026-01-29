@@ -1,6 +1,8 @@
 ---
 platforms:
-  - platform: amd64
+  - label: x86_64
+    platform: amd64
     runner: ubuntu-24.04
-  - platform: arm64
+  - label: ARM64
+    platform: arm64
     runner: ubuntu-24.04-arm
