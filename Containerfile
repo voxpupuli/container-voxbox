@@ -58,8 +58,6 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/stringio-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/rdoc-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/rdoc-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/rexml-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/rexml-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/racc-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/racc-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/drb-* \
