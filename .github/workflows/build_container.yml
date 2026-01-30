@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       build_matrix: ${{ steps.set-build-matrix.outputs.build_matrix }}
-      openvox_version: ${{ steps.set-build-matrix.outputs.openvox_version }}
       openvox_release: ${{ steps.set-build-matrix.outputs.openvox_release }}
+      openvox_version: ${{ steps.set-build-matrix.outputs.openvox_version }}
     steps:
       - name: Source checkout
         uses: actions/checkout@v6
@@ -34,6 +34,10 @@ jobs:
 
       - id: openvox_version
         run: echo "openvox_version=$(yq '.include[0].openvox_version' build_platforms.yaml)" >> $GITHUB_OUTPUT
+
+      - id: debug-output
+        run: |
+          echo $GITHUB_OUTPUT
 
   build-and-push-container:
     runs-on: ${{ matrix.runner }}
@@ -77,6 +81,11 @@ jobs:
           registry: docker.io
           username: voxpupulibot
           password: ${{ secrets.DOCKERHUB_BOT_ADMIN_TOKEN }}
+
+      - id: debug-output
+        run: |
+          echo "OpenVox Release: ${{ needs.setup-matrix.outputs.openvox_release }}"
+          echo "OpenVox Version: ${{ needs.setup-matrix.outputs.openvox_version }}"
 
       - name: Create multiarch manifests
         run: |
