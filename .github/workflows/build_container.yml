@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       build_matrix: ${{ steps.set-build-matrix.outputs.build_matrix }}
-      tag_matrix: ${{ steps.set-tag-matrix.outputs.tag_matrix }}
     steps:
       - name: Source checkout
         uses: actions/checkout@v6
@@ -26,10 +25,7 @@ jobs:
         uses: dcarbone/install-yq-action@v1.3.1
 
       - id: set-build-matrix
-        run: echo "build_matrix=$(bash matrix.sh build)" >> $GITHUB_OUTPUT
-
-      - id: set-tag-matrix
-        run: echo "tag_matrix=$(bash matrix.sh tag)" >> $GITHUB_OUTPUT
+        run: echo "build_matrix=$(yq -o=json build_platforms.yaml)" >> $GITHUB_OUTPUT
 
   build-and-push-container:
     runs-on: ${{ matrix.runner }}
@@ -60,7 +56,7 @@ jobs:
       - setup-matrix
       - build-and-push-container
     strategy:
-      matrix: ${{ fromJson(needs.setup-matrix.outputs.tag_matrix) }}
+      matrix: ${{ fromJson(needs.setup-matrix.outputs.build_matrix) }}
     steps:
       - name: Log in to the ghcr.io registry
         uses: docker/login-action@v3

@@ -1,8 +1,12 @@
 ---
-platforms:
+include:
   - label: x86_64
     platform: amd64
     runner: ubuntu-24.04
+    openvox_release: 8
+    openvox_version: '8.24.2'
   - label: ARM64
     platform: arm64
     runner: ubuntu-24.04-arm
+    openvox_release: 8
+    openvox_version: '8.24.2'

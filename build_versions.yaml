@@ -1,4 +1,0 @@
----
-include:
-  - openvox_release: 8
-    openvox_version: '8.24.2'

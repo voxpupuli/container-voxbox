@@ -23,7 +23,7 @@ jobs:
         uses: dcarbone/install-yq-action@v1.3.1
 
       - id: set-build-matrix
-        run: echo "build_matrix=$(bash matrix.sh build)" >> $GITHUB_OUTPUT
+        run: echo "build_matrix=$(yq -o=json build_platforms.yaml)" >> $GITHUB_OUTPUT
 
   build_ci_container:
     name: Build ${{ matrix.platform }} CI container
