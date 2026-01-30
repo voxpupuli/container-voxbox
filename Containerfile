@@ -21,22 +21,39 @@ ARG RUBYGEM_VOXPUPULI_RELEASE
 ARG RUBYGEM_VOXPUPULI_TEST
 ARG RUBYGEM_WEBMOCK
 
+# renovate: depName=bundler datasource=rubygems
 ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.5}
+# renovate: depName=hiera-eyaml datasource=rubygems
 ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-4.3.0}
+# renovate: depName=librarian-puppet datasource=rubygems
 ENV RUBYGEM_LIBRARIAN_PUPPET=${RUBYGEM_LIBRARIAN_PUPPET:-6.0.0}
+# renovate: depName=modulesync datasource=rubygems
 ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-4.2.0}
+# renovate: depName=onceover datasource=rubygems
 ENV RUBYGEM_ONCEOVER=${RUBYGEM_ONCEOVER:-5.0.2}
+# renovate: depName=openfact datasource=rubygems
 ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.3.0}
+# renovate: depName=openvox datasource=rubygems
 ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.24.2}
+# renovate: depName=puppet-ghostbuster datasource=rubygems
 ENV RUBYGEM_PUPPET_GHOSTBUSTER=${RUBYGEM_PUPPET_GHOSTBUSTER:-2.0.0}
+# renovate: depName=puppet-metadata datasource=rubygems
 ENV RUBYGEM_PUPPET_METADATA=${RUBYGEM_PUPPET_METADATA:-6.0.0}
+# renovate: depName=r10k datasource=rubygems
 ENV RUBYGEM_R10K=${RUBYGEM_R10K:-5.0.2}
+# renovate: depName=ra10ke datasource=rubygems
 ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-4.5.0}
+# renovate: depName=rspec-junit-formatter datasource=rubygems
 ENV RUBYGEM_RSPEC_JUNIT_FORMATTER=${RUBYGEM_RSPEC_JUNIT_FORMATTER:-0.6.0}
+# renovate: depName=rubocop-performance datasource=rubygems
 ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.23.0}
+# renovate: depName=voxpupuli-acceptance datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.3.0}
+# renovate: depName=voxpupuli-release datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.1.0}
+# renovate: depName=voxpupuli-test datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-13.2.0}
+# renovate: depName=webmock datasource=rubygems
 ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.26.1}
 
 COPY voxbox/Gemfile /

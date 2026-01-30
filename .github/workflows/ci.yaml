@@ -23,7 +23,7 @@ jobs:
         uses: dcarbone/install-yq-action@v1.3.1
 
       - id: set-build-matrix
-        run: echo "build_matrix=$(bash matrix.sh build)" >> $GITHUB_OUTPUT
+        run: echo "build_matrix=$(yq -o=json build_platforms.yaml | jq -c)" >> $GITHUB_OUTPUT
 
   build_ci_container:
     name: Build ${{ matrix.platform }} CI container
@@ -44,28 +44,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           file: Containerfile
-          tags: 'ci/voxbox:${{ matrix.rubygem_openvox }}'
+          tags: 'ci/voxbox:${{ matrix.openvox_version }}'
           push: false
           platforms: linux/${{ matrix.platform }}
-          build-args: |
-            BASE_IMAGE=${{ matrix.base_image }}
-            RUBYGEM_BUNDLER=${{ matrix.rubygem_bundler }}
-            RUBYGEM_HIERA_EYAML=${{ matrix.rubygem_hiera-eyaml }}
-            RUBYGEM_LIBRARIAN_PUPPET=${{ matrix.rubygem_librarian-puppet }}
-            RUBYGEM_MODULESYNC=${{ matrix.rubygem_modulesync }}
-            RUBYGEM_ONCEOVER=${{ matrix.rubygem_onceover }}
-            RUBYGEM_OPENFACT=${{ matrix.rubygem_openfact }}
-            RUBYGEM_OPENVOX=${{ matrix.rubygem_openvox }}
-            RUBYGEM_PUPPET_GHOSTBUSTER=${{ matrix.rubygem_puppet-ghostbuster }}
-            RUBYGEM_PUPPET_METADATA=${{ matrix.rubygem_puppet_metadata }}
-            RUBYGEM_R10K=${{ matrix.rubygem_r10k }}
-            RUBYGEM_RA10KE=${{ matrix.rubygem_ra10ke }}
-            RUBYGEM_RSPEC_JUNIT_FORMATTER=${{ matrix.rubygem_rspec_junit_formatter }}
-            RUBYGEM_RUBOCOP_PERFORMANCE=${{ matrix.rubygem_rubocop-performance }}
-            RUBYGEM_VOXPUPULI_ACCEPTANCE=${{ matrix.rubygem_voxpupuli-acceptance }}
-            RUBYGEM_VOXPUPULI_RELEASE=${{ matrix.rubygem_voxpupuli-release }}
-            RUBYGEM_VOXPUPULI_TEST=${{ matrix.rubygem_voxpupuli-test }}
-            RUBYGEM_WEBMOCK=${{ matrix.rubygem_webmock }}
 
       - name: Clone voxpupuli/puppet-example repository
         uses: actions/checkout@v6
@@ -74,21 +55,21 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile -T
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile metadata_lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:dependencies
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile r10k:syntax
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile rubocop
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile spec
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile strings:validate:reference
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.rubygem_openvox }} -f /Rakefile syntax
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile -T
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile lint
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile metadata_lint
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile r10k:dependencies
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile r10k:syntax
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile rubocop
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile spec
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile strings:validate:reference
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile syntax
 
       - name: Bundle Info
         run: |
-          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle check"
-          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle env"
-          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.rubygem_openvox }} -c "bundle outdated || true"
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle check"
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle env"
+          docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle outdated || true"
 
   tests:
     needs:
