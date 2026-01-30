@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       build_matrix: ${{ steps.set-build-matrix.outputs.build_matrix }}
-      openvox_release: ${{ steps.set-build-matrix.outputs.openvox_release }}
-      openvox_version: ${{ steps.set-build-matrix.outputs.openvox_version }}
+      openvox_release: ${{ steps.set-openvox-release.outputs.openvox_release }}
+      openvox_version: ${{ steps.set-openvox-version.outputs.openvox_version }}
     steps:
       - name: Source checkout
         uses: actions/checkout@v6
@@ -29,10 +29,10 @@ jobs:
       - id: set-build-matrix
         run: echo "build_matrix=$(yq -o=json build_platforms.yaml | jq -c)" >> $GITHUB_OUTPUT
 
-      - id: openvox_release
+      - id: set-openvox-release
         run: echo "openvox_release=$(yq '.include[0].openvox_release' build_platforms.yaml)" >> $GITHUB_OUTPUT
 
-      - id: openvox_version
+      - id: set-openvox-version
         run: echo "openvox_version=$(yq '.include[0].openvox_version' build_platforms.yaml)" >> $GITHUB_OUTPUT
 
       - id: debug-output
