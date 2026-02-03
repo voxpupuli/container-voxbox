@@ -37,13 +37,13 @@ ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.3.0}
 ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.24.2}
 # renovate: depName=puppet-ghostbuster datasource=rubygems
 ENV RUBYGEM_PUPPET_GHOSTBUSTER=${RUBYGEM_PUPPET_GHOSTBUSTER:-2.0.0}
-# renovate: depName=puppet-metadata datasource=rubygems
+# renovate: depName=puppet_metadata datasource=rubygems
 ENV RUBYGEM_PUPPET_METADATA=${RUBYGEM_PUPPET_METADATA:-6.0.0}
 # renovate: depName=r10k datasource=rubygems
 ENV RUBYGEM_R10K=${RUBYGEM_R10K:-5.0.2}
 # renovate: depName=ra10ke datasource=rubygems
 ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-4.5.0}
-# renovate: depName=rspec-junit-formatter datasource=rubygems
+# renovate: depName=rspec_junit_formatter datasource=rubygems
 ENV RUBYGEM_RSPEC_JUNIT_FORMATTER=${RUBYGEM_RSPEC_JUNIT_FORMATTER:-0.6.0}
 # renovate: depName=rubocop-performance datasource=rubygems
 ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.23.0}
