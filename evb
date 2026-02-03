@@ -6,7 +6,7 @@ get_path () {
   if [ "${1}" == '' ] ; then
     echo "ERROR: ensure you start this script either in a openvox control or a module directory" >&2
     exit 200
-  elif [ -f "${1}/metadata.json" ] || [ -f "${1}/Puppetfile" ] ; then 
+  elif [ -f "${1}/metadata.json" ] || [ -f "${1}/Puppetfile" ] ; then
     echo $1
   else
     get_path $(echo $1|sed 's|/[^/]*$||')
@@ -21,7 +21,7 @@ Usage: ${0} [options] [command]
 available options:
   --noop        : print the command to run, but do not run it
   --entrypoint  : use a different entrypoint
-                  examples for available endpoints are: 
+                  examples for available endpoints are:
                   onceover, ash, puppet, yamllint, jq, curl, rubocop
                   default: no entrypoint specified
   --image image : use a different image (default ${PODIMAGE})
@@ -32,13 +32,13 @@ available options:
                            and set --env SPEC=./supermodule_spec.rb we will
                            run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
   --volume vol  : specify an additional volume to put into the container
-                  see podman man page how to specify 'vol'. (no path magic is done ;)) 
+                  see podman man page how to specify 'vol'. (no path magic is done ;))
   --runcmd      : this lets you change the program used to start the container
                   if not set explicit it looks for podman or docker.
 
 available command:
    help  : print this help message and exit
-   
+
 commands/options not listed here are passed to VoxBox as is.
 use the '--noop' option to print the detailed call to VoxBox.
 EOF
