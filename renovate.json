@@ -1,6 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "addLabels": [ "dependencies", "renovate" ],
+  "addLabels": [
+    "dependencies",
+    "renovate"
+  ],
   "assigneesFromCodeOwners": true,
   "automerge": true,
   "automergeType": "pr",
@@ -30,21 +33,30 @@
       "customType": "regex",
       "datasourceTemplate": "rubygems",
       "versioningTemplate": "ruby",
-      "managerFilePatterns": ["/Containerfile/"],
+      "managerFilePatterns": [
+        "/Containerfile/"
+      ],
       "matchStrings": [
         "#\\s*renovate:\\s*depName=(?<depName>[a-zA-Z0-9_-]+)\\s+datasource=rubygems\\s*\\n\\s*ENV\\s+RUBYGEM_[A-Z0-9_-]+=\\$\\{RUBYGEM_[A-Z0-9_-]+:-?(?<currentValue>[^}\\n]+)\\}"
       ]
     }
   ],
-  "extends": [ "config:recommended", ":prImmediately" ],
+  "extends": [
+    "config:recommended",
+    ":prImmediately"
+  ],
   "vulnerabilityAlerts": {
-    "addLabels": [ "security" ],
+    "addLabels": [
+      "security"
+    ],
     "enabled": true
   },
   "packageRules": [
     {
-      "matchPackagePatterns": [".*"],
-      "dependencyDashboardApproval": false
+      "dependencyDashboardApproval": false,
+      "matchPackageNames": [
+        "/.*/"
+      ]
     }
   ]
 }
