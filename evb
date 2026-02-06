@@ -1,9 +1,13 @@
 #!/bin/bash
-set -e
+
+# -e: exit immediately when encountering non-zero status
+# -o pipefail: in a pipeline, use the last (rightmost) command to exit with a non-zero status, or zero
+# -u: treat unset variables and parameters as an error
+set -eou pipefail
 
 get_path () {
   # calculates the 'root' path to run the container
-  if [ "${1}" == '' ] ; then
+  if [ "${1:-}" == '' ] ; then
     echo "ERROR: ensure you start this script either in a openvox control or a module directory" >&2
     exit 200
   elif [ -f "${1}/metadata.json" ] || [ -f "${1}/Puppetfile" ] ; then
@@ -76,12 +80,12 @@ while [[ $# -gt 0 ]]; do
     ;;
     --runcmd)
        shift
-       RUNCMD=${1}
+       RUNCMD=${1:-}
        shift
     ;;
     --entrypoint)
        shift
-       PODOPTIONS="--entrypoint ${1} ${PODOPTIONS}"
+       PODOPTIONS="--entrypoint ${1:-} ${PODOPTIONS}"
        shift
     ;;
     --image)
@@ -91,12 +95,12 @@ while [[ $# -gt 0 ]]; do
     ;;
     --volume)
        shift
-       PODOPTIONS="-v ${1} ${PODOPTIONS}"
+       PODOPTIONS="-v ${1:-} ${PODOPTIONS}"
        shift
     ;;
     --env)
        shift
-       PODENV="-e $(sed "s|=./|=${PWD}/|" <<< "${1}") ${PODENV}"
+       PODENV="-e $(sed "s|=./|=${PWD}/|" <<< "${1:-}") ${PODENV}"
        shift
     ;;
     *)
@@ -107,7 +111,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # lets see what we have as default runcmd:
-if [ -n "${RUNCMD}" ] ; then
+if [ -n "${RUNCMD:-}" ] ; then
   true
 elif command -v podman >/dev/null 2>&1 ; then
   RUNCMD='podman'
