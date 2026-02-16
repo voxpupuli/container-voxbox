@@ -32,7 +32,7 @@ ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-4.2.0}
 # renovate: depName=onceover datasource=rubygems
 ENV RUBYGEM_ONCEOVER=${RUBYGEM_ONCEOVER:-5.0.2}
 # renovate: depName=openfact datasource=rubygems
-ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.3.0}
+ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.4.0}
 # renovate: depName=openvox datasource=rubygems
 ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.24.2}
 # renovate: depName=puppet-ghostbuster datasource=rubygems
