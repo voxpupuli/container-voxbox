@@ -50,7 +50,7 @@ ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.23.0}
 # renovate: depName=voxpupuli-acceptance datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.3.0}
 # renovate: depName=voxpupuli-release datasource=rubygems
-ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.1.0}
+ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.2.0}
 # renovate: depName=voxpupuli-test datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-13.2.0}
 # renovate: depName=webmock datasource=rubygems
