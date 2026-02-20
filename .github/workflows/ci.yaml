@@ -72,12 +72,16 @@ jobs:
           docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle outdated || true"
 
   tests:
+    if: always()
     needs:
       - build_ci_container
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Test suite
     steps:
-      - run: echo Test suite completed
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
 
   dependabot:
     permissions:
