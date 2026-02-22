@@ -25,7 +25,7 @@ ARG RUBYGEM_WEBMOCK
 # renovate: depName=bundler datasource=rubygems
 ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.6}
 # renovate: depName=hiera-eyaml datasource=rubygems
-ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-4.3.0}
+ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-5.0.0}
 # renovate: depName=librarian-puppet datasource=rubygems
 ENV RUBYGEM_LIBRARIAN_PUPPET=${RUBYGEM_LIBRARIAN_PUPPET:-6.0.0}
 # renovate: depName=modulesync datasource=rubygems
