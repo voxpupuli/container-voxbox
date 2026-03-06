@@ -69,14 +69,14 @@ jobs:
       - build-and-push-container
     steps:
       - name: Log in to the ghcr.io registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to the docker.io registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: docker.io
           username: voxpupulibot
