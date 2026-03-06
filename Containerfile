@@ -63,7 +63,7 @@ COPY voxbox/Gemfile /
 
 RUN apk update \
     && apk upgrade \
-    && apk add --no-cache --update alpine-sdk yaml-dev \
+    && apk add --no-cache --update alpine-sdk yaml-dev libffi-dev \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/bundler-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec \
     && gem install bundler -v ${RUBYGEM_BUNDLER} \
