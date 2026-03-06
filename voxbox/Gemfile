@@ -5,7 +5,6 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 gem 'hiera-eyaml',           ENV['RUBYGEM_HIERA_EYAML']
 gem 'librarian-puppet',      ENV['RUBYGEM_LIBRARIAN_PUPPET']
 gem 'modulesync',            ENV['RUBYGEM_MODULESYNC']
-gem 'onceover',              ENV['RUBYGEM_ONCEOVER']
 gem 'openfact',              ENV['RUBYGEM_OPENFACT']
 gem 'openvox',               ENV['RUBYGEM_OPENVOX']
 gem 'openvox-strings',       ENV['RUBYGEM_OPENVOX_STRINGS']
