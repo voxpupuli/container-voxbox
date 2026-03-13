@@ -2,6 +2,77 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v4.1.0](https://github.com/voxpupuli/container-voxbox/tree/v4.1.0) (2026-03-13)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v4.0.1...v4.1.0)
+
+**Implemented enhancements:**
+
+- SBOM/Gemfile.lock - get all gem dependencies and the installed version number [\#143](https://github.com/voxpupuli/container-voxbox/issues/143)
+- Enhance error handling in evb script [\#216](https://github.com/voxpupuli/container-voxbox/pull/216) ([corporate-gadfly](https://github.com/corporate-gadfly))
+- add missing gems, fix whitespaces [\#213](https://github.com/voxpupuli/container-voxbox/pull/213) ([rwaffen](https://github.com/rwaffen))
+- feat: use /Rakefile per default [\#187](https://github.com/voxpupuli/container-voxbox/pull/187) ([rwaffen](https://github.com/rwaffen))
+- fix: replace default gems for base64 and bigdecimal, silence warnings for exp. features [\#177](https://github.com/voxpupuli/container-voxbox/pull/177) ([rwaffen](https://github.com/rwaffen))
+- README: EasyVoxBox: fix typos [\#174](https://github.com/voxpupuli/container-voxbox/pull/174) ([kenyon](https://github.com/kenyon))
+- feat: add webmock for easier api mocking in rspec tests [\#171](https://github.com/voxpupuli/container-voxbox/pull/171) ([rwaffen](https://github.com/rwaffen))
+- fix: Update base image to use ruby:3.2-alpine [\#169](https://github.com/voxpupuli/container-voxbox/pull/169) ([rwaffen](https://github.com/rwaffen))
+- feat: Add hiera-eyaml and librarian-puppet to github actions [\#166](https://github.com/voxpupuli/container-voxbox/pull/166) ([rwaffen](https://github.com/rwaffen))
+- feat: add hiera-eyaml [\#165](https://github.com/voxpupuli/container-voxbox/pull/165) ([JGodin-C2C](https://github.com/JGodin-C2C))
+- feat: Add librarian utility [\#164](https://github.com/voxpupuli/container-voxbox/pull/164) ([JGodin-C2C](https://github.com/JGodin-C2C))
+
+**Fixed bugs:**
+
+- Regression: librarian pulling in the puppt gem again :\( [\#167](https://github.com/voxpupuli/container-voxbox/issues/167)
+- r10k:diff task does not work from inside a container [\#118](https://github.com/voxpupuli/container-voxbox/issues/118)
+- Gem: racc is installed two times [\#117](https://github.com/voxpupuli/container-voxbox/issues/117)
+- Bug: ghostbuster linters are executed every time [\#101](https://github.com/voxpupuli/container-voxbox/issues/101)
+- fix: add libffi-dev for compiling gem dependency fiddler [\#240](https://github.com/voxpupuli/container-voxbox/pull/240) ([rwaffen](https://github.com/rwaffen))
+- fix: add openvox-strings, pin to 6.0.0 [\#226](https://github.com/voxpupuli/container-voxbox/pull/226) ([bootc](https://github.com/bootc))
+- CI: properly check if all jobs passed [\#225](https://github.com/voxpupuli/container-voxbox/pull/225) ([bastelfreak](https://github.com/bastelfreak))
+- fix: use the right names for gem lookups [\#214](https://github.com/voxpupuli/container-voxbox/pull/214) ([rwaffen](https://github.com/rwaffen))
+- fix: update bundler and containerfile defaults, remove removal of rexml [\#207](https://github.com/voxpupuli/container-voxbox/pull/207) ([rwaffen](https://github.com/rwaffen))
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency github\_changelog\_generator to '~\> 1.17.0' [\#246](https://github.com/voxpupuli/container-voxbox/pull/246) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.8 [\#243](https://github.com/voxpupuli/container-voxbox/pull/243) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update docker/build-push-action action to v7 [\#238](https://github.com/voxpupuli/container-voxbox/pull/238) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency librarian-puppet to v7 [\#237](https://github.com/voxpupuli/container-voxbox/pull/237) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update docker/login-action action to v4 - autoclosed [\#235](https://github.com/voxpupuli/container-voxbox/pull/235) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency puppet-ghostbuster to v2.1.0 [\#234](https://github.com/voxpupuli/container-voxbox/pull/234) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/upload-artifact action to v7 [\#232](https://github.com/voxpupuli/container-voxbox/pull/232) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.7 [\#230](https://github.com/voxpupuli/container-voxbox/pull/230) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency hiera-eyaml to v5 [\#229](https://github.com/voxpupuli/container-voxbox/pull/229) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.5.0 [\#224](https://github.com/voxpupuli/container-voxbox/pull/224) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency voxpupuli-release to v5.2.0 [\#221](https://github.com/voxpupuli/container-voxbox/pull/221) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.25.0 [\#220](https://github.com/voxpupuli/container-voxbox/pull/220) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.4.0 [\#219](https://github.com/voxpupuli/container-voxbox/pull/219) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(config\): migrate Renovate config [\#218](https://github.com/voxpupuli/container-voxbox/pull/218) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.6 [\#206](https://github.com/voxpupuli/container-voxbox/pull/206) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency voxpupuli-acceptance to v4.3.0 [\#204](https://github.com/voxpupuli/container-voxbox/pull/204) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.3.0 [\#203](https://github.com/voxpupuli/container-voxbox/pull/203) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency voxpupuli-release to v5.1.0 [\#202](https://github.com/voxpupuli/container-voxbox/pull/202) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependabot/fetch-metadata action to v2.5.0 [\#201](https://github.com/voxpupuli/container-voxbox/pull/201) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency puppet\_metadata to v6 [\#200](https://github.com/voxpupuli/container-voxbox/pull/200) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.3 [\#198](https://github.com/voxpupuli/container-voxbox/pull/198) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency rdoc to v7 [\#197](https://github.com/voxpupuli/container-voxbox/pull/197) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency minitest to v6 [\#196](https://github.com/voxpupuli/container-voxbox/pull/196) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency minitest to v6 [\#194](https://github.com/voxpupuli/container-voxbox/pull/194) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.2 [\#193](https://github.com/voxpupuli/container-voxbox/pull/193) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bigdecimal to v4 [\#192](https://github.com/voxpupuli/container-voxbox/pull/192) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.24.2 [\#191](https://github.com/voxpupuli/container-voxbox/pull/191) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.2.1 [\#190](https://github.com/voxpupuli/container-voxbox/pull/190) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update davidanson/markdownlint-cli2-action action to v22 [\#185](https://github.com/voxpupuli/container-voxbox/pull/185) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.24.1 [\#184](https://github.com/voxpupuli/container-voxbox/pull/184) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.2.0 [\#183](https://github.com/voxpupuli/container-voxbox/pull/183) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4 [\#181](https://github.com/voxpupuli/container-voxbox/pull/181) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency voxpupuli-test to v13.2.0 [\#180](https://github.com/voxpupuli/container-voxbox/pull/180) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency voxpupuli-acceptance to v4.2.0 [\#179](https://github.com/voxpupuli/container-voxbox/pull/179) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v6 [\#178](https://github.com/voxpupuli/container-voxbox/pull/178) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(docs\): correct typos and formatting in README.md [\#175](https://github.com/voxpupuli/container-voxbox/pull/175) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update davidanson/markdownlint-cli2-action action to v21 [\#173](https://github.com/voxpupuli/container-voxbox/pull/173) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency voxpupuli-release to v5.0.2 [\#172](https://github.com/voxpupuli/container-voxbox/pull/172) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v4.0.1](https://github.com/voxpupuli/container-voxbox/tree/v4.0.1) (2025-10-16)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v4.0.0...v4.0.1)
