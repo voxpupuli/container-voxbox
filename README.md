@@ -16,7 +16,6 @@
       - [release Task](#release-task)
       - [spec Task](#spec-task)
       - [Available rake tasks](#available-rake-tasks)
-    - [Onceover](#onceover)
     - [Shell](#shell)
     - [Puppet](#puppet)
       - [puppet-strings](#puppet-strings)
@@ -43,6 +42,7 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 ## Informations
 
 - ⚠ On February 28, 2025, OpenVox/Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
+- ⚠ On March 20, 2026, Onceover was removed from this container. If you need Onceover, please use the dedicated container for this: <https://github.com/voxpupuli/container-onceover>.
 
 ## Included rubygems
 
@@ -51,7 +51,6 @@ see: [Gemfile](voxbox/Gemfile)
 - hiera-eyaml
 - librarian
 - modulesync
-- onceover
 - openfact
 - openvox
 - puppet-ghostbuster
@@ -199,55 +198,6 @@ rake validate                                                                   
 rake voxpupuli:custom:lint_all                                                  # Lint with all puppet-lint checks
 ```
 
-### Onceover
-
-If you want to run onceover, you have to override the entrypoint:
-
-```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 help
-```
-
-Onceover allows you to run tests against your control-repository.
-
-Initialize onceover:
-
-```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:latest init
-```
-
-Running spec tests:
-
-```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint onceover ghcr.io/voxpupuli/voxbox:8 run spec
-```
-
-Running spec test with internal git+ssh modules in Puppetfile:
-
-```shell
-podman run -it --rm \
-  -v ~/.ssh:/root/.ssh:Z \
-  -v $PWD:/repo:Z \
-  --entrypoint onceover ghcr.io/voxpupuli/voxbox:latest run spec
-```
-
-Running spec tests with puppet output:
-
-```shell
-podman run -it --rm \
-  -v $PWD:/repo:Z \
-  -e SHOW_PUPPET_OUTPUT=true \
-  --entrypoint onceover ghcr.io/voxpupuli/voxbox:latest run spec
-```
-
-Other commands are:
-
-| Command              | What it does                                 |
-| -------------------- | -------------------------------------------- |
-| `show puppetfile`    | Analyze the Puppetfile and show open updates |
-|  `update puppetfile` | Update modules                               |
-
-Further commands, required configuration and usage is described in the [onceover repository](https://github.com/voxpupuli/onceover).
-
 ### Shell
 
 If you need a shell, you have to override the entrypoint:
@@ -359,7 +309,7 @@ available options:
   --noop        : print the command to run, but do not run it
   --entrypoint  : use a different entrypoint
                   examples for available endpoints are:
-                  onceover, ash, puppet, yamllint, jq, curl, rubocop
+                  ash, puppet, yamllint, jq, curl, rubocop
                   default: no entrypoint specified
   --image image : use a different image (default ghcr.io/voxpupuli/voxbox:8)
   --env VAR=val : specify environment variables (can be used multiple times)
@@ -386,7 +336,6 @@ See the command that would be executed (dropping the --noop option will run the 
 evb --noop                                     # for rake -T
 evb --noop spec                                # for rake spec
 evb --noop --env SPEC=./example_spec.rb spec   # for only a specific spec in the current subdirectory
-evb --noop --entrypoint onceover --help        # onceover help
 
 # or the release rake task
 evb --volume ~/.gitconfig:/etc/gitconfig:ro \
