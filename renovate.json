@@ -57,6 +57,19 @@
       "matchPackageNames": [
         "/.*/"
       ]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchPaths": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/security_scanning.yml",
+        ".github/workflows/build_container.yml"
+      ],
+      "enabled": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "enabled": false
     }
   ]
 }
