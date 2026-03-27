@@ -14,7 +14,7 @@ jobs:
   labeler:
     name: Labeler
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'voxpupuli'
+    if: github.repository_owner == 'voxpupuli' || github.repository_owner == 'OpenVoxProject'
     permissions:
       pull-requests: write
     steps:
