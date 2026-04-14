@@ -40,7 +40,7 @@ ENV RUBYGEM_PUPPET_GHOSTBUSTER=${RUBYGEM_PUPPET_GHOSTBUSTER:-2.1.0}
 # renovate: depName=puppet_metadata datasource=rubygems
 ENV RUBYGEM_PUPPET_METADATA=${RUBYGEM_PUPPET_METADATA:-6.1.0}
 # renovate: depName=r10k datasource=rubygems
-ENV RUBYGEM_R10K=${RUBYGEM_R10K:-5.0.2}
+ENV RUBYGEM_R10K=${RUBYGEM_R10K:-5.0.3}
 # renovate: depName=ra10ke datasource=rubygems
 ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-4.5.0}
 # renovate: depName=rspec_junit_formatter datasource=rubygems
