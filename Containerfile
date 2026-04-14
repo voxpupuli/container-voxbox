@@ -22,7 +22,7 @@ ARG RUBYGEM_VOXPUPULI_TEST
 ARG RUBYGEM_WEBMOCK
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.9}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.10}
 # renovate: depName=hiera-eyaml datasource=rubygems
 ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-5.0.0}
 # renovate: depName=librarian-puppet datasource=rubygems
