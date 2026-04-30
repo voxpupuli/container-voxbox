@@ -34,7 +34,7 @@ ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.6.0}
 # renovate: depName=openvox datasource=rubygems
 ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.26.2}
 # renovate: depName=openvox-strings datasource=rubygems
-ENV RUBYGEM_OPENVOX_STRINGS=${RUBYGEM_OPENVOX_STRINGS:-6.0.0}
+ENV RUBYGEM_OPENVOX_STRINGS=${RUBYGEM_OPENVOX_STRINGS:-7.1.0}
 # renovate: depName=puppet-ghostbuster datasource=rubygems
 ENV RUBYGEM_PUPPET_GHOSTBUSTER=${RUBYGEM_PUPPET_GHOSTBUSTER:-2.1.0}
 # renovate: depName=puppet_metadata datasource=rubygems
@@ -50,7 +50,7 @@ ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.23.0}
 # renovate: depName=voxpupuli-acceptance datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.4.0}
 # renovate: depName=voxpupuli-release datasource=rubygems
-ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.2.0}
+ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.4.0}
 # renovate: depName=voxpupuli-test datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-14.0.0}
 # renovate: depName=webmock datasource=rubygems
@@ -71,6 +71,8 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/cgi-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/cgi-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/erb-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/stringio-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/stringio-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/rdoc-* \
