@@ -34,7 +34,7 @@ ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.6.0}
 # renovate: depName=openvox datasource=rubygems
 ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.26.2}
 # renovate: depName=openvox-strings datasource=rubygems
-ENV RUBYGEM_OPENVOX_STRINGS=${RUBYGEM_OPENVOX_STRINGS:-6.0.0}
+ENV RUBYGEM_OPENVOX_STRINGS=${RUBYGEM_OPENVOX_STRINGS:-7.1.0}
 # renovate: depName=puppet-ghostbuster datasource=rubygems
 ENV RUBYGEM_PUPPET_GHOSTBUSTER=${RUBYGEM_PUPPET_GHOSTBUSTER:-2.1.0}
 # renovate: depName=puppet_metadata datasource=rubygems
