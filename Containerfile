@@ -71,6 +71,8 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/cgi-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/cgi-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/erb-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/stringio-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/stringio-*.gemspec \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/rdoc-* \
