@@ -42,7 +42,7 @@ ENV RUBYGEM_PUPPET_METADATA=${RUBYGEM_PUPPET_METADATA:-6.2.0}
 # renovate: depName=r10k datasource=rubygems
 ENV RUBYGEM_R10K=${RUBYGEM_R10K:-5.0.3}
 # renovate: depName=ra10ke datasource=rubygems
-ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-4.5.0}
+ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-4.5.1}
 # renovate: depName=rspec_junit_formatter datasource=rubygems
 ENV RUBYGEM_RSPEC_JUNIT_FORMATTER=${RUBYGEM_RSPEC_JUNIT_FORMATTER:-0.6.0}
 # renovate: depName=rubocop-performance datasource=rubygems
