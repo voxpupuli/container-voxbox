@@ -60,7 +60,7 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "matchPaths": [
+      "matchFileNames": [
         ".github/workflows/ci.yml",
         ".github/workflows/security_scanning.yml",
         ".github/workflows/build_container.yml"
