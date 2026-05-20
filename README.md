@@ -300,10 +300,9 @@ If you have module which where created with PDK, you might run into some issuses
 useful tips:
 
 | PDK Command | VoxBox Rake Task |
-|-------------|----------------|
-| pdk validate  | validate |
+| ----------- | ---------------- |
+| pdk validate | validate |
 | pdk test unit | spec |
-
 
 ## EasyVoxBox (evb)
 
