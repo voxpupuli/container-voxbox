@@ -220,7 +220,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox
 podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 strings --help
 ```
 
-## puppet-ghostbuster
+### puppet-ghostbuster
 
 If you want to execute puppet-ghostbuster change the entrypoint to `ash` and pass the command to the container.
 Ghostbuster needs a connection to the OpenVoxDB/PuppetDB, so you have to provide the environment variables.
@@ -292,6 +292,18 @@ If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint l
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint eyaml ghcr.io/voxpupuli/voxbox:8 edit /repo/
 ```
+
+## Dealing with PDK
+
+If you have module which where created with PDK, you might run into some issuses.
+
+useful tips:
+
+| PDK Command | VoxBox Rake Task |
+|-------------|----------------|
+| pdk validate  | validate |
+| pdk test unit | spec |
+
 
 ## EasyVoxBox (evb)
 
