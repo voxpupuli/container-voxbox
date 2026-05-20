@@ -39,6 +39,17 @@
       "matchStrings": [
         "#\\s*renovate:\\s*depName=(?<depName>[a-zA-Z0-9_-]+)\\s+datasource=rubygems\\s*\\n\\s*ENV\\s+RUBYGEM_[A-Z0-9_-]+=\\$\\{RUBYGEM_[A-Z0-9_-]+:-?(?<currentValue>[^}\\n]+)\\}"
       ]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "rubygems",
+      "versioningTemplate": "ruby",
+      "managerFilePatterns": [
+        "/build_platforms.yaml/"
+      ],
+      "matchStrings": [
+        "#\\s*renovate:\\s*depName=(?<depName>[a-zA-Z0-9_-]+)\\s+datasource=rubygems\\s*\\n\\s*(?<key>openvox_version):\\s*'(?<currentValue>[^']+)'"
+      ]
     }
   ],
   "extends": [
