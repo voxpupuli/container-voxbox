@@ -8,6 +8,7 @@
 
 - [Vox Pupuli Test Box](#vox-pupuli-test-box)
   - [Introduction](#introduction)
+  - [Breaking changes](#breaking-changes)
   - [Included rubygems](#included-rubygems)
   - [Additionally included tools](#additionally-included-tools)
   - [Versions](#versions)
@@ -17,15 +18,17 @@
       - [spec Task](#spec-task)
       - [Available rake tasks](#available-rake-tasks)
     - [Shell](#shell)
-    - [Puppet](#puppet)
-      - [puppet-strings](#puppet-strings)
+    - [OpenVox/Puppet](#openvoxpuppet)
+    - [OpenVox/Puppet Strings](#openvoxpuppet-strings)
     - [puppet-ghostbuster](#puppet-ghostbuster)
     - [YAMLlint](#yamllint)
     - [JQ](#jq)
     - [cURL](#curl)
     - [RuboCop](#rubocop)
     - [Librarian](#librarian)
-    - [eyaml](#hiera-eyaml)
+    - [hiera-eyaml](#hiera-eyaml)
+  - [Dealing with PDK](#dealing-with-pdk)
+  - [EasyVoxBox (evb)](#easyvoxbox-evb)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
@@ -39,10 +42,13 @@
 This container should be used to test voxpupuli OpenVox/Puppet modules.
 It has the voxpupuli-test, -acceptance, -release gems and all dependencies installed.
 
-## Informations
+## Breaking changes
 
 - ⚠ On February 28, 2025, OpenVox/Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
 - ⚠ On March 20, 2026, Onceover was removed from this container. If you need Onceover, please use the dedicated container for this: <https://github.com/voxpupuli/container-onceover>.
+- ⚠ On May 27, 2026, We seperated the VoxBox gems from the system ruby and moved it into a local bundle.
+  This means that you have to use `bundle exec` to execute the gems.
+  This was done to avoid conflicts with the system ruby and to have more control over the gem versions.
 
 ## Included rubygems
 
@@ -206,18 +212,18 @@ If you need a shell, you have to override the entrypoint:
 podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
 ```
 
-### Puppet
+### OpenVox/Puppet
 
 If you want to execute puppet change the entrypoint to `puppet` and pass subcommands/parameters to it.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 --help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec puppet --help
 ```
 
-#### puppet-strings
+### OpenVox/Puppet Strings
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint puppet ghcr.io/voxpupuli/voxbox:8 strings --help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec puppet strings --help
 ```
 
 ### puppet-ghostbuster
@@ -241,7 +247,7 @@ They can be combined with `--only-checks` and listed in a comma separated list.
 
 ```shell
 podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
-find . -type f -exec bundle exec --gemfile /Gemfile puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
+find . -type f -exec bundle exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
 ```
 
 ### YAMLlint
@@ -273,8 +279,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8
 If you want to execute RuboCop directly change the entrypoint to `rubocop` and pass a subcommands/parameter to the container.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8
-podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbox:8 --auto-gen-config
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec rubocop
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec rubocop --auto-gen-config
 ```
 
 ### Librarian
@@ -282,7 +288,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint rubocop ghcr.io/voxpupuli/voxbo
 If you want to execute librarian change the entrypoint to `librarian-puppet` and pass a query/parameter to the container.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint librarian-puppet ghcr.io/voxpupuli/voxbox:8 help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec librarian-puppet help
 ```
 
 ### hiera-eyaml
@@ -290,7 +296,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint librarian-puppet ghcr.io/voxpup
 If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint like so :
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint eyaml ghcr.io/voxpupuli/voxbox:8 edit /repo/
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec eyaml edit /repo/
 ```
 
 ## Dealing with PDK
@@ -376,7 +382,7 @@ code-quality:
     entrypoint: [""]
   stage: verify
   script:
-    - rake -f /Rakefile voxpupuli:custom:lint_all
+    - bundle exec rake -f /Rakefile voxpupuli:custom:lint_all
   variables:
     # setting this variable makes puppet-lint create the json file
     # needed for the code quality report
@@ -406,7 +412,7 @@ rspec:
     entrypoint: [""]
   stage: test
   script:
-    - rake -f /Rakefile spec
+    - bundle exec rake -f /Rakefile spec
   artifacts:
     when: always
     reports:
