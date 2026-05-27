@@ -43,6 +43,7 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 
 - ⚠ On February 28, 2025, OpenVox/Puppet 7 entered its end-of-life phase. Consequently, no new VoxBox:7 releases will be build. Existing versions will be retained for continued access.
 - ⚠ On March 20, 2026, Onceover was removed from this container. If you need Onceover, please use the dedicated container for this: <https://github.com/voxpupuli/container-onceover>.
+- ⚠ On May 27, 2026, `yamllint` (python) was replaced with `yamlint` (ruby) to reduce the number of languages and package managers in the container.
 
 ## Included rubygems
 
@@ -59,6 +60,7 @@ see: [Gemfile](voxbox/Gemfile)
 - voxpupuli-acceptance
 - voxpupuli-release
 - voxpupuli-test
+- yamlint
 
 ## Additionally included tools
 
@@ -67,7 +69,6 @@ see: [Gemfile](voxbox/Gemfile)
 - gpg
 - jq
 - ssh-client
-- yamllint
 
 ## Versions
 
@@ -244,12 +245,14 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
 find . -type f -exec bundle exec --gemfile /Gemfile puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
 ```
 
-### YAMLlint
+### yamlint
 
-If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
+<https://github.com/ydah/yamlint>
+
+If you want to execute yamlint change the entryoint to `bundle` and pass a `exec yamlint` and a folder to the container, f.e. `.`.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:8 .
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec yamlint .
 ```
 
 ### JQ
