@@ -98,7 +98,12 @@ RUN apk update \
     && apk add --no-cache jq \
     && apk add --no-cache yamllint \
     && apk add --no-cache git \
-    && apk add --no-cache curl
+    && apk add --no-cache curl \
+    # CVE fixes - gems are deleted but are reinstalled in the bundler gemset
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/erb-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/net-imap-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/net-imap-*.gemspec
 
 COPY --from=builder /opt/voxbox /opt/voxbox
 
