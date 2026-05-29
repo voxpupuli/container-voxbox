@@ -55,15 +55,15 @@ jobs:
 
       - name: Test container
         run: |
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile -T
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile metadata_lint
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile r10k:dependencies
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile r10k:syntax
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile rubocop
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile spec
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile strings:validate:reference
-          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} -f /Rakefile syntax
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }}
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} lint
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} metadata_lint
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} r10k:dependencies
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} r10k:syntax
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} rubocop
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} spec
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} strings:validate:reference
+          docker run --rm -v $PWD:/repo:Z ci/voxbox:${{ matrix.openvox_version }} syntax
 
       - name: Bundle Info
         run: |

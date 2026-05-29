@@ -56,7 +56,7 @@ ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-14.0.0}
 # renovate: depName=webmock datasource=rubygems
 ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.26.2}
 
-COPY voxbox/Gemfile /
+COPY voxbox/Gemfile /opt/voxbox/Gemfile
 
 RUN apk update \
     && apk upgrade \
@@ -64,31 +64,11 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/gems/bundler-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec \
     && gem install bundler -v ${RUBYGEM_BUNDLER} \
-    && bundle config set path.system true \
+    && cd /opt/voxbox \
     && bundle config set jobs $(nproc) \
-    && bundle install --gemfile=/Gemfile \
-    && bundle clean --force \
-    && rm -rf /usr/local/lib/ruby/gems/*/cache/* \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/cgi-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/cgi-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/erb-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/stringio-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/stringio-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/rdoc-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/rdoc-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/racc-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/racc-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/drb-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/drb-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/csv-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/csv-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/minitest-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/minitest-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/base64-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/base64-*.gemspec \
-    && rm -rf /usr/local/lib/ruby/gems/*/gems/bigdecimal-* \
-    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/bigdecimal-*.gemspec
+    && bundle config set path /opt/voxbox/vendor/bundle \
+    && bundle install --gemfile=/opt/voxbox/Gemfile \
+    && bundle clean --force
 
 ###############################################################################
 
@@ -106,6 +86,11 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 # Disable warnings for experimental features
 ENV RUBYOPT="-W:no-experimental"
 
+# bundler needs to know where the Gemfile and gems are located
+ENV BUNDLE_GEMFILE=/opt/voxbox/Gemfile
+ENV BUNDLE_PATH=/opt/voxbox/vendor/bundle
+ENV BUNDLE_APP_CONFIG=/opt/voxbox/vendor/bundle
+
 RUN apk update \
     && apk upgrade \
     && apk add --no-cache openssh-client \
@@ -114,16 +99,18 @@ RUN apk update \
     && apk add --no-cache yamllint \
     && apk add --no-cache git \
     && apk add --no-cache curl \
-    && rm -rf /usr/local/lib/ruby/gems
+    # CVE fixes - gems are deleted but are reinstalled in the bundler gemset
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/erb-*.gemspec \
+    && rm -rf /usr/local/lib/ruby/gems/*/gems/net-imap-* \
+    && rm -rf /usr/local/lib/ruby/gems/*/specifications/net-imap-*.gemspec
 
-COPY --from=builder /usr/local/lib/ruby/gems /usr/local/lib/ruby/gems
-COPY --from=builder /usr/local/bundle /usr/local/bundle
-COPY --from=builder /Gemfile.lock /Gemfile.lock
+COPY --from=builder /opt/voxbox /opt/voxbox
+
 COPY Containerfile /
-COPY voxbox/Rakefile /
-COPY voxbox/Gemfile /
+COPY voxbox/Rakefile /opt/voxbox/Rakefile
 
 WORKDIR /repo
 
-ENTRYPOINT [ "rake", "-f", "/Rakefile" ]
+ENTRYPOINT [ "bundle", "exec", "rake", "-f", "/opt/voxbox/Rakefile" ]
 CMD [ "-T" ]

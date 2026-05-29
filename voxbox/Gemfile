@@ -20,19 +20,26 @@ gem 'voxpupuli-test',        ENV['RUBYGEM_VOXPUPULI_TEST']
 gem 'webmock',               ENV['RUBYGEM_WEBMOCK']
 
 # CVE fixes
-gem 'cgi',      '~> 0.5'  # cgi 0.1.0 has CVEs - remove default and install upstream replacement
-gem 'csv',      '~> 3.2'  # csv 3.1.2 has CVEs - remove default and install upstream replacement
-gem 'drb',      '~> 2.2'  # drb 2.1.1 has CVEs - remove default and install upstream replacement
-gem 'minitest', '~> 6.0' # minitest 5.16.3 has CVEs - remove default and install upstream replacement
-gem 'racc',     '~> 1.8'  # racc 1.6.2 has CVEs - remove default and install upstream replacement
-gem 'rdoc',     '~> 7.0' # rdoc 6.2.1 has CVEs - remove default and install upstream replacement
-gem 'rexml',    '~> 3.4'  # rexml < 3.3 has CVEs - remove default and install upstream replacement
-gem 'stringio', '~> 3.1'  # stringio 0.1.0 has CVEs - remove default and install upstream replacement
 
-# GEM fixes
-# removed default gems, install upstream replacements
-gem 'bigdecimal', '~> 4.1.0'
-gem 'base64',     '~> 0.3.0'
+# Older fixes where update in the 3.2 minor releases:
+
+# https://github.com/ruby/ruby/releases/tag/v3_2_11
+# https://github.com/ruby/ruby/releases/tag/v3_2_10
+# https://github.com/ruby/ruby/releases/tag/v3_2_9
+# https://github.com/ruby/ruby/releases/tag/v3_2_8
+# https://github.com/ruby/ruby/releases/tag/v3_2_7
+# https://github.com/ruby/ruby/releases/tag/v3_2_6
+# https://github.com/ruby/ruby/releases/tag/v3_2_5
+# https://github.com/ruby/ruby/releases/tag/v3_2_4
+# https://github.com/ruby/ruby/releases/tag/v3_2_3
+# https://github.com/ruby/ruby/releases/tag/v3_2_2
+# https://github.com/ruby/ruby/releases/tag/v3_2_1
+
+gem 'net-imap', '>= 0.6.4'
+gem 'erb',      '>= 6.0.4'
+
+# cannot be fixed until r10k has an update to allow jwt > 3
+# gem 'jwt',      '>= 3.2.0'
 
 # new dependencies needed for rspec
 gem 'guard-rake', '~> 1.0'
