@@ -88,11 +88,11 @@ Too see which tool versions are included in the container, see:
 Change into the root of a OpenVox/Puppet module and run the container.
 Make sure to mount the current directory into the container under `/repo`.
 The default entrypoint is rake.
-Without any arguments it will run `rake -f /Rakefile -T`.
+Without any arguments it will run `rake -f /opt/voxbox/Rakefile -T`.
 You can specify a rake task as argument.
 See [Available rake tasks](#available-rake-tasks) for more information.
 
-To guarantee a consistent rake environment, we use `-f /Rakefile` to explicitly specify a Rakefile,
+To guarantee a consistent rake environment, we use `-f /opt/voxbox/Rakefile` to explicitly specify a Rakefile,
 rather than relying on potentially outdated versions in a repository.
 The Rakefile being used can be viewed [here](voxbox/Rakefile).
 
@@ -382,7 +382,7 @@ code-quality:
     entrypoint: [""]
   stage: verify
   script:
-    - bundle exec rake -f /Rakefile voxpupuli:custom:lint_all
+    - bundle exec rake -f /opt/voxbox/Rakefile voxpupuli:custom:lint_all
   variables:
     # setting this variable makes puppet-lint create the json file
     # needed for the code quality report
@@ -412,7 +412,7 @@ rspec:
     entrypoint: [""]
   stage: test
   script:
-    - bundle exec rake -f /Rakefile spec
+    - bundle exec rake -f /opt/voxbox/Rakefile spec
   artifacts:
     when: always
     reports:
