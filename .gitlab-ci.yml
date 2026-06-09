@@ -8,7 +8,7 @@ stages:
 
 variables:
   # Use internal default Rakefile, to make sure we have a working version
-  RAKE: rake -f /opt/voxbox/Rakefile
+  RAKE: bundle exec rake -f /opt/voxbox/Rakefile
 
 default:
   image:
