@@ -83,6 +83,11 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.dockerfile="/Containerfile"
 
+ARG RUBYGEM_BUNDLER
+
+# renovate: depName=bundler datasource=rubygems
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.13}
+
 # Disable warnings for experimental features
 ENV RUBYOPT="-W:no-experimental"
 
@@ -99,6 +104,7 @@ RUN apk update \
     && apk add --no-cache yamllint \
     && apk add --no-cache git \
     && apk add --no-cache curl \
+    && gem install bundler -v ${RUBYGEM_BUNDLER} \
     # CVE fixes - gems are deleted but are reinstalled in the bundler gemset
     && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/default/erb-*.gemspec \
