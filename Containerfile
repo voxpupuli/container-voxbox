@@ -22,7 +22,7 @@ ARG RUBYGEM_VOXPUPULI_TEST
 ARG RUBYGEM_WEBMOCK
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.13}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.14}
 # renovate: depName=hiera-eyaml datasource=rubygems
 ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-5.0.1}
 # renovate: depName=librarian-puppet datasource=rubygems
@@ -86,7 +86,7 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 ARG RUBYGEM_BUNDLER
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.13}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.14}
 
 # Disable warnings for experimental features
 ENV RUBYOPT="-W:no-experimental"
