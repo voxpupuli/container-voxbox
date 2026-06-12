@@ -1,12 +1,12 @@
-# Vox Pupuli Test Box
+# Vox Pupuli <img src="media/voxbox_bildmarke/voxbox_bildmarke_orange_rgb.svg" alt="logo-1" height="170">
 
 [![CI](https://github.com/voxpupuli/container-voxbox/actions/workflows/ci.yaml/badge.svg)](https://github.com/voxpupuli/container-voxbox/actions/workflows/ci.yaml)
 [![License](https://img.shields.io/github/license/voxpupuli/container-voxbox.svg)](https://github.com/voxpupuli/container-voxbox/blob/main/LICENSE)
 [![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
 
 ---
-
-- [Vox Pupuli Test Box](#vox-pupuli-test-box)
+<!-- markdownlint-disable no-space-in-links -->
+- [Vox Pupuli ](#vox-pupuli-)
   - [Introduction](#introduction)
   - [Breaking changes](#breaking-changes)
   - [Included rubygems](#included-rubygems)
@@ -33,6 +33,7 @@
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
     - [GitLab Unit Test Report](#gitlab-unit-test-report)
+  - [Media](#media)
   - [Version Schema](#version-schema)
   - [How to release?](#how-to-release)
   - [How to contribute?](#how-to-contribute)
@@ -419,6 +420,15 @@ rspec:
       junit: rspec.xml
     expire_in: 1 week
 ```
+
+## Media
+
+For some images, see [media/](media/) folder.
+These are the official images used in the documentation and the README.
+
+<img src="media/voxbox_bildmarke/voxbox_bildmarke_orange_rgb.svg" alt="logo-1" height="200">
+<img src="media/voxbox_wortbildmarke/voxbox_wortbildmarke_orange_rgb.svg" alt="logo-2" height="200">
+<img src="media/logo-by-sebastianrakel.png" alt="logo-3" height="200">
 
 ## Version Schema
 
