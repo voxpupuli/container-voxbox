@@ -428,7 +428,7 @@ These are the official images used in the documentation and the README.
 
 <img src="media/voxbox_bildmarke/voxbox_bildmarke_orange_rgb.svg" alt="logo-1" height="200">
 <img src="media/voxbox_wortbildmarke/voxbox_wortbildmarke_orange_rgb.svg" alt="logo-2" height="200">
-<img src="media/565088684-b486376f-cedb-4c4b-868b-df63fa3edf84-1.png" alt="logo-3" height="200">
+<img src="media/logo-by-sebastianrakel.png" alt="logo-3" height="200">
 
 ## Version Schema
 
