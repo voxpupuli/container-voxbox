@@ -1,0 +1,23 @@
+---
+.github/workflows/ci.yml:
+  matrix_command: yq -o=json build_platforms.yaml | jq -c
+  matrix_requires_yq: true
+  build_job_name: 'Build ${{ matrix.platform }} CI container'
+  build_runner: '${{ matrix.runner }}'
+  image_tag: 'ci/voxbox:${{ matrix.openvox_version }}'
+  build_platforms: 'linux/${{ matrix.platform }}'
+  test_repository: voxpupuli/puppet-example
+  test_commands:
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }}'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} lint'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} metadata_lint'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} r10k:dependencies'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} r10k:syntax'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} rubocop'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} spec'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} strings:validate:reference'
+    - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }} syntax'
+  post_test_commands:
+    - 'docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle check"'
+    - 'docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle env"'
+    - 'docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle outdated || true"'
