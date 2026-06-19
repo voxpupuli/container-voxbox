@@ -1,11 +1,12 @@
 ---
-.github/workflows/ci.yml:
+:global:
   matrix_command: yq -o=json build_platforms.yaml | jq -c
   matrix_requires_yq: true
-  build_job_name: 'Build ${{ matrix.platform }} CI container'
   build_runner: '${{ matrix.runner }}'
   image_tag: 'ci/voxbox:${{ matrix.openvox_version }}'
   build_platforms: 'linux/${{ matrix.platform }}'
+.github/workflows/ci.yml:
+  build_job_name: 'Build ${{ matrix.platform }} CI container'
   test_repository: voxpupuli/puppet-example
   test_commands:
     - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }}'
@@ -21,3 +22,48 @@
     - 'docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle check"'
     - 'docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle env"'
     - 'docker run --rm --entrypoint=ash ci/voxbox:${{ matrix.openvox_version }} -c "bundle outdated || true"'
+.github/workflows/security_scanning.yml:
+  scan_job_name: 'Scan container (${{ matrix.label }})'
+  sarif_category: 'grype-${{ matrix.label }}'
+.github/workflows/build_container.yml:
+  publish_build_job_name: 'Build VoxBox ${{ matrix.openvox_version }} (${{ matrix.platform }})'
+  publish_build_arch: 'linux/${{ matrix.platform }}'
+  publish_tags:
+    - 'ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-${{ matrix.platform }}'
+  publish_setup_outputs:
+    openvox-release: '${{ steps.openvox-release.outputs.value }}'
+    openvox-version: '${{ steps.openvox-version.outputs.value }}'
+  publish_setup_steps:
+    - name: Read OpenVox release
+      id: openvox-release
+      commands:
+        - echo "value=$(yq '.include[0].openvox_release' build_platforms.yaml)" >> "$GITHUB_OUTPUT"
+    - name: Read OpenVox version
+      id: openvox-version
+      commands:
+        - echo "value=$(yq '.include[0].openvox_version' build_platforms.yaml)" >> "$GITHUB_OUTPUT"
+  publish_manifest_steps:
+    - name: Create multi-architecture manifests
+      commands:
+        - >-
+          docker buildx imagetools create
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-${{ github.ref_name }}
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-latest
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-${{ github.ref_name }}
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-latest
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:latest
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-${{ github.ref_name }}
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-latest
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-${{ github.ref_name }}
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-latest
+          -t docker.io/${{ github.repository_owner }}/voxbox:latest
+          ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ needs.setup-matrix.outputs.openvox-release }}-arm64
+          ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ needs.setup-matrix.outputs.openvox-release }}-amd64
+  publish_info_container: 'ghcr.io/voxpupuli/voxbox:${{ github.sha }}-v${{ needs.setup-matrix.outputs.openvox-release }}-amd64'
+  publish_info_commands:
+    - bundle check
+    - bundle env
+    - bundle outdated || true
+  dockerhub_repository: voxpupuli/voxbox
