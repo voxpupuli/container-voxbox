@@ -21,7 +21,7 @@ jobs:
       openvox_version: ${{ steps.set-openvox-version.outputs.openvox_version }}
     steps:
       - name: Source checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: 'Setup yq'
         uses: dcarbone/install-yq-action@v1.3.1
@@ -157,7 +157,7 @@ jobs:
       - create-multiarch-manifests
     steps:
       - name: Source checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v5
