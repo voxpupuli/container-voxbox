@@ -21,10 +21,10 @@ jobs:
       openvox_version: ${{ steps.set-openvox-version.outputs.openvox_version }}
     steps:
       - name: Source checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: 'Setup yq'
-        uses: dcarbone/install-yq-action@v1.3.1
+        uses: dcarbone/install-yq-action@4075b4dca348d74bd83f2bf82d30f25d7c54539b # v1.3.1
 
       - id: set-build-matrix
         run: echo "build_matrix=$(yq -o=json build_platforms.yaml | jq -c)" >> $GITHUB_OUTPUT
@@ -49,7 +49,7 @@ jobs:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.build_matrix) }}
     steps:
       - name: Build Vox Pupuli Test Container v${{ matrix.openvox_release }}-${{ matrix.platform }}
-        uses: voxpupuli/gha-build-and-publish-a-container@v2
+        uses: voxpupuli/gha-build-and-publish-a-container@f1680271a3fd34267c1401c760a15f45a9cf34ca # v2.0.0
         with:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           build_arch: linux/${{ matrix.platform }}
@@ -69,14 +69,14 @@ jobs:
       - build-and-push-container
     steps:
       - name: Log in to the ghcr.io registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@c99871dec2022cc055c062a10cc1a1310835ceb4 # v4.3.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to the docker.io registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@c99871dec2022cc055c062a10cc1a1310835ceb4 # v4.3.0
         with:
           registry: docker.io
           username: voxpupulibot
@@ -157,10 +157,10 @@ jobs:
       - create-multiarch-manifests
     steps:
       - name: Source checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Update Docker Hub Description
-        uses: peter-evans/dockerhub-description@v5
+        uses: peter-evans/dockerhub-description@1b9a80c056b620d92cedb9d9b5a223409c68ddfa # v5.0.0
         with:
           username: voxpupulibot
           password: ${{ secrets.DOCKERHUB_BOT_ADMIN_TOKEN }}
