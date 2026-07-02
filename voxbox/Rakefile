@@ -3,6 +3,13 @@ require 'voxpupuli/acceptance/rake'
 require 'voxpupuli/release/rake_tasks'
 require 'ra10ke'
 
+# disable error message internationalisation
+# this uses fast_gettext/gettext-setup and depending on the load order it fails
+# we don't have complete internationalisation and nobody uses it, so we can just disable it
+# https://github.com/voxpupuli/ra10ke/issues/39
+# https://github.com/voxpupuli/container-voxbox/issues/112
+Puppet[:disable_i18n] = true
+
 Ra10ke::RakeTask.new
 
 namespace :voxpupuli do
