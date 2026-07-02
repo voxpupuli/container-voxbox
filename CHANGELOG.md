@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v6.0.0](https://github.com/voxpupuli/container-voxbox/tree/v6.0.0) (2026-07-02)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v5.0.0...v6.0.0)
+
+**Breaking changes:**
+
+- feat: rework gem setup to prevent clashes in global gem space [\#283](https://github.com/voxpupuli/container-voxbox/pull/283) ([rwaffen](https://github.com/rwaffen))
+
+**Implemented enhancements:**
+
+- feat: add rubocop auto-gen-config rake task [\#245](https://github.com/voxpupuli/container-voxbox/issues/245)
+
+**Fixed bugs:**
+
+- regression: sort out duplicated gems [\#244](https://github.com/voxpupuli/container-voxbox/issues/244)
+- Disable i18n support [\#300](https://github.com/voxpupuli/container-voxbox/pull/300) ([bastelfreak](https://github.com/bastelfreak))
+- Add the bundler gem in the final image [\#291](https://github.com/voxpupuli/container-voxbox/pull/291) ([bigon](https://github.com/bigon))
+- Update examples for new Rakefile path [\#287](https://github.com/voxpupuli/container-voxbox/pull/287) ([bastelfreak](https://github.com/bastelfreak))
+
+**Closed issues:**
+
+- A logo for VoxBox [\#215](https://github.com/voxpupuli/container-voxbox/issues/215)
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency bundler to v4.0.15 [\#299](https://github.com/voxpupuli/container-voxbox/pull/299) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.28.0 [\#292](https://github.com/voxpupuli/container-voxbox/pull/292) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.14 [\#289](https://github.com/voxpupuli/container-voxbox/pull/289) ([renovate[bot]](https://github.com/apps/renovate))
+- docs: update example gitlab-ci.yaml [\#288](https://github.com/voxpupuli/container-voxbox/pull/288) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency bundler to v4.0.13 [\#286](https://github.com/voxpupuli/container-voxbox/pull/286) ([renovate[bot]](https://github.com/apps/renovate))
+- feat: add media for web and print [\#285](https://github.com/voxpupuli/container-voxbox/pull/285) ([rwaffen](https://github.com/rwaffen))
+
 ## [v5.0.0](https://github.com/voxpupuli/container-voxbox/tree/v5.0.0) (2026-05-27)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v4.1.0...v5.0.0)
