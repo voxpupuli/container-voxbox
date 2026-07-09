@@ -5,10 +5,10 @@ include:
     runner: ubuntu-24.04
     openvox_release: 8
     # renovate: depName=openvox datasource=rubygems
-    openvox_version: '8.28.0'
+    openvox_version: '8.28.1'
   - label: ARM64
     platform: arm64
     runner: ubuntu-24.04-arm
     openvox_release: 8
     # renovate: depName=openvox datasource=rubygems
-    openvox_version: '8.28.0'
+    openvox_version: '8.28.1'
