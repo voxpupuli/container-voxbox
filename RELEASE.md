@@ -21,7 +21,7 @@ bundle install
 
 CHANGELOG_GITHUB_TOKEN="token_MC_tokenface" bundle exec rake changelog
 
-git commit --all --signoff --message "Release v${RELEASE_VERSION}"
+git commit --all --signoff --sign --message "Release v${RELEASE_VERSION}"
 git push --set-upstream origin HEAD
 ```
 
@@ -32,6 +32,6 @@ Then open a PR, discuss and merge.
 ```shell
 git switch main
 git pull --rebase
-git tag v$RELEASE_VERSION --message "v$RELEASE_VERSION"
+git tag v$RELEASE_VERSION --sign --message "v$RELEASE_VERSION"
 git push --tags
 ```
