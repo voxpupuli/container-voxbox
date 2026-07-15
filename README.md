@@ -50,6 +50,9 @@ It has the voxpupuli-test, -acceptance, -release gems and all dependencies insta
 - ⚠ On May 27, 2026, We seperated the VoxBox gems from the system ruby and moved it into a local bundle.
   This means that you have to use `bundle exec` to execute the gems.
   This was done to avoid conflicts with the system ruby and to have more control over the gem versions.
+- ⚠ Starting with VoxBox 10.0.0, release tags use the new `<voxbox.version>-openvox<version>` schema, for example
+  `10.1.2-openvox8` or `10.1.2-openvox8.28.0`. The `latest` tag now points to the newest release, while builds from
+  the `main` branch use `main` and `sha-<git.sha>`. Existing legacy tags remain available but are no longer updated.
 
 ## Included rubygems
 
@@ -99,8 +102,8 @@ The Rakefile being used can be viewed [here](voxbox/Rakefile).
 
 ```shell
 cd puppet-example
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8                   # rake -T
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec              # rake spec
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest                   # rake -T
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec              # rake spec
 ```
 
 #### release Task
@@ -114,7 +117,7 @@ podman run -it --rm \
    -v ~/.ssh:/root/.ssh \
    -v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
    -e SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
-   ghcr.io/voxpupuli/voxbox:8 release
+   ghcr.io/voxpupuli/voxbox:latest release
 ```
 
 #### spec Task
@@ -122,7 +125,7 @@ podman run -it --rm \
 Running only a specific spec:
 
 ```shell
-podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:8 spec
+podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec
 ```
 
 #### Available rake tasks
@@ -210,7 +213,7 @@ rake voxpupuli:custom:lint_all                                                  
 If you need a shell, you have to override the entrypoint:
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
+podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:latest
 ```
 
 ### OpenVox/Puppet
@@ -218,13 +221,13 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
 If you want to execute puppet change the entrypoint to `puppet` and pass subcommands/parameters to it.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec puppet --help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec puppet --help
 ```
 
 ### OpenVox/Puppet Strings
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec puppet strings --help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec puppet strings --help
 ```
 
 ### puppet-ghostbuster
@@ -247,7 +250,7 @@ Ghostbuster supports the following checks:
 They can be combined with `--only-checks` and listed in a comma separated list.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:8
+podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:latest
 find . -type f -exec bundle exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_facts {} \+
 ```
 
@@ -256,7 +259,7 @@ find . -type f -exec bundle exec puppet-lint --only-checks ghostbuster_classes,g
 If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:8 .
+podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:latest .
 ```
 
 ### JQ
@@ -264,7 +267,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxb
 If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 --help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:latest --help
 ```
 
 ### cURL
@@ -272,7 +275,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:8 -
 If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8 --help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:latest --help
 ```
 
 ### RuboCop
@@ -280,8 +283,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:8
 If you want to execute RuboCop directly change the entrypoint to `rubocop` and pass a subcommands/parameter to the container.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec rubocop
-podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec rubocop --auto-gen-config
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec rubocop
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec rubocop --auto-gen-config
 ```
 
 ### Librarian
@@ -289,7 +292,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 If you want to execute librarian change the entrypoint to `librarian-puppet` and pass a query/parameter to the container.
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec librarian-puppet help
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec librarian-puppet help
 ```
 
 ### hiera-eyaml
@@ -297,7 +300,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint like so :
 
 ```shell
-podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:8 exec eyaml edit /repo/
+podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec eyaml edit /repo/
 ```
 
 ## Dealing with PDK
@@ -329,7 +332,7 @@ available options:
                   examples for available endpoints are:
                   ash, puppet, yamllint, jq, curl, rubocop
                   default: no entrypoint specified
-  --image image : use a different image (default ghcr.io/voxpupuli/voxbox:8)
+  --image image : use a different image (default ghcr.io/voxpupuli/voxbox:latest)
   --env VAR=val : specify environment variables (can be used multiple times)
                   Remark: the term './' in a assignment will be replaced with
                   the correct path to be used in the container.
@@ -379,7 +382,7 @@ Example usage:
 ```yaml
 code-quality:
   image:
-    name: ghcr.io/voxpupuli/voxbox:8
+    name: ghcr.io/voxpupuli/voxbox:latest
     entrypoint: [""]
   stage: verify
   script:
@@ -409,7 +412,7 @@ add to .gitlab-ci.yml:
 ```yaml
 rspec:
   image:
-    name: ghcr.io/voxpupuli/voxbox:8
+    name: ghcr.io/voxpupuli/voxbox:latest
     entrypoint: [""]
   stage: test
   script:
@@ -432,32 +435,37 @@ These are the official images used in the documentation and the README.
 
 ## Version Schema
 
-The version schema has the following layout:
+VoxBox releases use their own semantic version, independent of the OpenVox version contained in the image.
+Container versions start at `10.0.0` to avoid conflicts with the existing OpenVox/Puppet major-version tags.
+Bare numeric tags such as `10` are not published.
 
 ```text
-<puppet.major>.<puppet.minor>.<puppet.patch>-v<container.major>.<container.minor>.<container.patch>
-<puppet.major>-v<container.major>.<container.minor>.<container.patch>
-<puppet.major>
+<container.version>-openvox<openvox.version>
+<container.version>-openvox<openvox.major>
 latest
+main
+sha-<git.sha>
 ```
 
 Example usage:
 
 ```shell
-podman pull ghcr.io/voxpupuli/voxbox:8.5.1-v1.2.3
-podman pull ghcr.io/voxpupuli/voxbox:8-v1.2.3
-podman pull ghcr.io/voxpupuli/voxbox:8
+podman pull ghcr.io/voxpupuli/voxbox:10.1.2-openvox8.28.0
+podman pull ghcr.io/voxpupuli/voxbox:10.1.2-openvox8
 podman pull ghcr.io/voxpupuli/voxbox:latest
+podman pull ghcr.io/voxpupuli/voxbox:main
 ```
 
-| Name            | Description                                                       |
-| --------------- | ----------------------------------------------------------------- |
-| puppet.major    | Describes the contained major Puppet version (7 or 8)             |
-| puppet.minor    | Describes the contained minor Puppet version                      |
-| puppet.patch    | Describes the contained patchlevel Puppet version                 |
-| container.major | Describes breaking changes without backward compatibility         |
-| container.minor | Describes new features or refactoring with backward compatibility |
-| container.patch | Describes if minor changes or bugfixes have been implemented      |
+| Tag | Description |
+| --- | --- |
+| `10.1.2-openvox8.28.0` | Immutable release with an exact VoxBox and OpenVox version |
+| `10.1.2-openvox8` | Immutable VoxBox release for an OpenVox major version |
+| `latest` | Newest published VoxBox release across all OpenVox flavors |
+| `main` | Most recent build from the `main` branch; may change without a release |
+| `sha-<git.sha>` | Immutable build from a specific Git revision |
+
+`latest` is only moved when the released VoxBox version is the highest semantic version.
+Publishing an older flavor or backport therefore does not replace a newer `latest` image.
 
 ## How to release?
 
