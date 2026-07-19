@@ -35,6 +35,7 @@
     - [GitLab Unit Test Report](#gitlab-unit-test-report)
   - [Media](#media)
   - [Version Schema](#version-schema)
+    - [Semantic versioning](#semantic-versioning)
   - [How to release?](#how-to-release)
   - [How to contribute?](#how-to-contribute)
 
@@ -463,6 +464,20 @@ podman pull ghcr.io/voxpupuli/voxbox:main
 | `latest` | Newest published VoxBox release across all OpenVox flavors |
 | `main` | Most recent build from the `main` branch; may change without a release |
 | `sha-<git.sha>` | Immutable build from a specific Git revision |
+
+### Semantic versioning
+
+The VoxBox version describes compatibility of the container's documented interface, not just the versions of its
+individual tools and gems:
+
+- **Major**: Existing users must change a documented command, configuration, path, mount, environment variable, or
+  tag. Examples include removing a Rake task or bundled tool, changing the entrypoint or `/opt/voxbox` paths, dropping
+  an architecture, or moving `latest` to an incompatible OpenVox major version.
+- **Minor**: Backward-compatible functionality is added, such as a new tool, Rake task, or optional configuration.
+- **Patch**: Backward-compatible bug fixes, security updates, and dependency updates without user-visible changes.
+
+A major update of an included dependency does not automatically require a VoxBox major release. The resulting change
+must be evaluated by its effect on the documented container interface and existing module workflows.
 
 `latest` is only moved when the released VoxBox version is the highest semantic version.
 Publishing an older flavor or backport therefore does not replace a newer `latest` image.
