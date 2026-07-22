@@ -26,13 +26,16 @@
   scan_job_name: 'Scan container (${{ matrix.label }})'
   sarif_category: 'grype-${{ matrix.label }}'
 .github/workflows/build_container.yml:
+  publish_tag_patterns:
+    - 'v[1-9][0-9]*.*.*'
   publish_build_job_name: 'Build VoxBox ${{ matrix.openvox_version }} (${{ matrix.platform }})'
   publish_build_arch: 'linux/${{ matrix.platform }}'
   publish_tags:
-    - 'ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ matrix.openvox_release }}-${{ matrix.platform }}'
+    - 'ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-${{ matrix.platform }}'
   publish_setup_outputs:
     openvox-release: '${{ steps.openvox-release.outputs.value }}'
     openvox-version: '${{ steps.openvox-version.outputs.value }}'
+    voxbox-version: '${{ steps.voxbox-version.outputs.value }}'
   publish_setup_steps:
     - name: Read OpenVox release
       id: openvox-release
@@ -42,26 +45,56 @@
       id: openvox-version
       commands:
         - echo "value=$(yq '.include[0].openvox_version' build_platforms.yaml)" >> "$GITHUB_OUTPUT"
+    - name: Determine VoxBox version
+      id: voxbox-version
+      commands:
+        - >-
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+          [[ "$GITHUB_REF_NAME" =~ ^v[1-9][0-9]+\.[0-9]+\.[0-9]+$ ]]
+          || { echo "Release tag must match vX.Y.Z with a major version of at least 10" >&2; exit 1; };
+          value="${GITHUB_REF_NAME#v}";
+          else value="main-${GITHUB_SHA::7}";
+          fi;
+          echo "value=$value" >> "$GITHUB_OUTPUT"
   publish_manifest_steps:
-    - name: Create multi-architecture manifests
+    - name: Create main multi-architecture manifests
+      if: github.ref_type == 'branch'
       commands:
         - >-
           docker buildx imagetools create
-          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-${{ github.ref_name }}
-          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-latest
-          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-${{ github.ref_name }}
-          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}
-          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-latest
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:main
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}
+          -t docker.io/${{ github.repository_owner }}/voxbox:main
+          -t docker.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}
+          ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-arm64
+          ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-amd64
+    - name: Create release multi-architecture manifests
+      if: github.ref_type == 'tag'
+      commands:
+        - >-
+          docker buildx imagetools create
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.voxbox-version }}-openvox${{ needs.setup-matrix.outputs.openvox-version }}
+          -t ghcr.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.voxbox-version }}-openvox${{ needs.setup-matrix.outputs.openvox-release }}
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.voxbox-version }}-openvox${{ needs.setup-matrix.outputs.openvox-version }}
+          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.voxbox-version }}-openvox${{ needs.setup-matrix.outputs.openvox-release }}
+          ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-arm64
+          ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-amd64
+    - name: Update latest for the newest release
+      if: github.ref_type == 'tag'
+      commands:
+        - >-
+          latest_version=$(git ls-remote --tags --refs "https://github.com/${GITHUB_REPOSITORY}.git"
+          | sed -n 's#.*refs/tags/v\([0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\)$#\1#p'
+          | sort -V | tail -n 1);
+          if [[ "${{ needs.setup-matrix.outputs.voxbox-version }}" == "$latest_version" ]]; then
+          docker buildx imagetools create
           -t ghcr.io/${{ github.repository_owner }}/voxbox:latest
-          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-${{ github.ref_name }}
-          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-version }}-latest
-          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-${{ github.ref_name }}
-          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}
-          -t docker.io/${{ github.repository_owner }}/voxbox:${{ needs.setup-matrix.outputs.openvox-release }}-latest
           -t docker.io/${{ github.repository_owner }}/voxbox:latest
-          ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ needs.setup-matrix.outputs.openvox-release }}-arm64
-          ghcr.io/${{ github.repository_owner }}/voxbox:${{ github.sha }}-v${{ needs.setup-matrix.outputs.openvox-release }}-amd64
-  publish_info_container: 'ghcr.io/voxpupuli/voxbox:${{ github.sha }}-v${{ needs.setup-matrix.outputs.openvox-release }}-amd64'
+          ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-arm64
+          ghcr.io/${{ github.repository_owner }}/voxbox:sha-${{ github.sha }}-amd64;
+          else echo "Keeping latest at newer release $latest_version";
+          fi
+  publish_info_container: 'ghcr.io/voxpupuli/voxbox:sha-${{ github.sha }}-amd64'
   publish_info_commands:
     - bundle check
     - bundle env
