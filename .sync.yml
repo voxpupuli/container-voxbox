@@ -25,6 +25,12 @@
 .github/workflows/security_scanning.yml:
   scan_job_name: 'Scan container (${{ matrix.label }})'
   sarif_category: 'grype-${{ matrix.label }}'
+RELEASE.md:
+  release_preamble: |
+    VoxBox container releases use semantic versions starting at `10.0.0`.
+    The Git tag must use the `vX.Y.Z` form; the image tags combine that version with the OpenVox flavor.
+    For example, Git tag `v10.1.2` publishes `10.1.2-openvox8` and `10.1.2-openvox8.28.0`.
+    Only the highest released semantic version updates the `latest` image tag.
 .github/workflows/build_container.yml:
   publish_tag_patterns:
     - 'v[1-9][0-9]*.*.*'
