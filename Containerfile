@@ -110,12 +110,14 @@ ENV BUNDLE_APP_CONFIG=/opt/voxbox/vendor/bundle
 
 RUN apk update \
     && apk upgrade \
-    && apk add --no-cache openssh-client \
-    && apk add --no-cache gpg \
-    && apk add --no-cache jq \
-    && apk add --no-cache yamllint \
-    && apk add --no-cache git \
-    && apk add --no-cache curl \
+    && apk add --no-cache \
+        curl \
+        git \
+        gpg \
+        jq \
+        openssh-client \
+        socat \
+        yamllint \
     && gem install bundler -v ${RUBYGEM_BUNDLER} \
     # CVE fixes - gems are deleted but are reinstalled in the bundler gemset
     && rm -rf /usr/local/lib/ruby/gems/*/gems/erb-* \
