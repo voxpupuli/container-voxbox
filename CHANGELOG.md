@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v10.0.0](https://github.com/voxpupuli/container-voxbox/tree/v10.0.0) (2026-08-06)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v6.0.0...v10.0.0)
+
+**Implemented enhancements:**
+
+- feat: add toml [\#336](https://github.com/voxpupuli/container-voxbox/pull/336) ([rwaffen](https://github.com/rwaffen))
+- feat: add socat for proxy connections in air gapped environments [\#328](https://github.com/voxpupuli/container-voxbox/pull/328) ([rwaffen](https://github.com/rwaffen))
+- feat: change tag schema [\#317](https://github.com/voxpupuli/container-voxbox/pull/317) ([rwaffen](https://github.com/rwaffen))
+- feat: add/update new rubocop gems [\#305](https://github.com/voxpupuli/container-voxbox/pull/305) ([rwaffen](https://github.com/rwaffen))
+
+**Merged pull requests:**
+
+- docs: add release preamble to .sync.yml [\#326](https://github.com/voxpupuli/container-voxbox/pull/326) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency bundler to v4.0.17 [\#323](https://github.com/voxpupuli/container-voxbox/pull/323) ([renovate[bot]](https://github.com/apps/renovate))
+- GitLab docs: run tests in parallel [\#322](https://github.com/voxpupuli/container-voxbox/pull/322) ([bastelfreak](https://github.com/bastelfreak))
+- chore\(deps\): update actions/labeler action to v7 [\#321](https://github.com/voxpupuli/container-voxbox/pull/321) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v7.0.1 [\#320](https://github.com/voxpupuli/container-voxbox/pull/320) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update davidanson/markdownlint-cli2-action action to v24.1.0 [\#319](https://github.com/voxpupuli/container-voxbox/pull/319) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update github/codeql-action action to v4.37.3 [\#318](https://github.com/voxpupuli/container-voxbox/pull/318) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency puppet\_metadata to v6.3.0 [\#316](https://github.com/voxpupuli/container-voxbox/pull/316) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency modulesync to v4.5.0 [\#315](https://github.com/voxpupuli/container-voxbox/pull/315) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.7.0 [\#314](https://github.com/voxpupuli/container-voxbox/pull/314) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.16 [\#312](https://github.com/voxpupuli/container-voxbox/pull/312) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency modulesync to v4.4.0 [\#311](https://github.com/voxpupuli/container-voxbox/pull/311) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/labeler action to v6.2.0 [\#309](https://github.com/voxpupuli/container-voxbox/pull/309) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update github/codeql-action action to v4.37.0 [\#308](https://github.com/voxpupuli/container-voxbox/pull/308) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.28.1 [\#307](https://github.com/voxpupuli/container-voxbox/pull/307) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update docker/login-action action to v4.4.0 [\#303](https://github.com/voxpupuli/container-voxbox/pull/303) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v6.0.0](https://github.com/voxpupuli/container-voxbox/tree/v6.0.0) (2026-07-02)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v5.0.0...v6.0.0)
