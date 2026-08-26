@@ -88,6 +88,58 @@ Too see which tool versions are included in the container, see:
 
 ## Usage
 
+## EasyVoxBox (evb)
+
+The [evb script](evb) shortens the commands to be typed for running voxbox. Additionally, it does not care about the sequence of
+options, which can be useful for setting shell aliases. To run the command you must change into any subdirectory of an openvox module
+(with a metadata.json file) or a control repository (with a Puppetfile).
+
+Display the evb help message:
+
+```shell
+$ evb help
+Usage: /usr/local/bin/evb [options] [command]
+
+available options:
+  --noop        : print the command to run, but do not run it
+  --entrypoint  : use a different entrypoint
+                  examples for available endpoints are:
+                  ash, puppet, yamllint, jq, curl, rubocop
+                  default: no entrypoint specified
+  --image image : use a different image (default ghcr.io/voxpupuli/voxbox:latest)
+  --env VAR=val : specify environment variables (can be used multiple times)
+                  Remark: the term './' in a assignment will be replaced with
+                  the correct path to be used in the container.
+                  Example: if you start the script in ~/openvox-supermodule/spec/classes
+                           and set --env SPEC=./supermodule_spec.rb we will
+                           run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
+  --volume vol  : specify an additional volume to put into the container
+                  see podman man page how to specify 'vol'. (no path magic is done ;))
+  --runcmd      : this lets you change the program used to start the container
+                  if not set explicit it looks for podman or docker.
+
+available command:
+   help  : print this help message and exit
+
+commands/options not listed here are passed to VoxBox as is.
+use the '--noop' option to print the detailed call to VoxBox.
+```
+
+See the command that would be executed (dropping the --noop option will run the command):
+
+```shell
+evb --noop                                     # for rake -T
+evb --noop spec                                # for rake spec
+evb --noop --env SPEC=./example_spec.rb spec   # for only a specific spec in the current subdirectory
+
+# or the release rake task
+evb --volume ~/.gitconfig:/etc/gitconfig:ro \
+    --volume ~/.ssh:/root/.ssh \
+    --volume ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
+    --env  SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
+    release --noop
+```
+
 ### Rake
 
 Change into the root of a OpenVox/Puppet module and run the container.
@@ -103,8 +155,12 @@ The Rakefile being used can be viewed [here](voxbox/Rakefile).
 
 ```shell
 cd puppet-example
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest                   # rake -T
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec              # rake spec
+
+evb      # rake -T
+evb spec # rake spec
+
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest      # rake -T
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec # rake spec
 ```
 
 #### release Task
@@ -126,6 +182,8 @@ podman run -it --rm \
 Running only a specific spec:
 
 ```shell
+evb --env "SPEC=spec/classes/init_spec.rb" spec
+
 podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec
 ```
 
@@ -214,6 +272,8 @@ rake voxpupuli:custom:lint_all                                                  
 If you need a shell, you have to override the entrypoint:
 
 ```shell
+evb --entrypoint ash
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:latest
 ```
 
@@ -222,6 +282,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:la
 If you want to execute puppet change the entrypoint to `puppet` and pass subcommands/parameters to it.
 
 ```shell
+evb --entrypoint bundle exec puppet --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec puppet --help
 ```
 
@@ -314,58 +376,6 @@ useful tips:
 | ----------- | ---------------- |
 | pdk validate | validate |
 | pdk test unit | spec |
-
-## EasyVoxBox (evb)
-
-The [evb script](evb) shortens the commands to be typed for running voxbox. Additionally, it does not care about the sequence of
-options, which can be useful for setting shell aliases. To run the command you must change into any subdirectory of an openvox module
-(with a metadata.json file) or a control repository (with a Puppetfile).
-
-Display the evb help message:
-
-```shell
-$ evb help
-Usage: /usr/local/bin/evb [options] [command]
-
-available options:
-  --noop        : print the command to run, but do not run it
-  --entrypoint  : use a different entrypoint
-                  examples for available endpoints are:
-                  ash, puppet, yamllint, jq, curl, rubocop
-                  default: no entrypoint specified
-  --image image : use a different image (default ghcr.io/voxpupuli/voxbox:latest)
-  --env VAR=val : specify environment variables (can be used multiple times)
-                  Remark: the term './' in a assignment will be replaced with
-                  the correct path to be used in the container.
-                  Example: if you start the script in ~/openvox-supermodule/spec/classes
-                           and set --env SPEC=./supermodule_spec.rb we will
-                           run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
-  --volume vol  : specify an additional volume to put into the container
-                  see podman man page how to specify 'vol'. (no path magic is done ;))
-  --runcmd      : this lets you change the program used to start the container
-                  if not set explicit it looks for podman or docker.
-
-available command:
-   help  : print this help message and exit
-
-commands/options not listed here are passed to VoxBox as is.
-use the '--noop' option to print the detailed call to VoxBox.
-```
-
-See the command that would be executed (dropping the --noop option will run the command):
-
-```shell
-evb --noop                                     # for rake -T
-evb --noop spec                                # for rake spec
-evb --noop --env SPEC=./example_spec.rb spec   # for only a specific spec in the current subdirectory
-
-# or the release rake task
-evb --volume ~/.gitconfig:/etc/gitconfig:ro \
-    --volume ~/.ssh:/root/.ssh \
-    --volume ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
-    --env  SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
-    release --noop
-```
 
 ## GitLab
 
