@@ -89,6 +89,19 @@ RUN apk update \
     && bundle clean --force
 
 ###############################################################################
+FROM docker.io/library/golang:alpine AS jig
+
+# renovate: datasource=github-tags depName=voxpupuli/jig
+ARG JIG_VERSION=2.3.1
+
+RUN apk add --no-cache ca-certificates
+
+WORKDIR /build
+
+RUN wget -qO - https://github.com/voxpupuli/jig/archive/refs/tags/v$JIG_VERSION.tar.gz | tar xfz - -C ./ --strip-components 1 \
+    && go build -o jig .
+
+###############################################################################
 
 FROM $BASE_IMAGE AS final
 
@@ -132,6 +145,7 @@ RUN apk update \
     && rm -rf /usr/local/lib/ruby/gems/*/specifications/net-imap-*.gemspec
 
 COPY --from=builder /opt/voxbox /opt/voxbox
+COPY --from=jig /build/jig /usr/local/bin/jig
 
 COPY Containerfile /
 COPY voxbox/Rakefile /opt/voxbox/Rakefile

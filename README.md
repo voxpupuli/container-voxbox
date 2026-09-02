@@ -27,6 +27,7 @@
     - [RuboCop](#rubocop)
     - [Librarian](#librarian)
     - [hiera-eyaml](#hiera-eyaml)
+    - [jig](#jig)
   - [Dealing with PDK](#dealing-with-pdk)
   - [EasyVoxBox (evb)](#easyvoxbox-evb)
   - [GitLab](#gitlab)
@@ -304,16 +305,34 @@ If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint l
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec eyaml edit /repo/
 ```
 
+### jig
+
+PDK Scaffolding (and more) replacement <https://github.com/voxpupuli/jig>
+
+If you want to execute jig change the entrypoint to `jig` and pass a query/parameter to the container.
+
+```shell
+evb --entrypoint jig --help
+
+podman run -it --rm -v $PWD:/repo:Z --entrypoint jig ghcr.io/voxpupuli/voxbox:latest --help
+```
+
 ## Dealing with PDK
 
 If you have module which where created with PDK, you might run into some issuses.
 
 useful tips:
 
-| PDK Command | VoxBox Rake Task |
+| PDK Command | VoxBox Command |
 | ----------- | ---------------- |
-| pdk validate | validate |
-| pdk test unit | spec |
+| pdk validate | evb validate |
+| pdk test unit | evb spec |
+| pdk new | evb --entrypoint [jig new](https://github.com/voxpupuli/jig/blob/main/docs/commands/new.md) |
+| pdk convert | evb --entrypoint [jig convert](https://github.com/voxpupuli/jig/blob/main/docs/commands/convert.md) |
+| pdk update | evb --entrypoint [jig renew](https://github.com/voxpupuli/jig/blob/main/docs/commands/renew.md) |
+| pdk build | evb --entrypoint [jig build](https://github.com/voxpupuli/jig/blob/main/docs/commands/build.md) |
+
+For more jig commands also see: <https://github.com/voxpupuli/jig/blob/main/docs/README.md#commands>
 
 ## EasyVoxBox (evb)
 
