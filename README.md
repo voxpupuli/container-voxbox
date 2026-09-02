@@ -13,6 +13,7 @@
   - [Additionally included tools](#additionally-included-tools)
   - [Versions](#versions)
   - [Usage](#usage)
+  - [EasyVoxBox (evb)](#easyvoxbox-evb)
     - [Rake](#rake)
       - [release Task](#release-task)
       - [spec Task](#spec-task)
@@ -29,7 +30,6 @@
     - [hiera-eyaml](#hiera-eyaml)
     - [jig](#jig)
   - [Dealing with PDK](#dealing-with-pdk)
-  - [EasyVoxBox (evb)](#easyvoxbox-evb)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
@@ -89,6 +89,58 @@ Too see which tool versions are included in the container, see:
 
 ## Usage
 
+## EasyVoxBox (evb)
+
+The [evb script](evb) shortens the commands to be typed for running voxbox. Additionally, it does not care about the sequence of
+options, which can be useful for setting shell aliases. To run the command you must change into any subdirectory of an openvox module
+(with a metadata.json file) or a control repository (with a Puppetfile).
+
+Display the evb help message:
+
+```shell
+$ evb help
+Usage: /usr/local/bin/evb [options] [command]
+
+available options:
+  --noop        : print the command to run, but do not run it
+  --entrypoint  : use a different entrypoint
+                  examples for available endpoints are:
+                  ash, puppet, yamllint, jq, curl, rubocop
+                  default: no entrypoint specified
+  --image image : use a different image (default ghcr.io/voxpupuli/voxbox:latest)
+  --env VAR=val : specify environment variables (can be used multiple times)
+                  Remark: the term './' in a assignment will be replaced with
+                  the correct path to be used in the container.
+                  Example: if you start the script in ~/openvox-supermodule/spec/classes
+                           and set --env SPEC=./supermodule_spec.rb we will
+                           run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
+  --volume vol  : specify an additional volume to put into the container
+                  see podman man page how to specify 'vol'. (no path magic is done ;))
+  --runcmd      : this lets you change the program used to start the container
+                  if not set explicit it looks for podman or docker.
+
+available command:
+   help  : print this help message and exit
+
+commands/options not listed here are passed to VoxBox as is.
+use the '--noop' option to print the detailed call to VoxBox.
+```
+
+See the command that would be executed (dropping the --noop option will run the command):
+
+```shell
+evb --noop                                     # for rake -T
+evb --noop spec                                # for rake spec
+evb --noop --env SPEC=./example_spec.rb spec   # for only a specific spec in the current subdirectory
+
+# or the release rake task
+evb --volume ~/.gitconfig:/etc/gitconfig:ro \
+    --volume ~/.ssh:/root/.ssh \
+    --volume ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
+    --env  SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
+    release --noop
+```
+
 ### Rake
 
 Change into the root of a OpenVox/Puppet module and run the container.
@@ -104,8 +156,12 @@ The Rakefile being used can be viewed [here](voxbox/Rakefile).
 
 ```shell
 cd puppet-example
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest                   # rake -T
-podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec              # rake spec
+
+evb      # rake -T
+evb spec # rake spec
+
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest      # rake -T
+podman run -it --rm -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec # rake spec
 ```
 
 #### release Task
@@ -127,6 +183,8 @@ podman run -it --rm \
 Running only a specific spec:
 
 ```shell
+evb --env "SPEC=spec/classes/init_spec.rb" spec
+
 podman run -it --rm -e "SPEC=spec/classes/example_spec.rb" -v $PWD:/repo:Z ghcr.io/voxpupuli/voxbox:latest spec
 ```
 
@@ -215,6 +273,8 @@ rake voxpupuli:custom:lint_all                                                  
 If you need a shell, you have to override the entrypoint:
 
 ```shell
+evb --entrypoint ash
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:latest
 ```
 
@@ -223,12 +283,16 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint ash ghcr.io/voxpupuli/voxbox:la
 If you want to execute puppet change the entrypoint to `puppet` and pass subcommands/parameters to it.
 
 ```shell
+evb --entrypoint bundle exec puppet --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec puppet --help
 ```
 
 ### OpenVox/Puppet Strings
 
 ```shell
+evb --entrypoint bundle exec puppet strings --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec puppet strings --help
 ```
 
@@ -261,6 +325,8 @@ find . -type f -exec bundle exec puppet-lint --only-checks ghostbuster_classes,g
 If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
 
 ```shell
+evb --entrypoint yamllint .
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:latest .
 ```
 
@@ -269,6 +335,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxb
 If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
 
 ```shell
+evb --entrypoint jq --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:latest --help
 ```
 
@@ -277,6 +345,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:lat
 If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
 
 ```shell
+evb --entrypoint curl --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:latest --help
 ```
 
@@ -285,6 +355,9 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:l
 If you want to execute RuboCop directly change the entrypoint to `rubocop` and pass a subcommands/parameter to the container.
 
 ```shell
+evb --entrypoint bundle exec rubocop
+evb --entrypoint bundle exec rubocop --auto-gen-config
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec rubocop
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec rubocop --auto-gen-config
 ```
@@ -294,6 +367,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 If you want to execute librarian change the entrypoint to `librarian-puppet` and pass a query/parameter to the container.
 
 ```shell
+evb --entrypoint bundle exec librarian-puppet help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec librarian-puppet help
 ```
 
@@ -302,6 +377,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint like so :
 
 ```shell
+evb --entrypoint bundle exec eyaml edit /repo/
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec eyaml edit /repo/
 ```
 
@@ -333,58 +410,6 @@ useful tips:
 | pdk build | evb --entrypoint [jig build](https://github.com/voxpupuli/jig/blob/main/docs/commands/build.md) |
 
 For more jig commands also see: <https://github.com/voxpupuli/jig/blob/main/docs/README.md#commands>
-
-## EasyVoxBox (evb)
-
-The [evb script](evb) shortens the commands to be typed for running voxbox. Additionally, it does not care about the sequence of
-options, which can be useful for setting shell aliases. To run the command you must change into any subdirectory of an openvox module
-(with a metadata.json file) or a control repository (with a Puppetfile).
-
-Display the evb help message:
-
-```shell
-$ evb help
-Usage: /usr/local/bin/evb [options] [command]
-
-available options:
-  --noop        : print the command to run, but do not run it
-  --entrypoint  : use a different entrypoint
-                  examples for available endpoints are:
-                  ash, puppet, yamllint, jq, curl, rubocop
-                  default: no entrypoint specified
-  --image image : use a different image (default ghcr.io/voxpupuli/voxbox:latest)
-  --env VAR=val : specify environment variables (can be used multiple times)
-                  Remark: the term './' in a assignment will be replaced with
-                  the correct path to be used in the container.
-                  Example: if you start the script in ~/openvox-supermodule/spec/classes
-                           and set --env SPEC=./supermodule_spec.rb we will
-                           run VoxBox with -e SPEC=spec/classes/supermodule_spec.rb
-  --volume vol  : specify an additional volume to put into the container
-                  see podman man page how to specify 'vol'. (no path magic is done ;))
-  --runcmd      : this lets you change the program used to start the container
-                  if not set explicit it looks for podman or docker.
-
-available command:
-   help  : print this help message and exit
-
-commands/options not listed here are passed to VoxBox as is.
-use the '--noop' option to print the detailed call to VoxBox.
-```
-
-See the command that would be executed (dropping the --noop option will run the command):
-
-```shell
-evb --noop                                     # for rake -T
-evb --noop spec                                # for rake spec
-evb --noop --env SPEC=./example_spec.rb spec   # for only a specific spec in the current subdirectory
-
-# or the release rake task
-evb --volume ~/.gitconfig:/etc/gitconfig:ro \
-    --volume ~/.ssh:/root/.ssh \
-    --volume ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
-    --env  SSH_AUTH_SOCK="${SSH_AUTH_SOCK}" \
-    release --noop
-```
 
 ## GitLab
 
