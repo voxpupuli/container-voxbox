@@ -28,13 +28,13 @@ ARG RUBYGEM_VOXPUPULI_TEST
 ARG RUBYGEM_WEBMOCK
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.17}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.19}
 # renovate: depName=hiera-eyaml datasource=rubygems
 ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-5.0.1}
 # renovate: depName=librarian-puppet datasource=rubygems
 ENV RUBYGEM_LIBRARIAN_PUPPET=${RUBYGEM_LIBRARIAN_PUPPET:-7.0.0}
 # renovate: depName=modulesync datasource=rubygems
-ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-4.5.0}
+ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-4.6.0}
 # renovate: depName=openfact datasource=rubygems
 ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.7.0}
 # renovate: depName=openvox datasource=rubygems
@@ -72,7 +72,7 @@ ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.4.1}
 # renovate: depName=voxpupuli-test datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-14.0.0}
 # renovate: depName=webmock datasource=rubygems
-ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.26.2}
+ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.26.4}
 
 COPY voxbox/Gemfile /opt/voxbox/Gemfile
 
@@ -104,7 +104,7 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 ARG RUBYGEM_BUNDLER
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.17}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.19}
 
 # Disable warnings for experimental features
 ENV RUBYOPT="-W:no-experimental"
