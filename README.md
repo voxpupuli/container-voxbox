@@ -13,6 +13,7 @@
   - [Additionally included tools](#additionally-included-tools)
   - [Versions](#versions)
   - [Usage](#usage)
+  - [EasyVoxBox (evb)](#easyvoxbox-evb)
     - [Rake](#rake)
       - [release Task](#release-task)
       - [spec Task](#spec-task)
@@ -28,7 +29,6 @@
     - [Librarian](#librarian)
     - [hiera-eyaml](#hiera-eyaml)
   - [Dealing with PDK](#dealing-with-pdk)
-  - [EasyVoxBox (evb)](#easyvoxbox-evb)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
@@ -290,6 +290,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 ### OpenVox/Puppet Strings
 
 ```shell
+evb --entrypoint bundle exec puppet strings --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec puppet strings --help
 ```
 
@@ -322,6 +324,8 @@ find . -type f -exec bundle exec puppet-lint --only-checks ghostbuster_classes,g
 If you want to execute yamllint change the entryoint to `yamllint` and pass a folder to the container, f.e. `.`.
 
 ```shell
+evb --entrypoint yamllint .
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxbox:latest .
 ```
 
@@ -330,6 +334,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint yamllint ghcr.io/voxpupuli/voxb
 If you want to execute jq change the entrypoint to `jq` and pass a query/parameter to the container.
 
 ```shell
+evb --entrypoint jq --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:latest --help
 ```
 
@@ -338,6 +344,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint jq ghcr.io/voxpupuli/voxbox:lat
 If you want to execute curl change the entrypoint to `curl` and pass a query/parameter to the container.
 
 ```shell
+evb --entrypoint curl --help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:latest --help
 ```
 
@@ -346,6 +354,9 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint curl ghcr.io/voxpupuli/voxbox:l
 If you want to execute RuboCop directly change the entrypoint to `rubocop` and pass a subcommands/parameter to the container.
 
 ```shell
+evb --entrypoint bundle exec rubocop
+evb --entrypoint bundle exec rubocop --auto-gen-config
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec rubocop
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec rubocop --auto-gen-config
 ```
@@ -355,6 +366,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 If you want to execute librarian change the entrypoint to `librarian-puppet` and pass a query/parameter to the container.
 
 ```shell
+evb --entrypoint bundle exec librarian-puppet help
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec librarian-puppet help
 ```
 
@@ -363,6 +376,8 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox
 If you want to encrypt/decrypt data using plain `eyaml`, change the entrypoint like so :
 
 ```shell
+evb --entrypoint bundle exec eyaml edit /repo/
+
 podman run -it --rm -v $PWD:/repo:Z --entrypoint bundle ghcr.io/voxpupuli/voxbox:latest exec eyaml edit /repo/
 ```
 
