@@ -1,6 +1,6 @@
 # Vox Pupuli <img src="media/voxbox_bildmarke/voxbox_bildmarke_orange_rgb.svg" alt="logo-1" height="170">
 
-[![CI](https://github.com/voxpupuli/container-voxbox/actions/workflows/ci.yaml/badge.svg)](https://github.com/voxpupuli/container-voxbox/actions/workflows/ci.yaml)
+[![CI](https://github.com/voxpupuli/container-voxbox/actions/workflows/ci.yml/badge.svg)](https://github.com/voxpupuli/container-voxbox/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/voxpupuli/container-voxbox.svg)](https://github.com/voxpupuli/container-voxbox/blob/main/LICENSE)
 [![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
 
@@ -30,6 +30,7 @@
     - [hiera-eyaml](#hiera-eyaml)
     - [jig](#jig)
   - [Dealing with PDK](#dealing-with-pdk)
+    - [puppetlabs\_spec\_helper](#puppetlabs_spec_helper)
   - [GitLab](#gitlab)
     - [Example GitLab CI configuration](#example-gitlab-ci-configuration)
     - [GitLab Codequality Report](#gitlab-codequality-report)
@@ -77,6 +78,7 @@ see: [Gemfile](voxbox/Gemfile)
 - curl
 - git
 - gpg
+- jig
 - jq
 - ssh-client
 - yamllint
@@ -396,7 +398,7 @@ podman run -it --rm -v $PWD:/repo:Z --entrypoint jig ghcr.io/voxpupuli/voxbox:la
 
 ## Dealing with PDK
 
-If you have module which where created with PDK, you might run into some issuses.
+If you have a module which was created with PDK, you might run into some issues.
 
 useful tips:
 
@@ -410,6 +412,19 @@ useful tips:
 | pdk build | evb --entrypoint [jig build](https://github.com/voxpupuli/jig/blob/main/docs/commands/build.md) |
 
 For more jig commands also see: <https://github.com/voxpupuli/jig/blob/main/docs/README.md#commands>
+
+### puppetlabs_spec_helper
+
+Your `Gemfile` or spec files might require `puppetlabs_spec_helper`.
+
+This will not work with VoxBox because it neither includes nor requires the `puppetlabs_spec_helper` gem.
+These references need to be removed or commented out.
+
+You may even be able to remove the `Gemfile` and `Rakefile` entirely.
+VoxBox provides its own `Gemfile` and `Rakefile` for running tests.
+However, you should only do this if you don't need them for any Ruby-based testing outside of VoxBox.
+
+Alternatively, you can run `jig convert` to handle the conversion automatically.
 
 ## GitLab
 
