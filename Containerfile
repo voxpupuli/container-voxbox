@@ -96,10 +96,7 @@ ARG JIG_VERSION=2.3.1
 
 RUN apk add --no-cache ca-certificates
 
-WORKDIR /build
-
-RUN wget -qO - https://github.com/voxpupuli/jig/archive/refs/tags/v$JIG_VERSION.tar.gz | tar xfz - -C ./ --strip-components 1 \
-    && go build -o jig .
+RUN GOBIN=/build go install -ldflags "-X github.com/voxpupuli/jig/v2/commands.version=$JIG_VERSION" github.com/voxpupuli/jig/v2@v$JIG_VERSION
 
 ###############################################################################
 
