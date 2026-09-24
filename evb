@@ -28,6 +28,7 @@ available options:
                   examples for available endpoints are:
                   ash, puppet, yamllint, jq, curl, rubocop
                   default: no entrypoint specified
+  --ep           : shorthand for --entrypoint
   --image image : use a different image (default ${PODIMAGE})
   --env VAR=val : specify environment variables (can be used multiple times)
                   Remark: the term './' in a assignment will be replaced with
@@ -84,6 +85,11 @@ while [[ $# -gt 0 ]]; do
        shift
     ;;
     --entrypoint)
+       shift
+       PODOPTIONS="--entrypoint ${1:-} ${PODOPTIONS}"
+       shift
+    ;;
+    --ep)
        shift
        PODOPTIONS="--entrypoint ${1:-} ${PODOPTIONS}"
        shift
