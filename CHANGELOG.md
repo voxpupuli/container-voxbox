@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v10.1.0](https://github.com/voxpupuli/container-voxbox/tree/v10.1.0) (2026-10-08)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v10.0.0...v10.1.0)
+
+**Implemented enhancements:**
+
+- refactor: go build direct from the interwebs, set version [\#345](https://github.com/voxpupuli/container-voxbox/pull/345) ([rwaffen](https://github.com/rwaffen))
+- feat: add jig [\#343](https://github.com/voxpupuli/container-voxbox/pull/343) ([rwaffen](https://github.com/rwaffen))
+
+**Closed issues:**
+
+- integrate jig or at least reference it [\#330](https://github.com/voxpupuli/container-voxbox/issues/330)
+- Migration guide or helpers for PDK users [\#205](https://github.com/voxpupuli/container-voxbox/issues/205)
+
+**Merged pull requests:**
+
+- Renovate all [\#363](https://github.com/voxpupuli/container-voxbox/pull/363) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency openfact to v5.7.2 [\#361](https://github.com/voxpupuli/container-voxbox/pull/361) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency puppet\_metadata to v6.4.0 [\#359](https://github.com/voxpupuli/container-voxbox/pull/359) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency toml-rb to v4.2.2 [\#353](https://github.com/voxpupuli/container-voxbox/pull/353) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency modulesync to v4.6.1 [\#352](https://github.com/voxpupuli/container-voxbox/pull/352) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.7.1 - autoclosed [\#351](https://github.com/voxpupuli/container-voxbox/pull/351) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.21 [\#350](https://github.com/voxpupuli/container-voxbox/pull/350) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.29.0 - autoclosed [\#348](https://github.com/voxpupuli/container-voxbox/pull/348) ([renovate[bot]](https://github.com/apps/renovate))
+- docs: add note about puppetlabs\_spec\_helper [\#346](https://github.com/voxpupuli/container-voxbox/pull/346) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency bundler to v4.0.20 [\#344](https://github.com/voxpupuli/container-voxbox/pull/344) ([renovate[bot]](https://github.com/apps/renovate))
+- docs: make evb more prominent [\#342](https://github.com/voxpupuli/container-voxbox/pull/342) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency webmock to v3.26.4 [\#341](https://github.com/voxpupuli/container-voxbox/pull/341) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency webmock to v3.26.3 [\#339](https://github.com/voxpupuli/container-voxbox/pull/339) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.19 [\#335](https://github.com/voxpupuli/container-voxbox/pull/335) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency modulesync to v4.6.0 [\#332](https://github.com/voxpupuli/container-voxbox/pull/332) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v10.0.0](https://github.com/voxpupuli/container-voxbox/tree/v10.0.0) (2026-08-06)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v6.0.0...v10.0.0)
