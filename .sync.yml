@@ -4,6 +4,7 @@
   matrix_requires_yq: true
   build_args:
     - 'RUBYGEM_OPENVOX=${{ matrix.openvox_version }}'
+    - 'RUBYGEM_OPENFACT=${{ matrix.openfact_version }}'
   build_runner: '${{ matrix.runner }}'
   image_tag: 'ci/voxbox:${{ matrix.openvox_version }}'
   build_platforms: 'linux/${{ matrix.platform }}'

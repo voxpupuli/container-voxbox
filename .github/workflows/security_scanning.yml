@@ -65,6 +65,7 @@ jobs:
           platforms: linux/${{ matrix.platform }}
           build-args: |
             RUBYGEM_OPENVOX=${{ matrix.openvox_version }}
+            RUBYGEM_OPENFACT=${{ matrix.openfact_version }}
 
       - name: Scan image with Anchore Grype
         id: scan

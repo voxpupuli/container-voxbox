@@ -87,6 +87,7 @@ jobs:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           build_args: |
             RUBYGEM_OPENVOX=${{ matrix.openvox_version }}
+            RUBYGEM_OPENFACT=${{ matrix.openfact_version }}
           build_arch: linux/${{ matrix.platform }}
           build_context: .
           buildfile: Containerfile

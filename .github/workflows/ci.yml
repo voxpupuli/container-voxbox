@@ -63,6 +63,7 @@ jobs:
           platforms: linux/${{ matrix.platform }}
           build-args: |
             RUBYGEM_OPENVOX=${{ matrix.openvox_version }}
+            RUBYGEM_OPENFACT=${{ matrix.openfact_version }}
 
       - name: Checkout test repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
