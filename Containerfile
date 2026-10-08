@@ -58,7 +58,7 @@ ENV RUBYGEM_RUBOCOP_FACTORY_BOT=${RUBYGEM_RUBOCOP_FACTORY_BOT:-2.28.0}
 # renovate: depName=rubocop-gitlab_formatter datasource=rubygems
 ENV RUBYGEM_RUBOCOP_GITLAB_FORMATTER=${RUBYGEM_RUBOCOP_GITLAB_FORMATTER:-0.1.1}
 # renovate: depName=rubocop-performance datasource=rubygems
-ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.26.1}
+ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.27.0}
 # renovate: depName=rubocop-rspec_rails datasource=rubygems
 ENV RUBYGEM_RUBOCOP_RSPEC_RAILS=${RUBYGEM_RUBOCOP_RSPEC_RAILS:-2.32.0}
 # renovate: depName=toml datasource=rubygems
