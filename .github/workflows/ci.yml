@@ -39,7 +39,7 @@ jobs:
         run: echo "build-matrix=$(yq -o=json build_platforms.yaml | jq -c)" >> "$GITHUB_OUTPUT"
 
   build-container:
-    name: Build ${{ matrix.platform }} CI container
+    name: Build OpenVox ${{ matrix.openvox_version }} CI container (${{ matrix.platform }})
     runs-on: ${{ matrix.runner }}
     needs:
       - setup-matrix

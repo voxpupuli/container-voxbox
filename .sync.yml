@@ -9,7 +9,7 @@
   image_tag: 'ci/voxbox:${{ matrix.openvox_version }}'
   build_platforms: 'linux/${{ matrix.platform }}'
 .github/workflows/ci.yml:
-  build_job_name: 'Build ${{ matrix.platform }} CI container'
+  build_job_name: 'Build OpenVox ${{ matrix.openvox_version }} CI container (${{ matrix.platform }})'
   test_repository: voxpupuli/puppet-example
   test_commands:
     - 'docker run --rm -v "$PWD:/repo:Z" ci/voxbox:${{ matrix.openvox_version }}'
