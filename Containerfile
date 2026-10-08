@@ -28,7 +28,7 @@ ARG RUBYGEM_VOXPUPULI_TEST
 ARG RUBYGEM_WEBMOCK
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.21}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.22}
 # renovate: depName=hiera-eyaml datasource=rubygems
 ENV RUBYGEM_HIERA_EYAML=${RUBYGEM_HIERA_EYAML:-5.0.1}
 # renovate: depName=librarian-puppet datasource=rubygems
@@ -38,9 +38,9 @@ ENV RUBYGEM_MODULESYNC=${RUBYGEM_MODULESYNC:-4.6.1}
 # renovate: depName=openfact datasource=rubygems
 ENV RUBYGEM_OPENFACT=${RUBYGEM_OPENFACT:-5.7.2}
 # renovate: depName=openvox datasource=rubygems
-ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.29.0}
+ENV RUBYGEM_OPENVOX=${RUBYGEM_OPENVOX:-8.30.0}
 # renovate: depName=openvox-strings datasource=rubygems
-ENV RUBYGEM_OPENVOX_STRINGS=${RUBYGEM_OPENVOX_STRINGS:-7.1.0}
+ENV RUBYGEM_OPENVOX_STRINGS=${RUBYGEM_OPENVOX_STRINGS:-7.2.0}
 # renovate: depName=puppet-ghostbuster datasource=rubygems
 ENV RUBYGEM_PUPPET_GHOSTBUSTER=${RUBYGEM_PUPPET_GHOSTBUSTER:-2.1.0}
 # renovate: depName=puppet_metadata datasource=rubygems
@@ -58,19 +58,19 @@ ENV RUBYGEM_RUBOCOP_FACTORY_BOT=${RUBYGEM_RUBOCOP_FACTORY_BOT:-2.28.0}
 # renovate: depName=rubocop-gitlab_formatter datasource=rubygems
 ENV RUBYGEM_RUBOCOP_GITLAB_FORMATTER=${RUBYGEM_RUBOCOP_GITLAB_FORMATTER:-0.1.1}
 # renovate: depName=rubocop-performance datasource=rubygems
-ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.26.1}
+ENV RUBYGEM_RUBOCOP_PERFORMANCE=${RUBYGEM_RUBOCOP_PERFORMANCE:-1.27.0}
 # renovate: depName=rubocop-rspec_rails datasource=rubygems
 ENV RUBYGEM_RUBOCOP_RSPEC_RAILS=${RUBYGEM_RUBOCOP_RSPEC_RAILS:-2.32.0}
 # renovate: depName=toml datasource=rubygems
 ENV RUBYGEM_TOML=${RUBYGEM_TOML:-0.3.0}
 # renovate: depName=toml-rb datasource=rubygems
-ENV RUBYGEM_TOML_RB=${RUBYGEM_TOML_RB:-4.2.2}
+ENV RUBYGEM_TOML_RB=${RUBYGEM_TOML_RB:-6.0.0}
 # renovate: depName=voxpupuli-acceptance datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.4.0}
 # renovate: depName=voxpupuli-release datasource=rubygems
-ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.4.1}
+ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.5.0}
 # renovate: depName=voxpupuli-test datasource=rubygems
-ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-14.0.0}
+ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-15.0.0}
 # renovate: depName=webmock datasource=rubygems
 ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.26.4}
 
@@ -92,7 +92,7 @@ RUN apk update \
 FROM docker.io/library/golang:alpine AS jig
 
 # renovate: datasource=github-tags depName=voxpupuli/jig
-ARG JIG_VERSION=2.3.1
+ARG JIG_VERSION=2.5.0
 
 RUN apk add --no-cache ca-certificates
 
@@ -114,7 +114,7 @@ LABEL org.label-schema.maintainer="Voxpupuli Team <voxpupuli@groups.io>" \
 ARG RUBYGEM_BUNDLER
 
 # renovate: depName=bundler datasource=rubygems
-ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.21}
+ENV RUBYGEM_BUNDLER=${RUBYGEM_BUNDLER:-4.0.22}
 
 # Disable warnings for experimental features
 ENV RUBYOPT="-W:no-experimental"
