@@ -64,7 +64,7 @@ ENV RUBYGEM_RUBOCOP_RSPEC_RAILS=${RUBYGEM_RUBOCOP_RSPEC_RAILS:-2.32.0}
 # renovate: depName=toml datasource=rubygems
 ENV RUBYGEM_TOML=${RUBYGEM_TOML:-0.3.0}
 # renovate: depName=toml-rb datasource=rubygems
-ENV RUBYGEM_TOML_RB=${RUBYGEM_TOML_RB:-4.2.2}
+ENV RUBYGEM_TOML_RB=${RUBYGEM_TOML_RB:-6.0.0}
 # renovate: depName=voxpupuli-acceptance datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.4.0}
 # renovate: depName=voxpupuli-release datasource=rubygems
