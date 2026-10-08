@@ -92,7 +92,7 @@ RUN apk update \
 FROM docker.io/library/golang:alpine AS jig
 
 # renovate: datasource=github-tags depName=voxpupuli/jig
-ARG JIG_VERSION=2.3.1
+ARG JIG_VERSION=2.5.0
 
 RUN apk add --no-cache ca-certificates
 
