@@ -25,6 +25,10 @@ gem 'voxpupuli-release',     ENV['RUBYGEM_VOXPUPULI_RELEASE']
 gem 'voxpupuli-test',        ENV['RUBYGEM_VOXPUPULI_TEST']
 gem 'webmock',               ENV['RUBYGEM_WEBMOCK']
 
+# jgrep 1.5.4 (used by facterdb) calls JSON.create_id=, which JSON 3 removed.
+# Keep JSON 2 until jgrep supports the JSON 3 API.
+gem 'json', '< 3'
+
 # CVE fixes
 
 # Older fixes where update in the 3.2 minor releases:

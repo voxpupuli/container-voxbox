@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Build image
-        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: .
           file: Containerfile
@@ -63,10 +63,13 @@ jobs:
           load: true
           push: false
           platforms: linux/${{ matrix.platform }}
+          build-args: |
+            RUBYGEM_OPENVOX=${{ matrix.openvox_version }}
+            RUBYGEM_OPENFACT=${{ matrix.openfact_version }}
 
       - name: Scan image with Anchore Grype
         id: scan
-        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
+        uses: anchore/scan-action@27805bf3b4e84b4a5c980df22ed233c00390a439 # v7.4.2
         with:
           image: 'ci/voxbox:${{ matrix.openvox_version }}'
           fail-build: false
@@ -75,7 +78,7 @@ jobs:
         run: jq . "${{ steps.scan.outputs.sarif }}"
 
       - name: Upload SARIF report
-        uses: github/codeql-action/upload-sarif@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+        uses: github/codeql-action/upload-sarif@1c5b675653bb5c22dbe9b12b556ec555138e09fd # v4.38.1
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
           category: 'grype-${{ matrix.label }}'

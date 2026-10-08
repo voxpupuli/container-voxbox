@@ -1,14 +1,30 @@
 ---
 include:
-  - label: x86_64
+  - label: x86_64-openvox8
     platform: amd64
     runner: ubuntu-24.04
     openvox_release: 8
     # renovate: depName=openvox datasource=rubygems
     openvox_version: '8.30.0'
-  - label: ARM64
+    openfact_version: '5.7.2'
+  - label: ARM64-openvox8
     platform: arm64
     runner: ubuntu-24.04-arm
     openvox_release: 8
     # renovate: depName=openvox datasource=rubygems
     openvox_version: '8.30.0'
+    openfact_version: '5.7.2'
+  - label: x86_64-openvox9
+    platform: amd64
+    runner: ubuntu-24.04
+    openvox_release: 9
+    # renovate: depName=openvox datasource=rubygems
+    openvox_version: '9.0.0'
+    openfact_version: '6.2.1'
+  - label: ARM64-openvox9
+    platform: arm64
+    runner: ubuntu-24.04-arm
+    openvox_release: 9
+    # renovate: depName=openvox datasource=rubygems
+    openvox_version: '9.0.0'
+    openfact_version: '6.2.1'
