@@ -72,7 +72,7 @@ ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.5.0}
 # renovate: depName=voxpupuli-test datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_TEST=${RUBYGEM_VOXPUPULI_TEST:-15.0.0}
 # renovate: depName=webmock datasource=rubygems
-ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.26.4}
+ENV RUBYGEM_WEBMOCK=${RUBYGEM_WEBMOCK:-3.27.0}
 
 COPY voxbox/Gemfile /opt/voxbox/Gemfile
 
