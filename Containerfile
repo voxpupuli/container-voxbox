@@ -52,7 +52,7 @@ ENV RUBYGEM_RA10KE=${RUBYGEM_RA10KE:-4.6.0}
 # renovate: depName=rspec_junit_formatter datasource=rubygems
 ENV RUBYGEM_RSPEC_JUNIT_FORMATTER=${RUBYGEM_RSPEC_JUNIT_FORMATTER:-0.6.0}
 # renovate: depName=rubocop-capybara datasource=rubygems
-ENV RUBYGEM_RUBOCOP_CAPYBARA=${RUBYGEM_RUBOCOP_CAPYBARA:-3.0.0}
+ENV RUBYGEM_RUBOCOP_CAPYBARA=${RUBYGEM_RUBOCOP_CAPYBARA:-3.1.0}
 # renovate: depName=rubocop-factory_bot datasource=rubygems
 ENV RUBYGEM_RUBOCOP_FACTORY_BOT=${RUBYGEM_RUBOCOP_FACTORY_BOT:-2.28.0}
 # renovate: depName=rubocop-gitlab_formatter datasource=rubygems
