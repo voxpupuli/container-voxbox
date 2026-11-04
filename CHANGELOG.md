@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v10.1.1](https://github.com/voxpupuli/container-voxbox/tree/v10.1.1) (2026-11-04)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v10.1.0...v10.1.1)
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency openvox to v8.32.0 [\#376](https://github.com/voxpupuli/container-voxbox/pull/376) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency rubocop-capybara to v3.1.0 [\#374](https://github.com/voxpupuli/container-voxbox/pull/374) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency webmock to v3.34.0 [\#373](https://github.com/voxpupuli/container-voxbox/pull/373) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency webmock to v3.32.0 [\#371](https://github.com/voxpupuli/container-voxbox/pull/371) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency ra10ke to v4.6.0 [\#370](https://github.com/voxpupuli/container-voxbox/pull/370) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency webmock to v3.30.0 [\#368](https://github.com/voxpupuli/container-voxbox/pull/368) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency rubocop-rspec\_rails to v2.33.0 [\#365](https://github.com/voxpupuli/container-voxbox/pull/365) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.31.0 [\#362](https://github.com/voxpupuli/container-voxbox/pull/362) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.0.23 [\#355](https://github.com/voxpupuli/container-voxbox/pull/355) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v10.1.0](https://github.com/voxpupuli/container-voxbox/tree/v10.1.0) (2026-10-08)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v10.0.0...v10.1.0)
