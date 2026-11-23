@@ -65,6 +65,12 @@
       ]
     },
     {
+      "matchPackageNames": [
+        "rspec_junit_formatter"
+      ],
+      "allowedVersions": "< 0.7.0"
+    },
+    {
       // Do not require dashboard approval before creating updates.
       "dependencyDashboardApproval": false,
       "matchPackageNames": [

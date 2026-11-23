@@ -5,6 +5,12 @@
   build_runner: '${{ matrix.runner }}'
   image_tag: 'ci/voxbox:${{ matrix.openvox_version }}'
   build_platforms: 'linux/${{ matrix.platform }}'
+.github/renovate.jsonc:
+  renovate_package_rules:
+    # Versions >= 0.7.0 require Ruby >= 3.3; VoxBox must stay on Ruby 3.2.
+    - matchPackageNames:
+        - rspec_junit_formatter
+      allowedVersions: '< 0.7.0'
 .github/workflows/ci.yml:
   build_job_name: 'Build ${{ matrix.platform }} CI container'
   test_repository: voxpupuli/puppet-example
