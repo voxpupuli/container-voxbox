@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v10.1.2](https://github.com/voxpupuli/container-voxbox/tree/v10.1.2) (2026-11-23)
+
+[Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v10.1.1...v10.1.2)
+
+**Merged pull requests:**
+
+- fix: pin junit gem to stay on ruby 3.2 for openvox8 [\#384](https://github.com/voxpupuli/container-voxbox/pull/384) ([rwaffen](https://github.com/rwaffen))
+- chore\(deps\): update dependency openvox to v8.34.0 [\#383](https://github.com/voxpupuli/container-voxbox/pull/383) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.7.4 [\#382](https://github.com/voxpupuli/container-voxbox/pull/382) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency webmock to v3.38.0 [\#381](https://github.com/voxpupuli/container-voxbox/pull/381) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openvox to v8.33.0 [\#380](https://github.com/voxpupuli/container-voxbox/pull/380) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency openfact to v5.7.3 [\#379](https://github.com/voxpupuli/container-voxbox/pull/379) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency bundler to v4.1.0 [\#378](https://github.com/voxpupuli/container-voxbox/pull/378) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v10.1.1](https://github.com/voxpupuli/container-voxbox/tree/v10.1.1) (2026-11-04)
 
 [Full Changelog](https://github.com/voxpupuli/container-voxbox/compare/v10.1.0...v10.1.1)
