@@ -66,7 +66,7 @@ ENV RUBYGEM_TOML=${RUBYGEM_TOML:-0.3.0}
 # renovate: depName=toml-rb datasource=rubygems
 ENV RUBYGEM_TOML_RB=${RUBYGEM_TOML_RB:-6.0.0}
 # renovate: depName=voxpupuli-acceptance datasource=rubygems
-ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.4.0}
+ENV RUBYGEM_VOXPUPULI_ACCEPTANCE=${RUBYGEM_VOXPUPULI_ACCEPTANCE:-4.4.1}
 # renovate: depName=voxpupuli-release datasource=rubygems
 ENV RUBYGEM_VOXPUPULI_RELEASE=${RUBYGEM_VOXPUPULI_RELEASE:-5.5.0}
 # renovate: depName=voxpupuli-test datasource=rubygems
